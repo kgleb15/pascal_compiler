@@ -27,6 +27,8 @@ add_executable(pascal_lexer
         ${FLEX_PascalLexer_OUTPUTS}
         core/Console.cpp
         core/Console.h
+        core/Buffer.cpp
+        core/Buffer.h
 )
 
 target_include_directories(pascal_lexer PRIVATE
