@@ -3,14 +3,17 @@
 %option c++
 
 %{
-#include <iostream>
+#include <string>
+#include "core/Console.h"
+
+using std::string;
 %}
 
 %%
 
-[0-9]+                  { std::cout << "NUMBER: " << yytext << std::endl; }
-[A-Za-z_][A-Za-z0-9_]*  { std::cout << "IDENTIFIER: " << yytext << std::endl; }
+[0-9]+                  { Console::Log("NUMBER: " + string(yytext)); }
+[A-Za-z_][A-Za-z0-9_]*  { Console::Log("IDENTIFIER: " + string(yytext)); }
 [ \t\r\n]+              { /* ignore */ }
-.                       { std::cout << "UNKNOWN: " << yytext << std::endl; }
+.                       { Console::Error("UNKNOWN: " + string(yytext)); }
 
 %%
