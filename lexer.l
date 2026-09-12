@@ -28,8 +28,8 @@ ID         {LETTER}({LETTER}|{DIGIT})*
 
 %%
 
-[0-9]+                  { Console::Log("NUMBER: " + string(yytext)); }
-[A-Za-z_][A-Za-z0-9_]*  { Console::Log("IDENTIFIER: " + string(yytext)); }
+{DIGIT}+                { Console::Log("NUMBER: " + string(yytext)); }
+{ID}                    { Console::Log("IDENTIFIER: " + string(yytext)); }
 [ \t\r\n]+              { /* ignore */ }
 .                       {
                             /* Пример вывода ошибки (с номером строки через lineno()) */
