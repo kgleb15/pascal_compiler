@@ -15,8 +15,7 @@ int main(int argc, char **argv) {
         input = &file;
     }
 
-    yyFlexLexer lexer;
-    lexer.switch_streams(input, &std::cout); 
+    yyFlexLexer lexer(input, &std::cout);
     lexer.yylex();
 
     return 0;
