@@ -28,6 +28,20 @@ ID         {LETTER}({LETTER}|{DIGIT})*
 
 %%
 
+
+if                      { /* ---- Ключевые слова (пример) ---- */ Console::Log("KEYWORD: if"); }
+then                    { Console::Log("KEYWORD: then"); }
+else                    { Console::Log("KEYWORD: else"); }
+begin                   { Console::Log("KEYWORD: begin"); }
+
+
+\:\=                    { /* ---- Операторы (пример) ---- */ Console::Log("OPERATOR: :="); }
+\=                      { Console::Log("OPERATOR: ="); }
+\+                      { Console::Log("OPERATOR: +"); }
+\;                      { Console::Log("OPERATOR: ;"); }
+
+
+
 {DIGIT}+                { Console::Log("NUMBER: " + string(yytext)); }
 {ID}                    { Console::Log("IDENTIFIER: " + string(yytext)); }
 [ \t\r\n]+              { /* ignore */ }
