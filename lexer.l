@@ -49,7 +49,32 @@ begin                   { Console::Log("KEYWORD: begin"); }
 
 
 
-{DIGIT}+                { Console::Log("NUMBER: " + string(yytext)); }
+\${HEX_DIGIT}+ {
+    long long value = strtoll(yytext + 1, nullptr, 16);
+    Console::Log("HEX_INT: " + std::to_string(value));
+}
+
+\&{OCT_DIGIT}+ {
+    long long value = strtoll(yytext + 1, nullptr, 8);
+    Console::Log("OCT_INT: " + std::to_string(value));
+}
+
+\%{BIN_DIGIT}+ {
+    long long value = strtoll(yytext + 1, nullptr, 2);
+    Console::Log("BIN_INT: " + std::to_string(value));
+}
+
+{REAL} {
+    double value = strtod(yytext, nullptr);
+    Console::Log("REAL: " + std::to_string(value));
+}
+
+{DIGIT}+ {
+    long long value = strtoll(yytext, nullptr, 10);
+    Console::Log("INTEGER: " + std::to_string(value));
+}
+
+
 {ID}                    { Console::Log("IDENTIFIER: " + string(yytext)); }
 [ \t\r\n]+              { /* ignore */ }
 .                       {
