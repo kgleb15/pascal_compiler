@@ -23,6 +23,13 @@ using std::string;
 
 /* Раздел с макросами, для более читабельного вида регулярок. Примеры макросов: */
 DIGIT      [0-9]
+HEX_DIGIT  [0-9A-Fa-f]
+OCT_DIGIT  [0-7]
+BIN_DIGIT  [01]
+
+SCALE      [Ee][+-]?{DIGIT}+
+REAL       ({DIGIT}+\.{DIGIT}+{SCALE}?)|({DIGIT}+{SCALE})
+
 LETTER     [A-Za-z_]
 ID         {LETTER}({LETTER}|{DIGIT})*
 
