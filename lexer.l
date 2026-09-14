@@ -15,7 +15,8 @@ using std::string;
    ---------------------------- */
 
 /* Здесь будут состояния для сложных конструкций (по типу строковых констант и т.п.) */
-
+%x COMMENT_ONE_CHAR
+%x COMMENT_TWO_CHAR
 
 /* ----------------------------
    Macros
@@ -34,6 +35,12 @@ LETTER     [A-Za-z_]
 ID         {LETTER}({LETTER}|{DIGIT})*
 
 %%
+
+%{
+    int commentDepth = 0;
+    int commentStartLine = 0;
+    string commentText;
+%}
 
 
 if                      { /* ---- Ключевые слова (пример) ---- */ Console::Log("KEYWORD: if"); }
@@ -74,6 +81,72 @@ begin                   { Console::Log("KEYWORD: begin"); }
     Console::Log("INTEGER: " + std::to_string(value));
 }
 
+
+\/\/[^\n]* {
+    Console::Log("COMMENT: " + string(yytext));
+}
+
+
+\{ {
+    commentDepth = 1;
+    commentStartLine = lineno();
+    commentText = "";
+    BEGIN(COMMENT_ONE_CHAR);
+}
+<COMMENT_ONE_CHAR>[^{}]* {
+    commentText += yytext;
+}
+<COMMENT_ONE_CHAR>\{ {
+    commentDepth++;
+    commentText += yytext;
+}
+<COMMENT_ONE_CHAR>\} {
+    commentDepth--;
+    if (commentDepth == 0) {
+        Console::Log("COMMENT: {" + commentText + "}");
+        BEGIN(INITIAL);
+    } else {
+        commentText += yytext;
+    }
+}
+<COMMENT_ONE_CHAR><<EOF>> {
+    Console::Error("Line " + std::to_string(commentStartLine) + ": unclosed comment '{'");
+    BEGIN(INITIAL);
+}
+
+
+\(\* {
+    commentDepth = 1;
+    commentStartLine = lineno();
+    commentText = "";
+    BEGIN(COMMENT_TWO_CHAR);
+}
+<COMMENT_TWO_CHAR>[^*(]* {
+    commentText += yytext;
+}
+<COMMENT_TWO_CHAR>\(+[^*]* {
+    commentText += yytext;
+}
+<COMMENT_TWO_CHAR>\*+[^)]* {
+    commentText += yytext;
+}
+<COMMENT_TWO_CHAR>\(\* {
+    commentDepth++;
+    commentText += yytext;
+}
+<COMMENT_TWO_CHAR>\*\) {
+    commentDepth--;
+    if (commentDepth == 0) {
+        Console::Log("COMMENT: (*" + commentText + "*)");
+        BEGIN(INITIAL);
+    } else {
+        commentText += yytext;
+    }
+}
+<COMMENT_TWO_CHAR><<EOF>> {
+    Console::Error("Line " + std::to_string(commentStartLine) + ": unclosed comment '(*'");
+    BEGIN(INITIAL);
+}
 
 {ID}                    { Console::Log("IDENTIFIER: " + string(yytext)); }
 [ \t\r\n]+              { /* ignore */ }
