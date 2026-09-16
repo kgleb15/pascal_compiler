@@ -73,6 +73,25 @@ if                      { /* ---- Ключевые слова (пример) ---
 (?i:automated)      { Console::Log("KEYWORD: automated"); }
 (?i:strict)         { Console::Log("KEYWORD: strict"); }
 
+    /* ---------- Модификаторы методов ---------- */
+(?i:virtual)        { Console::Log("KEYWORD: virtual"); }
+(?i:override)       { Console::Log("KEYWORD: override"); }
+(?i:abstract)       { Console::Log("KEYWORD: abstract"); }
+(?i:dynamic)        { Console::Log("KEYWORD: dynamic"); }
+(?i:overload)       { Console::Log("KEYWORD: overload"); }
+(?i:reintroduce)    { Console::Log("KEYWORD: reintroduce"); }
+(?i:message)        { Console::Log("KEYWORD: message"); }
+(?i:static)         { Console::Log("KEYWORD: static"); }
+(?i:inline)         { Console::Log("KEYWORD: inline"); }
+(?i:assembler)      { Console::Log("KEYWORD: assembler"); }
+(?i:register)       { Console::Log("KEYWORD: register"); }
+(?i:cdecl)          { Console::Log("KEYWORD: cdecl"); }
+(?i:stdcall)        { Console::Log("KEYWORD: stdcall"); }
+(?i:safecall)       { Console::Log("KEYWORD: safecall"); }
+(?i:pascal)         { Console::Log("KEYWORD: pascal"); }
+(?i:export)         { Console::Log("KEYWORD: export"); }
+(?i:varargs)        { Console::Log("KEYWORD: varargs"); }
+
 \:\=                    { /* ---- Операторы (пример) ---- */ Console::Log("OPERATOR: :="); }
 \=                      { Console::Log("OPERATOR: ="); }
 \+                      { Console::Log("OPERATOR: +"); }
