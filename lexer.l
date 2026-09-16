@@ -40,6 +40,7 @@ ID         {LETTER}({LETTER}|{DIGIT})*
 (?i:uses)           { Console::Log("KEYWORD: uses"); }
 (?i:library)        { Console::Log("KEYWORD: library"); }
 (?i:package)        { Console::Log("KEYWORD: package"); }
+(?i:exports)        { Console::Log("KEYWORD: exports"); }
 
     /* ---------- Блоки и определения ---------- */
 (?i:begin)          { Console::Log("KEYWORD: begin"); }
