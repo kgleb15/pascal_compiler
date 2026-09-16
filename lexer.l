@@ -54,6 +54,17 @@ if                      { /* ---- Ключевые слова (пример) ---
 (?i:external)       { Console::Log("KEYWORD: external"); }
 (?i:absolute)       { Console::Log("KEYWORD: absolute"); }
 
+    /* ---------- ООП ---------- */
+(?i:class)          { Console::Log("KEYWORD: class"); }
+(?i:object)         { Console::Log("KEYWORD: object"); }
+(?i:record)         { Console::Log("KEYWORD: record"); }
+(?i:constructor)    { Console::Log("KEYWORD: constructor"); }
+(?i:destructor)     { Console::Log("KEYWORD: destructor"); }
+(?i:inherited)      { Console::Log("KEYWORD: inherited"); }
+(?i:property)       { Console::Log("KEYWORD: property"); }
+(?i:self)           { Console::Log("KEYWORD: self"); }
+(?i:helper)         { Console::Log("KEYWORD: helper"); }
+
 
 \:\=                    { /* ---- Операторы (пример) ---- */ Console::Log("OPERATOR: :="); }
 \=                      { Console::Log("OPERATOR: ="); }
