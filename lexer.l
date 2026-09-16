@@ -6,6 +6,7 @@
 %{
 #include <string>
 #include "core/Console.h"
+#include "core/Buffer.h"
 
 using std::string;
 %}
@@ -38,8 +39,7 @@ ID         {LETTER}({LETTER}|{DIGIT})*
 
 %{
     int commentDepth = 0;
-    int commentStartLine = 0;
-    string commentText;
+    Buffer commentBuf;
 %}
 
 
@@ -89,62 +89,62 @@ begin                   { Console::Log("KEYWORD: begin"); }
 
 \{ {
     commentDepth = 1;
-    commentStartLine = lineno();
-    commentText = "";
+    commentBuf.reset();
+    commentBuf.setStartLine(lineno());
     BEGIN(COMMENT_ONE_CHAR);
 }
 <COMMENT_ONE_CHAR>[^{}]* {
-    commentText += yytext;
+    commentBuf.append(yytext);
 }
 <COMMENT_ONE_CHAR>\{ {
     commentDepth++;
-    commentText += yytext;
+    commentBuf.append(yytext);
 }
 <COMMENT_ONE_CHAR>\} {
     commentDepth--;
     if (commentDepth == 0) {
-        Console::Log("COMMENT: {" + commentText + "}");
+        Console::Log("COMMENT: {" + commentBuf.current() + "}");
         BEGIN(INITIAL);
     } else {
-        commentText += yytext;
+        commentBuf.append(yytext);
     }
 }
 <COMMENT_ONE_CHAR><<EOF>> {
-    Console::Error("Line " + std::to_string(commentStartLine) + ": unclosed comment '{'");
+    Console::Error("Line " + std::to_string(commentBuf.getStartLine()) + ": unclosed comment '{'");
     BEGIN(INITIAL);
 }
 
 
 \(\* {
     commentDepth = 1;
-    commentStartLine = lineno();
-    commentText = "";
+    commentBuf.reset();
+    commentBuf.setStartLine(lineno());
     BEGIN(COMMENT_TWO_CHAR);
 }
 <COMMENT_TWO_CHAR>[^*(]* {
-    commentText += yytext;
+    commentBuf.append(yytext);
 }
 <COMMENT_TWO_CHAR>\(+[^*]* {
-    commentText += yytext;
+    commentBuf.append(yytext);
 }
 <COMMENT_TWO_CHAR>\*+[^)]* {
-    commentText += yytext;
+    commentBuf.append(yytext);
 }
 <COMMENT_TWO_CHAR>\(\* {
     commentDepth++;
-    commentText += yytext;
+    commentBuf.append(yytext);
 }
 <COMMENT_TWO_CHAR>\*\) {
     commentDepth--;
     if (commentDepth == 0) {
-        Console::Log("COMMENT: (*" + commentText + "*)");
+        Console::Log("COMMENT: (*" + commentBuf.current() + "*)");
         BEGIN(INITIAL);
     } else {
-        commentText += yytext;
+        commentBuf.append(yytext);
     }
 }
 <COMMENT_TWO_CHAR><<EOF>> {
-    Console::Error("Line " + std::to_string(commentStartLine) + ": unclosed comment '(*'");
+    Console::Error("Line " + std::to_string(commentBuf.getStartLine()) + ": unclosed comment '(*'");
     BEGIN(INITIAL);
 }
 
