@@ -29,7 +29,7 @@ ID         {LETTER}({LETTER}|{DIGIT})*
 %%
 
 
-    /* ---- Ключевые слова  ---- */
+    /* ---------- Ключевые слова  ---------- */
     /* ---------- Модули и структура ---------- */
 (?i:program)        { Console::Log("KEYWORD: program"); }
 (?i:unit)           { Console::Log("KEYWORD: unit"); }
@@ -168,6 +168,24 @@ ID         {LETTER}({LETTER}|{DIGIT})*
 ">="              { Console::Log("OPERATOR: >="); }
 ".."              { Console::Log("OPERATOR: .."); }
 
+    /* ---------- Односимвольные операторы ---------- */
+"+"               { Console::Log("OPERATOR: +"); }
+"-"               { Console::Log("OPERATOR: -"); }
+"*"               { Console::Log("OPERATOR: *"); }
+"/"               { Console::Log("OPERATOR: /"); }
+"="               { Console::Log("OPERATOR: ="); }
+"<"               { Console::Log("OPERATOR: <"); }
+">"               { Console::Log("OPERATOR: >"); }
+";"               { Console::Log("OPERATOR: ;"); }
+","               { Console::Log("OPERATOR: ,"); }
+":"               { Console::Log("OPERATOR: :"); }
+"."               { Console::Log("OPERATOR: ."); }
+"("               { Console::Log("OPERATOR: ("); }
+")"               { Console::Log("OPERATOR: )"); }
+"["               { Console::Log("OPERATOR: ["); }
+"]"               { Console::Log("OPERATOR: ]"); }
+"^"               { Console::Log("OPERATOR: ^"); }
+"@"               { Console::Log("OPERATOR: @"); }
 
 {DIGIT}+                { Console::Log("NUMBER: " + string(yytext)); }
 {ID}                    { Console::Log("IDENTIFIER: " + string(yytext)); }
