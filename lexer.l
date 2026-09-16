@@ -214,6 +214,8 @@ ID         {LETTER}({LETTER}|{DIGIT})*
 "<="              { Console::Log("OPERATOR: <="); }
 ">="              { Console::Log("OPERATOR: >="); }
 ".."              { Console::Log("OPERATOR: .."); }
+"**"              { Console::Log("OPERATOR: **"); }
+"><"              { Console::Log("OPERATOR: ><"); }
 
     /* ---------- Односимвольные операторы ---------- */
 "+"               { Console::Log("OPERATOR: +"); }
