@@ -160,11 +160,13 @@ ID         {LETTER}({LETTER}|{DIGIT})*
 (?i:experimental)   { Console::Log("KEYWORD: experimental"); }
 (?i:platform)       { Console::Log("KEYWORD: platform"); }
 
-\:\=                    { /* ---- Операторы (пример) ---- */ Console::Log("OPERATOR: :="); }
-\=                      { Console::Log("OPERATOR: ="); }
-\+                      { Console::Log("OPERATOR: +"); }
-\;                      { Console::Log("OPERATOR: ;"); }
-
+    /* ---------- Операторы ---------- */
+    /* ---------- Длинные операторы (2+ символа)  ---------- */
+":="              { Console::Log("OPERATOR: :="); }
+"<>"              { Console::Log("OPERATOR: <>"); }
+"<="              { Console::Log("OPERATOR: <="); }
+">="              { Console::Log("OPERATOR: >="); }
+".."              { Console::Log("OPERATOR: .."); }
 
 
 {DIGIT}+                { Console::Log("NUMBER: " + string(yytext)); }
