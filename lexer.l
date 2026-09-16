@@ -169,6 +169,21 @@ ID         {LETTER}({LETTER}|{DIGIT})*
     /* ---------- Специфичные для Object Pascal ---------- */
 (?i:out)            { Console::Log("KEYWORD: out"); }
 
+    /* ---------- Устаревшие ключевые слова (Turbo Pascal / ранние Delphi) ----------
+       Эти слова зарезервированы в Turbo Pascal и ранних версиях Delphi,
+       но почти не встречаются в современном коде.
+
+       near, far  — модификаторы указателей времён 16-битного DOS.
+                    В современном Object Pascal не используются.
+       local      — устаревший модификатор процедур/функций.
+       varargs    — устаревший модификатор для функций с переменным
+                    числом аргументов (заменён на array of const).
+       ---------------------------------------------------------------------- */
+(?i:near)           { Console::Log("KEYWORD: near"); }
+(?i:far)            { Console::Log("KEYWORD: far"); }
+(?i:local)          { Console::Log("KEYWORD: local"); }
+(?i:varargs)        { Console::Log("KEYWORD: varargs"); }
+
 
     /* ============================================================
        ОСТОРОЖНО: exit, break, continue, new, dispose
