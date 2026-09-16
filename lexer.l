@@ -41,6 +41,19 @@ if                      { /* ---- Ключевые слова (пример) ---
 (?i:library)        { Console::Log("KEYWORD: library"); }
 (?i:package)        { Console::Log("KEYWORD: package"); }
 
+    /* ---------- Блоки и определения ---------- */
+(?i:begin)          { Console::Log("KEYWORD: begin"); }
+(?i:end)            { Console::Log("KEYWORD: end"); }
+(?i:const)          { Console::Log("KEYWORD: const"); }
+(?i:var)            { Console::Log("KEYWORD: var"); }
+(?i:type)           { Console::Log("KEYWORD: type"); }
+(?i:label)          { Console::Log("KEYWORD: label"); }
+(?i:procedure)      { Console::Log("KEYWORD: procedure"); }
+(?i:function)       { Console::Log("KEYWORD: function"); }
+(?i:forward)        { Console::Log("KEYWORD: forward"); }
+(?i:external)       { Console::Log("KEYWORD: external"); }
+(?i:absolute)       { Console::Log("KEYWORD: absolute"); }
+
 
 \:\=                    { /* ---- Операторы (пример) ---- */ Console::Log("OPERATOR: :="); }
 \=                      { Console::Log("OPERATOR: ="); }
