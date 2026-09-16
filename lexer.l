@@ -165,6 +165,9 @@ ID         {LETTER}({LETTER}|{DIGIT})*
 (?i:string)         { Console::Log("KEYWORD: string"); }
 (?i:operator)       { Console::Log("KEYWORD: operator"); }
 
+    /* ---------- Специфичные для Object Pascal ---------- */
+(?i:out)            { Console::Log("KEYWORD: out"); }
+
     /* ---------- Операторы ---------- */
     /* ---------- Длинные операторы (2+ символа)  ---------- */
 ":="              { Console::Log("OPERATOR: :="); }
