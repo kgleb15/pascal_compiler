@@ -160,6 +160,11 @@ ID         {LETTER}({LETTER}|{DIGIT})*
 (?i:experimental)   { Console::Log("KEYWORD: experimental"); }
 (?i:platform)       { Console::Log("KEYWORD: platform"); }
 
+    /* ---------- Turbo Pascal ---------- */
+(?i:asm)            { Console::Log("KEYWORD: asm"); }
+(?i:string)         { Console::Log("KEYWORD: string"); }
+(?i:operator)       { Console::Log("KEYWORD: operator"); }
+
     /* ---------- Операторы ---------- */
     /* ---------- Длинные операторы (2+ символа)  ---------- */
 ":="              { Console::Log("OPERATOR: :="); }
