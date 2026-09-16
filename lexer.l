@@ -29,7 +29,7 @@ ID         {LETTER}({LETTER}|{DIGIT})*
 %%
 
 
-if                      { /* ---- Ключевые слова (пример) ---- */ Console::Log("KEYWORD: if"); }
+    /* ---- Ключевые слова  ---- */
     /* ---------- Модули и структура ---------- */
 (?i:program)        { Console::Log("KEYWORD: program"); }
 (?i:unit)           { Console::Log("KEYWORD: unit"); }
@@ -112,6 +112,22 @@ if                      { /* ---- Ключевые слова (пример) ---
 (?i:raise)          { Console::Log("KEYWORD: raise"); }
 (?i:on)             { Console::Log("KEYWORD: on"); }
 (?i:at)             { Console::Log("KEYWORD: at"); }
+
+    /* ---------- Управляющие конструкции ---------- */
+(?i:if)             { Console::Log("KEYWORD: if"); }
+(?i:then)           { Console::Log("KEYWORD: then"); }
+(?i:else)           { Console::Log("KEYWORD: else"); }
+(?i:case)           { Console::Log("KEYWORD: case"); }
+(?i:of)             { Console::Log("KEYWORD: of"); }
+(?i:for)            { Console::Log("KEYWORD: for"); }
+(?i:to)             { Console::Log("KEYWORD: to"); }
+(?i:downto)         { Console::Log("KEYWORD: downto"); }
+(?i:do)             { Console::Log("KEYWORD: do"); }
+(?i:while)          { Console::Log("KEYWORD: while"); }
+(?i:repeat)         { Console::Log("KEYWORD: repeat"); }
+(?i:until)          { Console::Log("KEYWORD: until"); }
+(?i:with)           { Console::Log("KEYWORD: with"); }
+(?i:goto)           { Console::Log("KEYWORD: goto"); }
 
 \:\=                    { /* ---- Операторы (пример) ---- */ Console::Log("OPERATOR: :="); }
 \=                      { Console::Log("OPERATOR: ="); }
