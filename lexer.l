@@ -92,6 +92,19 @@ if                      { /* ---- Ключевые слова (пример) ---
 (?i:export)         { Console::Log("KEYWORD: export"); }
 (?i:varargs)        { Console::Log("KEYWORD: varargs"); }
 
+    /* ---------- Свойства ---------- */
+(?i:read)           { Console::Log("KEYWORD: read"); }
+(?i:write)          { Console::Log("KEYWORD: write"); }
+(?i:default)        { Console::Log("KEYWORD: default"); }
+(?i:stored)         { Console::Log("KEYWORD: stored"); }
+(?i:index)          { Console::Log("KEYWORD: index"); }
+(?i:nodefault)      { Console::Log("KEYWORD: nodefault"); }
+(?i:readonly)       { Console::Log("KEYWORD: readonly"); }
+(?i:writeonly)      { Console::Log("KEYWORD: writeonly"); }
+(?i:implements)     { Console::Log("KEYWORD: implements"); }
+(?i:dispid)         { Console::Log("KEYWORD: dispid"); }
+(?i:name)           { Console::Log("KEYWORD: name"); }
+
 \:\=                    { /* ---- Операторы (пример) ---- */ Console::Log("OPERATOR: :="); }
 \=                      { Console::Log("OPERATOR: ="); }
 \+                      { Console::Log("OPERATOR: +"); }
