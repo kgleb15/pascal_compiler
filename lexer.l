@@ -142,6 +142,11 @@ ID         {LETTER}({LETTER}|{DIGIT})*
 (?i:is)             { Console::Log("KEYWORD: is"); }
 (?i:as)             { Console::Log("KEYWORD: as"); }
 
+    /* ---------- Константы ---------- */
+(?i:true)           { Console::Log("KEYWORD: true"); }
+(?i:false)          { Console::Log("KEYWORD: false"); }
+(?i:nil)            { Console::Log("KEYWORD: nil"); }
+
 \:\=                    { /* ---- Операторы (пример) ---- */ Console::Log("OPERATOR: :="); }
 \=                      { Console::Log("OPERATOR: ="); }
 \+                      { Console::Log("OPERATOR: +"); }
