@@ -44,4 +44,40 @@ m := 6;
 n := 7;
 
 o := 8; // comment (* nested *)
-p := 9; { comment
+
+// строки: базовые случаи
+q := 'Hello, world!';
+r := '';
+s := 'a';
+
+// экранирование кавычки
+t := 'it''s a test';
+u := '''';
+v := '''quoted''';
+
+// control string
+w := #9;
+x := #13#10;
+y := 'Tab:'#9'End';
+z := 'Line1'#13#10'Line2';
+zz := 'a'#62'b';
+// с пробелами между частями
+zzz := 'a' #62 'b';
+
+// caret-нотация
+kk := ^G;
+
+// строка, содержащая символы похожие на другие лексемы
+aa := 'contains // not a comment';
+bb := 'contains { not a comment } too';
+cc := 'contains (* not a comment *) too';
+dd := '42 and 3.14 inside a string';
+
+ff := #300;
+gg := #abc; // ошибка компиляции
+
+// незакрытая строка
+hh := 'unterminated string
+ii := 10;
+
+
