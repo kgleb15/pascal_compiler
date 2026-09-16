@@ -105,6 +105,14 @@ if                      { /* ---- Ключевые слова (пример) ---
 (?i:dispid)         { Console::Log("KEYWORD: dispid"); }
 (?i:name)           { Console::Log("KEYWORD: name"); }
 
+    /* ---------- Исключения ---------- */
+(?i:try)            { Console::Log("KEYWORD: try"); }
+(?i:except)         { Console::Log("KEYWORD: except"); }
+(?i:finally)        { Console::Log("KEYWORD: finally"); }
+(?i:raise)          { Console::Log("KEYWORD: raise"); }
+(?i:on)             { Console::Log("KEYWORD: on"); }
+(?i:at)             { Console::Log("KEYWORD: at"); }
+
 \:\=                    { /* ---- Операторы (пример) ---- */ Console::Log("OPERATOR: :="); }
 \=                      { Console::Log("OPERATOR: ="); }
 \+                      { Console::Log("OPERATOR: +"); }
