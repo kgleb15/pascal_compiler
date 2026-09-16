@@ -65,6 +65,13 @@ if                      { /* ---- Ключевые слова (пример) ---
 (?i:self)           { Console::Log("KEYWORD: self"); }
 (?i:helper)         { Console::Log("KEYWORD: helper"); }
 
+    /* ---------- Видимость ---------- */
+(?i:private)        { Console::Log("KEYWORD: private"); }
+(?i:protected)      { Console::Log("KEYWORD: protected"); }
+(?i:public)         { Console::Log("KEYWORD: public"); }
+(?i:published)      { Console::Log("KEYWORD: published"); }
+(?i:automated)      { Console::Log("KEYWORD: automated"); }
+(?i:strict)         { Console::Log("KEYWORD: strict"); }
 
 \:\=                    { /* ---- Операторы (пример) ---- */ Console::Log("OPERATOR: :="); }
 \=                      { Console::Log("OPERATOR: ="); }
