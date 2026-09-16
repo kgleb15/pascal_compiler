@@ -30,7 +30,7 @@ ID         {LETTER}({LETTER}|{DIGIT})*
 
 
 if                      { /* ---- Ключевые слова (пример) ---- */ Console::Log("KEYWORD: if"); }
-/* ---------- Модули и структура ---------- */
+    /* ---------- Модули и структура ---------- */
 (?i:program)        { Console::Log("KEYWORD: program"); }
 (?i:unit)           { Console::Log("KEYWORD: unit"); }
 (?i:interface)      { Console::Log("KEYWORD: interface"); }
