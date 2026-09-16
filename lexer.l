@@ -129,6 +129,19 @@ ID         {LETTER}({LETTER}|{DIGIT})*
 (?i:with)           { Console::Log("KEYWORD: with"); }
 (?i:goto)           { Console::Log("KEYWORD: goto"); }
 
+    /* ---------- Логические и битовые ---------- */
+(?i:and)            { Console::Log("KEYWORD: and"); }
+(?i:or)             { Console::Log("KEYWORD: or"); }
+(?i:not)            { Console::Log("KEYWORD: not"); }
+(?i:xor)            { Console::Log("KEYWORD: xor"); }
+(?i:shl)            { Console::Log("KEYWORD: shl"); }
+(?i:shr)            { Console::Log("KEYWORD: shr"); }
+(?i:div)            { Console::Log("KEYWORD: div"); }
+(?i:mod)            { Console::Log("KEYWORD: mod"); }
+(?i:in)             { Console::Log("KEYWORD: in"); }
+(?i:is)             { Console::Log("KEYWORD: is"); }
+(?i:as)             { Console::Log("KEYWORD: as"); }
+
 \:\=                    { /* ---- Операторы (пример) ---- */ Console::Log("OPERATOR: :="); }
 \=                      { Console::Log("OPERATOR: ="); }
 \+                      { Console::Log("OPERATOR: +"); }
