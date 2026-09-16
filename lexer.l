@@ -18,6 +18,8 @@ using std::string;
 /* Здесь будут состояния для сложных конструкций (по типу строковых констант и т.п.) */
 %x COMMENT_ONE_CHAR
 %x COMMENT_TWO_CHAR
+%x STRING
+%x STRING_CONT
 
 /* ----------------------------
    Macros
@@ -35,11 +37,15 @@ REAL       ({DIGIT}+\.{DIGIT}+{SCALE}?)|({DIGIT}+{SCALE})
 LETTER     [A-Za-z_]
 ID         {LETTER}({LETTER}|{DIGIT})*
 
+CONTROL_CODE       \#({DIGIT}+|\${HEX_DIGIT}+|\&{OCT_DIGIT}+|\%{BIN_DIGIT}+)
+CONTROL_CARET_CODE \^[A-Za-z]
+
 %%
 
 %{
     int commentDepth = 0;
     Buffer commentBuf;
+    Buffer stringBuf;
 %}
 
 
@@ -147,6 +153,70 @@ begin                   { Console::Log("KEYWORD: begin"); }
     Console::Error("Line " + std::to_string(commentBuf.getStartLine()) + ": unclosed comment '(*'");
     BEGIN(INITIAL);
 }
+
+
+\' {
+    stringBuf.reset();
+    stringBuf.setStartLine(lineno());
+    BEGIN(STRING);
+}
+{CONTROL_CODE} {
+    stringBuf.reset();
+    stringBuf.setStartLine(lineno());
+    int base = 10;
+    if (yytext[1] == '$') {
+        base = 16;
+    } else if (yytext[1] == '&') {
+        base = 8;
+    } else if (yytext[1] == '%') {
+        base = 2;
+    }
+
+    stringBuf.append(string(1, (char) strtoll(yytext + 1, nullptr, base)));
+    BEGIN(STRING_CONT);
+}
+{CONTROL_CARET_CODE} {
+    stringBuf.reset();
+    stringBuf.setStartLine(lineno());
+    stringBuf.append(string(1, (char) (toupper(yytext[1]) - 'A' + 1)));
+    BEGIN(STRING_CONT);
+}
+
+<STRING>[^'\n]* {
+    stringBuf.append(yytext);
+}
+<STRING>\'\' {
+    stringBuf.append("'");
+}
+<STRING>\' {
+    BEGIN(STRING_CONT);
+}
+<STRING>\n {
+    Console::Error("Line " + std::to_string(stringBuf.getStartLine()) + ": string contains a line break");
+    BEGIN(INITIAL);
+}
+
+
+<STRING_CONT>\' {
+    BEGIN(STRING);
+}
+<STRING_CONT>{CONTROL_CODE} {
+    int base = 10;
+    if (yytext[1] == '$') {
+        base = 16;
+    } else if (yytext[1] == '&') {
+        base = 8;
+    } else if (yytext[1] == '%') {
+        base = 2;
+    }
+
+    stringBuf.append(string(1, (char) strtoll(yytext + 1, nullptr, base)));
+}
+<STRING_CONT>{CONTROL_CARET_CODE} {
+    stringBuf.append(string(1, (char) (toupper(yytext[1]) - 'A' + 1)));
+}
+<STRING_CONT>(.|\n) { yyless(0); Console::Log("STRING: " + stringBuf.current()); BEGIN(INITIAL); }
+
 
 {ID}                    { Console::Log("IDENTIFIER: " + string(yytext)); }
 [ \t\r\n]+              { /* ignore */ }

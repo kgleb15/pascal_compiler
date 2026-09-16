@@ -65,7 +65,7 @@ zz := 'a'#62'b';
 zzz := 'a' #62 'b';
 
 // caret-нотация
-kk := ^G;
+kk := ^Z;
 
 // строка, содержащая символы похожие на другие лексемы
 aa := 'contains // not a comment';
@@ -74,10 +74,10 @@ cc := 'contains (* not a comment *) too';
 dd := '42 and 3.14 inside a string';
 
 ff := #300;
-gg := #abc; // ошибка компиляции
+gg := #abc; // ошибка компиляции TODO: правильно обработать
 
 // незакрытая строка
-hh := 'unterminated string
+qq := '''
 ii := 10;
 
 
