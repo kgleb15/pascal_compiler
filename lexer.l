@@ -168,6 +168,14 @@ ID         {LETTER}({LETTER}|{DIGIT})*
     /* ---------- Специфичные для Object Pascal ---------- */
 (?i:out)            { Console::Log("KEYWORD: out"); }
 
+    /* ---------- Директивы и модификаторы ---------- */
+(?i:sealed)         { Console::Log("KEYWORD: sealed"); }
+(?i:dispose)        { Console::Log("KEYWORD: dispose"); }
+(?i:exit)           { Console::Log("KEYWORD: exit"); }
+(?i:new)            { Console::Log("KEYWORD: new"); }
+(?i:break)          { Console::Log("KEYWORD: break"); }
+(?i:continue)       { Console::Log("KEYWORD: continue"); }
+
     /* ---------- Операторы ---------- */
     /* ---------- Длинные операторы (2+ символа)  ---------- */
 ":="              { Console::Log("OPERATOR: :="); }
