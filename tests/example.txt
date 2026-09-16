@@ -1,3 +1,4 @@
+program Test;
 x = 42;
 if x = 42 then
 begin
@@ -8,4 +9,3 @@ else
 begin
     y := 0;
 end;
- 

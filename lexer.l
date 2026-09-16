@@ -30,9 +30,16 @@ ID         {LETTER}({LETTER}|{DIGIT})*
 
 
 if                      { /* ---- Ключевые слова (пример) ---- */ Console::Log("KEYWORD: if"); }
-then                    { Console::Log("KEYWORD: then"); }
-else                    { Console::Log("KEYWORD: else"); }
-begin                   { Console::Log("KEYWORD: begin"); }
+/* ---------- Модули и структура ---------- */
+(?i:program)        { Console::Log("KEYWORD: program"); }
+(?i:unit)           { Console::Log("KEYWORD: unit"); }
+(?i:interface)      { Console::Log("KEYWORD: interface"); }
+(?i:implementation) { Console::Log("KEYWORD: implementation"); }
+(?i:initialization) { Console::Log("KEYWORD: initialization"); }
+(?i:finalization)   { Console::Log("KEYWORD: finalization"); }
+(?i:uses)           { Console::Log("KEYWORD: uses"); }
+(?i:library)        { Console::Log("KEYWORD: library"); }
+(?i:package)        { Console::Log("KEYWORD: package"); }
 
 
 \:\=                    { /* ---- Операторы (пример) ---- */ Console::Log("OPERATOR: :="); }
