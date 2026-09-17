@@ -195,6 +195,10 @@ begin                   { Console::Log("KEYWORD: begin"); }
     Console::Error("Line " + std::to_string(stringBuf.getStartLine()) + ": string contains a line break");
     BEGIN(INITIAL);
 }
+<STRING><<EOF>> {
+    Console::Error("Line " + std::to_string(stringBuf.getStartLine()) + ": unterminated string");
+    BEGIN(INITIAL);
+}
 
 
 <STRING_CONT>\' {
@@ -215,8 +219,15 @@ begin                   { Console::Log("KEYWORD: begin"); }
 <STRING_CONT>{CONTROL_CARET_CODE} {
     stringBuf.append(string(1, (char) (toupper(yytext[1]) - 'A' + 1)));
 }
-<STRING_CONT>(.|\n) { yyless(0); Console::Log("STRING: " + stringBuf.current()); BEGIN(INITIAL); }
-
+<STRING_CONT>(.|\n) {
+    yyless(0);
+    Console::Log("STRING: " + stringBuf.current());
+    BEGIN(INITIAL);
+}
+<STRING_CONT><<EOF>> {
+    Console::Log("STRING: " + stringBuf.current());
+    BEGIN(INITIAL);
+}
 
 {ID}                    { Console::Log("IDENTIFIER: " + string(yytext)); }
 [ \t\r\n]+              { /* ignore */ }
