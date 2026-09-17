@@ -241,9 +241,8 @@ begin                   { Console::Log("KEYWORD: begin"); }
 
 {ID}                    { Console::Log("IDENTIFIER: " + string(yytext)); }
 [ \t\r\n]+              { /* ignore */ }
-.                       {
-                            /* Пример вывода ошибки (с номером строки через lineno()) */
-                            Console::Error("Line " + std::to_string(lineno()) + ": UNKNOWN: " + string(yytext));
-                        }
+<*>. {
+    Console::Error("Line " + std::to_string(lineno()) + ": UNKNOWN CHARACTER: " + string(yytext));
+}
 
 %%
