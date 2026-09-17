@@ -130,10 +130,10 @@ begin                   { Console::Log("KEYWORD: begin"); }
 <COMMENT_TWO_CHAR>[^*(]* {
     commentBuf.append(yytext);
 }
-<COMMENT_TWO_CHAR>\(+[^*]* {
+<COMMENT_TWO_CHAR>\(+[^*(]* {
     commentBuf.append(yytext);
 }
-<COMMENT_TWO_CHAR>\*+[^)]* {
+<COMMENT_TWO_CHAR>\*+[^)*]* {
     commentBuf.append(yytext);
 }
 <COMMENT_TWO_CHAR>\(\* {
