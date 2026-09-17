@@ -163,16 +163,22 @@ begin                   { Console::Log("KEYWORD: begin"); }
 {CONTROL_CODE} {
     stringBuf.reset();
     stringBuf.setStartLine(lineno());
+
+    const char* numStart = yytext + 1;
     int base = 10;
+
     if (yytext[1] == '$') {
         base = 16;
+        numStart = yytext + 2;
     } else if (yytext[1] == '&') {
         base = 8;
+        numStart = yytext + 2;
     } else if (yytext[1] == '%') {
         base = 2;
+        numStart = yytext + 2;
     }
 
-    stringBuf.append(string(1, (char) strtoll(yytext + 1, nullptr, base)));
+    stringBuf.append(string(1, (char) strtoll(numStart, nullptr, base)));
     BEGIN(STRING_CONT);
 }
 {CONTROL_CARET_CODE} {
@@ -205,16 +211,20 @@ begin                   { Console::Log("KEYWORD: begin"); }
     BEGIN(STRING);
 }
 <STRING_CONT>{CONTROL_CODE} {
+    const char* numStart = yytext + 1;
     int base = 10;
     if (yytext[1] == '$') {
         base = 16;
+        numStart = yytext + 2;
     } else if (yytext[1] == '&') {
         base = 8;
+        numStart = yytext + 2;
     } else if (yytext[1] == '%') {
         base = 2;
+        numStart = yytext + 2;
     }
 
-    stringBuf.append(string(1, (char) strtoll(yytext + 1, nullptr, base)));
+    stringBuf.append(string(1, (char) strtoll(numStart, nullptr, base)));
 }
 <STRING_CONT>{CONTROL_CARET_CODE} {
     stringBuf.append(string(1, (char) (toupper(yytext[1]) - 'A' + 1)));
