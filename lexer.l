@@ -91,7 +91,6 @@ CONTROL_CARET_CODE \^[A-Za-z]
 (?i:finally)        { Console::Log("KEYWORD: finally"); }
 (?i:raise)          { Console::Log("KEYWORD: raise"); }
 (?i:on)             { Console::Log("KEYWORD: on"); }
-(?i:at)             { Console::Log("KEYWORD: at"); }
 
     /* ---------- Управляющие конструкции ---------- */
 (?i:if)             { Console::Log("KEYWORD: if"); }
