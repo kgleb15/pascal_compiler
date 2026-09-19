@@ -50,7 +50,6 @@ CONTROL_CARET_CODE \^[A-Za-z]\b
 
 
     /* ---------- Ключевые слова  ---------- */
-(?i:absolute)            { Console::Log("KEYWORD: absolute"); }
 (?i:and)            { Console::Log("KEYWORD: and"); }
 (?i:array)          { Console::Log("KEYWORD: array"); }
 (?i:asm)            { Console::Log("KEYWORD: asm"); }
@@ -84,7 +83,6 @@ CONTROL_CARET_CODE \^[A-Za-z]\b
 (?i:procedure)      { Console::Log("KEYWORD: procedure"); }
 (?i:program)        { Console::Log("KEYWORD: program"); }
 (?i:record)         { Console::Log("KEYWORD: record"); }
-(?i:reintroduce)        { Console::Log("KEYWORD: reintroduce"); }
 (?i:repeat)         { Console::Log("KEYWORD: repeat"); }
 (?i:self)           { Console::Log("KEYWORD: self"); }
 (?i:set)            { Console::Log("KEYWORD: set"); }
