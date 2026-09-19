@@ -101,25 +101,25 @@ CONTROL_CARET_CODE \^[A-Za-z]\b
 (?i:xor)            { Console::Log("KEYWORD: xor"); }
 
     /* ---------- Специфичные для Object Pascal ---------- */
-(?i:as)             { Console::Log("KEYWORD: as"); }
-(?i:class)          { Console::Log("KEYWORD: class"); }
-(?i:dispinterface)  { Console::Log("KEYWORD: dispinterface"); }
-(?i:except)         { Console::Log("KEYWORD: except"); }
+(?i:as)              { Console::Log("KEYWORD: as"); }
+(?i:class)           { Console::Log("KEYWORD: class"); }
+(?i:dispinterface)   { Console::Log("KEYWORD: dispinterface"); }
+(?i:except)          { Console::Log("KEYWORD: except"); }
 (?i:exports)        { Console::Log("KEYWORD: exports"); }
 (?i:finalization)   { Console::Log("KEYWORD: finalization"); }
-(?i:finally)        { Console::Log("KEYWORD: finally"); }
+(?i:finally)         { Console::Log("KEYWORD: finally"); }
 (?i:initialization) { Console::Log("KEYWORD: initialization"); }
-(?i:inline)         { Console::Log("KEYWORD: inline"); }
-(?i:is)             { Console::Log("KEYWORD: is"); }
+(?i:inline)          { Console::Log("KEYWORD: inline"); }
+(?i:is)              { Console::Log("KEYWORD: is"); }
 (?i:library)        { Console::Log("KEYWORD: library"); }
-(?i:on)             { Console::Log("KEYWORD: on"); }
-(?i:out)            { Console::Log("KEYWORD: out"); }
+(?i:on)              { Console::Log("KEYWORD: on"); }
+(?i:out)             { Console::Log("KEYWORD: out"); }
 (?i:packed)         { Console::Log("KEYWORD: packed"); }
 (?i:property)       { Console::Log("KEYWORD: property"); }
-(?i:raise)          { Console::Log("KEYWORD: raise"); }
+(?i:raise)           { Console::Log("KEYWORD: raise"); }
 (?i:resourcestring) { Console::Log("KEYWORD: resourcestring"); }
 (?i:threadvar)      { Console::Log("KEYWORD: threadvar"); }
-(?i:try)            { Console::Log("KEYWORD: try"); }
+(?i:try)             { Console::Log("KEYWORD: try"); }
 
     /* ---------- Операторы ---------- */
     /* ---------- Длинные операторы ---------- */
