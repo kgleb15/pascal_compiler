@@ -1,6 +1,6 @@
 Program Test;
 x = 42;
-if x = 42 then
+&if x = 42 then
 begin
     y := x + 1;
     x := x - 1;
