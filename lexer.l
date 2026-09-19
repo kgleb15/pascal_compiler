@@ -80,7 +80,6 @@ CONTROL_CARET_CODE \^[A-Za-z]
 (?i:inherited)      { Console::Log("KEYWORD: inherited"); }
 (?i:property)       { Console::Log("KEYWORD: property"); }
 (?i:self)           { Console::Log("KEYWORD: self"); }
-(?i:helper)         { Console::Log("KEYWORD: helper"); }
 
     /* ---------- Видимость ---------- */
 (?i:private)        { Console::Log("KEYWORD: private"); }
