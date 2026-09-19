@@ -59,7 +59,6 @@ CONTROL_CARET_CODE \^[A-Za-z]
 (?i:finalization)   { Console::Log("KEYWORD: finalization"); }
 (?i:uses)           { Console::Log("KEYWORD: uses"); }
 (?i:library)        { Console::Log("KEYWORD: library"); }
-(?i:package)        { Console::Log("KEYWORD: package"); }
 (?i:exports)        { Console::Log("KEYWORD: exports"); }
 
     /* ---------- Блоки и определения ---------- */
