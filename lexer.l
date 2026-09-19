@@ -189,10 +189,6 @@ CONTROL_CARET_CODE \^[A-Za-z]
     /* ---------- Специфичные для Object Pascal ---------- */
 (?i:out)            { Console::Log("KEYWORD: out"); }
 
-(?i:near)           { Console::Log("KEYWORD: near"); }
-(?i:far)            { Console::Log("KEYWORD: far"); }
-(?i:local)          { Console::Log("KEYWORD: local"); }
-(?i:varargs)        { Console::Log("KEYWORD: varargs"); }
 
     /* ---------- Директивы и модификаторы ---------- */
 (?i:sealed)         { Console::Log("KEYWORD: sealed"); }
