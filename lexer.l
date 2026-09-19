@@ -128,14 +128,10 @@ CONTROL_CARET_CODE \^[A-Za-z]
 (?i:array)          { Console::Log("KEYWORD: array"); }
 (?i:set)            { Console::Log("KEYWORD: set"); }
 (?i:file)           { Console::Log("KEYWORD: file"); }
-(?i:pointer)        { Console::Log("KEYWORD: pointer"); }
 (?i:packed)         { Console::Log("KEYWORD: packed"); }
 (?i:threadvar)      { Console::Log("KEYWORD: threadvar"); }
 (?i:resourcestring) { Console::Log("KEYWORD: resourcestring"); }
 (?i:dispinterface)  { Console::Log("KEYWORD: dispinterface"); }
-(?i:deprecated)     { Console::Log("KEYWORD: deprecated"); }
-(?i:experimental)   { Console::Log("KEYWORD: experimental"); }
-(?i:platform)       { Console::Log("KEYWORD: platform"); }
 
     /* ---------- Turbo Pascal ---------- */
 (?i:asm)            { Console::Log("KEYWORD: asm"); }
