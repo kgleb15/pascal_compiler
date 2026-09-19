@@ -70,9 +70,6 @@ CONTROL_CARET_CODE \^[A-Za-z]
 (?i:label)          { Console::Log("KEYWORD: label"); }
 (?i:procedure)      { Console::Log("KEYWORD: procedure"); }
 (?i:function)       { Console::Log("KEYWORD: function"); }
-(?i:forward)        { Console::Log("KEYWORD: forward"); }
-(?i:external)       { Console::Log("KEYWORD: external"); }
-(?i:absolute)       { Console::Log("KEYWORD: absolute"); }
 
     /* ---------- ООП ---------- */
 (?i:class)          { Console::Log("KEYWORD: class"); }
