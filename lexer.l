@@ -81,14 +81,6 @@ CONTROL_CARET_CODE \^[A-Za-z]
 (?i:property)       { Console::Log("KEYWORD: property"); }
 (?i:self)           { Console::Log("KEYWORD: self"); }
 
-    /* ---------- Видимость ---------- */
-(?i:private)        { Console::Log("KEYWORD: private"); }
-(?i:protected)      { Console::Log("KEYWORD: protected"); }
-(?i:public)         { Console::Log("KEYWORD: public"); }
-(?i:published)      { Console::Log("KEYWORD: published"); }
-(?i:automated)      { Console::Log("KEYWORD: automated"); }
-(?i:strict)         { Console::Log("KEYWORD: strict"); }
-
     /* ---------- Модификаторы методов ---------- */
 (?i:virtual)        { Console::Log("KEYWORD: virtual"); }
 (?i:override)       { Console::Log("KEYWORD: override"); }
