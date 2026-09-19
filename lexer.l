@@ -104,7 +104,7 @@ CONTROL_CARET_CODE \^[A-Za-z]\b
 
     /* ---------- Специфичные для Object Pascal ---------- */
 (?i:as)             { Console::Log("KEYWORD: as"); }
-(?i:class)          { Console::Log("KEYWORD: class");
+(?i:class)          { Console::Log("KEYWORD: class"); }
 (?i:dispinterface)  { Console::Log("KEYWORD: dispinterface"); }
 (?i:except)         { Console::Log("KEYWORD: except"); }
 (?i:exports)        { Console::Log("KEYWORD: exports"); }
