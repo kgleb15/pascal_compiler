@@ -153,7 +153,7 @@ CONTROL_CARET_CODE \^[A-Za-z]
 \>  { Console::Log("OPERATOR: >"); }
 \[  { Console::Log("OPERATOR: ["); }
 \]  { Console::Log("OPERATOR: ]"); }
-\;      { Console::Log("OPERATOR: ;"); }
+\;  { Console::Log("OPERATOR: ;"); }
 \.  { Console::Log("OPERATOR: ."); }
 \,  { Console::Log("OPERATOR: ,"); }
 \(  { Console::Log("OPERATOR: ("); }
@@ -161,10 +161,6 @@ CONTROL_CARET_CODE \^[A-Za-z]
 \:  { Console::Log("OPERATOR: :"); }
 \^  { Console::Log("OPERATOR: ^"); }
 \@  { Console::Log("OPERATOR: @"); }
-\&      { Console::Log("OPERATOR: &"); }
-\$  { Console::Log("OPERATOR: $"); }
-\#  { Console::Log("OPERATOR: #"); }
-\%  { Console::Log("OPERATOR: %"); }
 
 \${HEX_DIGIT}+ {
     long long value = strtoll(yytext + 1, nullptr, 16);
