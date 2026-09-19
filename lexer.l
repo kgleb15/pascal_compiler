@@ -38,7 +38,7 @@ LETTER     [A-Za-z_]
 ID         {LETTER}({LETTER}|{DIGIT})*
 
 CONTROL_CODE       \#({DIGIT}+|\${HEX_DIGIT}+|\&{OCT_DIGIT}+|\%{BIN_DIGIT}+)
-CONTROL_CARET_CODE \^[A-Za-z]
+CONTROL_CARET_CODE \^[A-Za-z]\b
 
 %%
 
