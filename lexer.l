@@ -2,6 +2,7 @@
 %option never-interactive
 %option yylineno
 %option c++
+%option case-insensitive
 
 %{
 #include <string>
@@ -50,76 +51,76 @@ CONTROL_CARET_CODE \^[A-Za-z]\b
 
 
     /* ---------- Ключевые слова  ---------- */
-(?i:and)            { Console::Log("KEYWORD: and"); }
-(?i:array)          { Console::Log("KEYWORD: array"); }
-(?i:asm)            { Console::Log("KEYWORD: asm"); }
-(?i:begin)          { Console::Log("KEYWORD: begin"); }
-(?i:case)           { Console::Log("KEYWORD: case"); }
-(?i:const)          { Console::Log("KEYWORD: const"); }
-(?i:constructor)    { Console::Log("KEYWORD: constructor"); }
-(?i:destructor)     { Console::Log("KEYWORD: destructor"); }
-(?i:div)            { Console::Log("KEYWORD: div"); }
-(?i:do)             { Console::Log("KEYWORD: do"); }
-(?i:downto)         { Console::Log("KEYWORD: downto"); }
-(?i:else)           { Console::Log("KEYWORD: else"); }
-(?i:end)            { Console::Log("KEYWORD: end"); }
-(?i:file)           { Console::Log("KEYWORD: file"); }
-(?i:for)            { Console::Log("KEYWORD: for"); }
-(?i:function)       { Console::Log("KEYWORD: function"); }
-(?i:goto)           { Console::Log("KEYWORD: goto"); }
-(?i:if)             { Console::Log("KEYWORD: if"); }
-(?i:implementation) { Console::Log("KEYWORD: implementation"); }
-(?i:in)             { Console::Log("KEYWORD: in"); }
-(?i:inherited)      { Console::Log("KEYWORD: inherited"); }
-(?i:interface)      { Console::Log("KEYWORD: interface"); }
-(?i:label)          { Console::Log("KEYWORD: label"); }
-(?i:mod)            { Console::Log("KEYWORD: mod"); }
-(?i:nil)            { Console::Log("KEYWORD: nil"); }
-(?i:not)            { Console::Log("KEYWORD: not"); }
-(?i:object)         { Console::Log("KEYWORD: object"); }
-(?i:of)             { Console::Log("KEYWORD: of"); }
-(?i:operator)       { Console::Log("KEYWORD: operator"); }
-(?i:or)             { Console::Log("KEYWORD: or"); }
-(?i:procedure)      { Console::Log("KEYWORD: procedure"); }
-(?i:program)        { Console::Log("KEYWORD: program"); }
-(?i:record)         { Console::Log("KEYWORD: record"); }
-(?i:repeat)         { Console::Log("KEYWORD: repeat"); }
-(?i:self)           { Console::Log("KEYWORD: self"); }
-(?i:set)            { Console::Log("KEYWORD: set"); }
-(?i:shl)            { Console::Log("KEYWORD: shl"); }
-(?i:shr)            { Console::Log("KEYWORD: shr"); }
-(?i:string)         { Console::Log("KEYWORD: string"); }
-(?i:then)           { Console::Log("KEYWORD: then"); }
-(?i:to)             { Console::Log("KEYWORD: to"); }
-(?i:type)           { Console::Log("KEYWORD: type"); }
-(?i:unit)           { Console::Log("KEYWORD: unit"); }
-(?i:until)          { Console::Log("KEYWORD: until"); }
-(?i:uses)           { Console::Log("KEYWORD: uses"); }
-(?i:var)            { Console::Log("KEYWORD: var"); }
-(?i:while)          { Console::Log("KEYWORD: while"); }
-(?i:with)           { Console::Log("KEYWORD: with"); }
-(?i:xor)            { Console::Log("KEYWORD: xor"); }
+and            { Console::Log("KEYWORD: and"); }
+array          { Console::Log("KEYWORD: array"); }
+asm            { Console::Log("KEYWORD: asm"); }
+begin          { Console::Log("KEYWORD: begin"); }
+case           { Console::Log("KEYWORD: case"); }
+const          { Console::Log("KEYWORD: const"); }
+constructor    { Console::Log("KEYWORD: constructor"); }
+destructor     { Console::Log("KEYWORD: destructor"); }
+div            { Console::Log("KEYWORD: div"); }
+do             { Console::Log("KEYWORD: do"); }
+downto         { Console::Log("KEYWORD: downto"); }
+else           { Console::Log("KEYWORD: else"); }
+end            { Console::Log("KEYWORD: end"); }
+file           { Console::Log("KEYWORD: file"); }
+for            { Console::Log("KEYWORD: for"); }
+function       { Console::Log("KEYWORD: function"); }
+goto           { Console::Log("KEYWORD: goto"); }
+if             { Console::Log("KEYWORD: if"); }
+implementation { Console::Log("KEYWORD: implementation"); }
+in             { Console::Log("KEYWORD: in"); }
+inherited      { Console::Log("KEYWORD: inherited"); }
+interface      { Console::Log("KEYWORD: interface"); }
+label          { Console::Log("KEYWORD: label"); }
+mod            { Console::Log("KEYWORD: mod"); }
+nil            { Console::Log("KEYWORD: nil"); }
+not            { Console::Log("KEYWORD: not"); }
+object         { Console::Log("KEYWORD: object"); }
+of             { Console::Log("KEYWORD: of"); }
+operator       { Console::Log("KEYWORD: operator"); }
+or             { Console::Log("KEYWORD: or"); }
+procedure      { Console::Log("KEYWORD: procedure"); }
+program        { Console::Log("KEYWORD: program"); }
+record         { Console::Log("KEYWORD: record"); }
+repeat         { Console::Log("KEYWORD: repeat"); }
+self           { Console::Log("KEYWORD: self"); }
+set            { Console::Log("KEYWORD: set"); }
+shl            { Console::Log("KEYWORD: shl"); }
+shr            { Console::Log("KEYWORD: shr"); }
+string         { Console::Log("KEYWORD: string"); }
+then           { Console::Log("KEYWORD: then"); }
+to             { Console::Log("KEYWORD: to"); }
+type           { Console::Log("KEYWORD: type"); }
+unit           { Console::Log("KEYWORD: unit"); }
+until          { Console::Log("KEYWORD: until"); }
+uses           { Console::Log("KEYWORD: uses"); }
+var            { Console::Log("KEYWORD: var"); }
+while          { Console::Log("KEYWORD: while"); }
+with           { Console::Log("KEYWORD: with"); }
+xor            { Console::Log("KEYWORD: xor"); }
 
     /* ---------- Специфичные для Object Pascal ---------- */
-(?i:as)              { Console::Log("KEYWORD: as"); }
-(?i:class)           { Console::Log("KEYWORD: class"); }
-(?i:dispinterface)   { Console::Log("KEYWORD: dispinterface"); }
-(?i:except)          { Console::Log("KEYWORD: except"); }
-(?i:exports)        { Console::Log("KEYWORD: exports"); }
-(?i:finalization)   { Console::Log("KEYWORD: finalization"); }
-(?i:finally)         { Console::Log("KEYWORD: finally"); }
-(?i:initialization) { Console::Log("KEYWORD: initialization"); }
-(?i:inline)          { Console::Log("KEYWORD: inline"); }
-(?i:is)              { Console::Log("KEYWORD: is"); }
-(?i:library)        { Console::Log("KEYWORD: library"); }
-(?i:on)              { Console::Log("KEYWORD: on"); }
-(?i:out)             { Console::Log("KEYWORD: out"); }
-(?i:packed)         { Console::Log("KEYWORD: packed"); }
-(?i:property)       { Console::Log("KEYWORD: property"); }
-(?i:raise)           { Console::Log("KEYWORD: raise"); }
-(?i:resourcestring) { Console::Log("KEYWORD: resourcestring"); }
-(?i:threadvar)      { Console::Log("KEYWORD: threadvar"); }
-(?i:try)             { Console::Log("KEYWORD: try"); }
+as              { Console::Log("KEYWORD: as"); }
+class           { Console::Log("KEYWORD: class"); }
+dispinterface   { Console::Log("KEYWORD: dispinterface"); }
+except          { Console::Log("KEYWORD: except"); }
+exports        { Console::Log("KEYWORD: exports"); }
+finalization   { Console::Log("KEYWORD: finalization"); }
+finally         { Console::Log("KEYWORD: finally"); }
+initialization { Console::Log("KEYWORD: initialization"); }
+inline          { Console::Log("KEYWORD: inline"); }
+is              { Console::Log("KEYWORD: is"); }
+library        { Console::Log("KEYWORD: library"); }
+on              { Console::Log("KEYWORD: on"); }
+out             { Console::Log("KEYWORD: out"); }
+packed         { Console::Log("KEYWORD: packed"); }
+property       { Console::Log("KEYWORD: property"); }
+raise           { Console::Log("KEYWORD: raise"); }
+resourcestring { Console::Log("KEYWORD: resourcestring"); }
+threadvar      { Console::Log("KEYWORD: threadvar"); }
+try             { Console::Log("KEYWORD: try"); }
 
     /* ---------- Операторы ---------- */
     /* ---------- Длинные операторы ---------- */
