@@ -122,8 +122,6 @@ CONTROL_CARET_CODE \^[A-Za-z]
 (?i:as)             { Console::Log("KEYWORD: as"); }
 
     /* ---------- Константы ---------- */
-(?i:true)           { Console::Log("KEYWORD: true"); }
-(?i:false)          { Console::Log("KEYWORD: false"); }
 (?i:nil)            { Console::Log("KEYWORD: nil"); }
 
     /* ---------- Типы-заготовки и прочее ---------- */
