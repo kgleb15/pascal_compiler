@@ -50,18 +50,11 @@ CONTROL_CARET_CODE \^[A-Za-z]
 
 
     /* ---------- Ключевые слова  ---------- */
-    /* ---------- Модули и структура ---------- */
 (?i:program)        { Console::Log("KEYWORD: program"); }
 (?i:unit)           { Console::Log("KEYWORD: unit"); }
 (?i:interface)      { Console::Log("KEYWORD: interface"); }
 (?i:implementation) { Console::Log("KEYWORD: implementation"); }
-(?i:initialization) { Console::Log("KEYWORD: initialization"); }
-(?i:finalization)   { Console::Log("KEYWORD: finalization"); }
 (?i:uses)           { Console::Log("KEYWORD: uses"); }
-(?i:library)        { Console::Log("KEYWORD: library"); }
-(?i:exports)        { Console::Log("KEYWORD: exports"); }
-
-    /* ---------- Блоки и определения ---------- */
 (?i:begin)          { Console::Log("KEYWORD: begin"); }
 (?i:end)            { Console::Log("KEYWORD: end"); }
 (?i:const)          { Console::Log("KEYWORD: const"); }
@@ -70,29 +63,12 @@ CONTROL_CARET_CODE \^[A-Za-z]
 (?i:label)          { Console::Log("KEYWORD: label"); }
 (?i:procedure)      { Console::Log("KEYWORD: procedure"); }
 (?i:function)       { Console::Log("KEYWORD: function"); }
-
-    /* ---------- ООП ---------- */
-(?i:class)          { Console::Log("KEYWORD: class"); }
 (?i:object)         { Console::Log("KEYWORD: object"); }
 (?i:record)         { Console::Log("KEYWORD: record"); }
 (?i:constructor)    { Console::Log("KEYWORD: constructor"); }
 (?i:destructor)     { Console::Log("KEYWORD: destructor"); }
 (?i:inherited)      { Console::Log("KEYWORD: inherited"); }
-(?i:property)       { Console::Log("KEYWORD: property"); }
 (?i:self)           { Console::Log("KEYWORD: self"); }
-
-    /* ---------- Модификаторы методов ---------- */
-(?i:inline)         { Console::Log("KEYWORD: inline"); }
-
-
-    /* ---------- Исключения ---------- */
-(?i:try)            { Console::Log("KEYWORD: try"); }
-(?i:except)         { Console::Log("KEYWORD: except"); }
-(?i:finally)        { Console::Log("KEYWORD: finally"); }
-(?i:raise)          { Console::Log("KEYWORD: raise"); }
-(?i:on)             { Console::Log("KEYWORD: on"); }
-
-    /* ---------- Управляющие конструкции ---------- */
 (?i:if)             { Console::Log("KEYWORD: if"); }
 (?i:then)           { Console::Log("KEYWORD: then"); }
 (?i:else)           { Console::Log("KEYWORD: else"); }
@@ -107,8 +83,6 @@ CONTROL_CARET_CODE \^[A-Za-z]
 (?i:until)          { Console::Log("KEYWORD: until"); }
 (?i:with)           { Console::Log("KEYWORD: with"); }
 (?i:goto)           { Console::Log("KEYWORD: goto"); }
-
-    /* ---------- Логические и битовые ---------- */
 (?i:and)            { Console::Log("KEYWORD: and"); }
 (?i:or)             { Console::Log("KEYWORD: or"); }
 (?i:not)            { Console::Log("KEYWORD: not"); }
@@ -118,28 +92,35 @@ CONTROL_CARET_CODE \^[A-Za-z]
 (?i:div)            { Console::Log("KEYWORD: div"); }
 (?i:mod)            { Console::Log("KEYWORD: mod"); }
 (?i:in)             { Console::Log("KEYWORD: in"); }
-(?i:is)             { Console::Log("KEYWORD: is"); }
-(?i:as)             { Console::Log("KEYWORD: as"); }
-
-    /* ---------- Константы ---------- */
 (?i:nil)            { Console::Log("KEYWORD: nil"); }
-
-    /* ---------- Типы-заготовки и прочее ---------- */
 (?i:array)          { Console::Log("KEYWORD: array"); }
 (?i:set)            { Console::Log("KEYWORD: set"); }
 (?i:file)           { Console::Log("KEYWORD: file"); }
-(?i:packed)         { Console::Log("KEYWORD: packed"); }
-(?i:threadvar)      { Console::Log("KEYWORD: threadvar"); }
-(?i:resourcestring) { Console::Log("KEYWORD: resourcestring"); }
-(?i:dispinterface)  { Console::Log("KEYWORD: dispinterface"); }
-
-    /* ---------- Turbo Pascal ---------- */
 (?i:asm)            { Console::Log("KEYWORD: asm"); }
 (?i:string)         { Console::Log("KEYWORD: string"); }
 (?i:operator)       { Console::Log("KEYWORD: operator"); }
 
+
     /* ---------- Специфичные для Object Pascal ---------- */
+(?i:as)             { Console::Log("KEYWORD: as"); }
+(?i:class)          { Console::Log("KEYWORD: class");
+(?i:dispinterface)  { Console::Log("KEYWORD: dispinterface"); }
+(?i:except)         { Console::Log("KEYWORD: except"); }
+(?i:exports)        { Console::Log("KEYWORD: exports"); }
+(?i:finalization)   { Console::Log("KEYWORD: finalization"); }
+(?i:finally)        { Console::Log("KEYWORD: finally"); }
+(?i:initialization) { Console::Log("KEYWORD: initialization"); }
+(?i:inline)         { Console::Log("KEYWORD: inline"); }
+(?i:is)             { Console::Log("KEYWORD: is"); }
+(?i:library)        { Console::Log("KEYWORD: library"); }
+(?i:on)             { Console::Log("KEYWORD: on"); }
 (?i:out)            { Console::Log("KEYWORD: out"); }
+(?i:packed)         { Console::Log("KEYWORD: packed"); }
+(?i:property)       { Console::Log("KEYWORD: property"); }
+(?i:raise)          { Console::Log("KEYWORD: raise"); }
+(?i:resourcestring) { Console::Log("KEYWORD: resourcestring"); }
+(?i:threadvar)      { Console::Log("KEYWORD: threadvar"); }
+(?i:try)            { Console::Log("KEYWORD: try"); }
 
     /* ---------- Операторы ---------- */
     /* ---------- Длинные операторы ---------- */
