@@ -244,47 +244,47 @@ CONTROL_CARET_CODE \^[A-Za-z]
 (?i:continue)       { Console::Log("KEYWORD: continue"); }
 
     /* ---------- Операторы ---------- */
-    /* ---------- Длинные операторы (2+ символа)  ---------- */
-":="              { Console::Log("OPERATOR: :="); }
-"<>"              { Console::Log("OPERATOR: <>"); }
-"<="              { Console::Log("OPERATOR: <="); }
-">="              { Console::Log("OPERATOR: >="); }
-".."              { Console::Log("OPERATOR: .."); }
-"**"              { Console::Log("OPERATOR: **"); }
-"><"              { Console::Log("OPERATOR: ><"); }
+    /* ---------- Длинные операторы ---------- */
+\<\<    { Console::Log("OPERATOR: <<"); }
+\>\>    { Console::Log("OPERATOR: <<"); }
+\*\*    { Console::Log("OPERATOR: **"); }
+\<\>    { Console::Log("OPERATOR: <>"); }
+\>\<    { Console::Log("OPERATOR: ><"); }
+\<\=    { Console::Log("OPERATOR: <="); }
+\>\=    { Console::Log("OPERATOR: >="); }
+\:\=    { Console::Log("OPERATOR: :="); }
+\+\=    { Console::Log("OPERATOR: +="); }
+\-\=    { Console::Log("OPERATOR: -="); }
+\*\=    { Console::Log("OPERATOR: *="); }
+\/\=    { Console::Log("OPERATOR: :="); }
+\(\.    { Console::Log("OPERATOR: (*"); }
+\.\)    { Console::Log("OPERATOR: :="); }
+\.\.        { Console::Log("OPERATOR: .."); }
+\*\*        { Console::Log("OPERATOR: **"); }
+
 
     /* ---------- Односимвольные операторы ---------- */
-"+"               { Console::Log("OPERATOR: +"); }
-"-"               { Console::Log("OPERATOR: -"); }
-"*"               { Console::Log("OPERATOR: *"); }
-"/"               { Console::Log("OPERATOR: /"); }
-"="               { Console::Log("OPERATOR: ="); }
-"<"               { Console::Log("OPERATOR: <"); }
-">"               { Console::Log("OPERATOR: >"); }
-";"               { Console::Log("OPERATOR: ;"); }
-","               { Console::Log("OPERATOR: ,"); }
-":"               { Console::Log("OPERATOR: :"); }
-"."               { Console::Log("OPERATOR: ."); }
-"("               { Console::Log("OPERATOR: ("); }
-")"               { Console::Log("OPERATOR: )"); }
-"["               { Console::Log("OPERATOR: ["); }
-"]"               { Console::Log("OPERATOR: ]"); }
-"^"               { Console::Log("OPERATOR: ^"); }
-"@"               { Console::Log("OPERATOR: @"); }
-    /* ---------- Escape-символ & (ВНИМАНИЕ, см. комментарий) ----------
-       В Object Pascal & — это НЕ настоящий оператор, а escape-символ
-       для идентификаторов, совпадающих с ключевыми словами:
-           &type, &begin, &end, &class  →  обычные идентификаторы
-       То есть «type» после & — это имя переменной, а не ключевое слово.
-
-       Строго говоря, правильнее было бы обрабатывать & вместе с
-       идентификатором, например: "&"?{ID} { ... IDENTIFIER ... }
-       Но пока оставляем & как отдельный токен OPERATOR. Если в тестах встретится
-       &type, лексер выдаст: OPERATOR: & , IDENTIFIER: type.
-       При необходимости правило легко переделать на "&"?{ID}.
-       ----------------------------------------------------------------- */
-"&"               { Console::Log("OPERATOR: &"); }
-
+\+  { Console::Log("OPERATOR: +"); }
+\-  { Console::Log("OPERATOR: -"); }
+\*  { Console::Log("OPERATOR: *"); }
+\/  { Console::Log("OPERATOR: /"); }
+\=  { Console::Log("OPERATOR: ="); }
+\<  { Console::Log("OPERATOR: <"); }
+\>  { Console::Log("OPERATOR: >"); }
+\[  { Console::Log("OPERATOR: ["); }
+\]  { Console::Log("OPERATOR: ]"); }
+\;      { Console::Log("OPERATOR: ;"); }
+\.  { Console::Log("OPERATOR: ."); }
+\,  { Console::Log("OPERATOR: ,"); }
+\(  { Console::Log("OPERATOR: ("); }
+\)  { Console::Log("OPERATOR: )"); }
+\:  { Console::Log("OPERATOR: :"); }
+\^  { Console::Log("OPERATOR: ^"); }
+\@  { Console::Log("OPERATOR: @"); }
+\&      { Console::Log("OPERATOR: &"); }
+\$  { Console::Log("OPERATOR: $"); }
+\#  { Console::Log("OPERATOR: #"); }
+\%  { Console::Log("OPERATOR: %"); }
 
 \${HEX_DIGIT}+ {
     long long value = strtoll(yytext + 1, nullptr, 16);
