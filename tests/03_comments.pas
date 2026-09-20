@@ -26,7 +26,8 @@ j := 3; (* после текста *)
 (* comment 1 (* comment 2 *) *)
 { comment 1 { comment 2 } }
 // comment 1 (* comment 2 *)
-
+(* a **)
+(((* x *) y *) z *)
 
 
 // С ошибками
