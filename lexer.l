@@ -44,7 +44,7 @@ LETTER              [A-Za-z_]
 ID                  {LETTER}({LETTER}|{DIGIT})*
 
 CONTROL_CODE        \#({DIGIT}+|\${HEX_DIGIT}+|\&{OCT_DIGIT}+|\%{BIN_DIGIT}+)
-CONTROL_CARET_CODE  \^[A-Za-z][^A-Za-z0-9_]
+CONTROL_CARET_CODE  \^[A-Za-z]
 
 %%
 
@@ -288,7 +288,7 @@ try              { Console::Log(lineno(), "KEYWORD: try"); }
     stringBuf.append(string(1, (char) strtoll(numStart, nullptr, base)));
     BEGIN(STRING_CONT);
 }
-{CONTROL_CARET_CODE} {
+{CONTROL_CARET_CODE}/[^A-Za-z0-9_] {
     stringBuf.reset();
     stringBuf.setStartLine(lineno());
     stringBuf.append(string(1, (char) (toupper(yytext[1]) - 'A' + 1)));
@@ -334,7 +334,7 @@ try              { Console::Log(lineno(), "KEYWORD: try"); }
 
     stringBuf.append(string(1, (char) strtoll(numStart, nullptr, base)));
 }
-<STRING_CONT>{CONTROL_CARET_CODE} {
+<STRING_CONT>{CONTROL_CARET_CODE}/[^A-Za-z0-9_] {
     stringBuf.append(string(1, (char) (toupper(yytext[1]) - 'A' + 1)));
 }
 <STRING_CONT>(.|\n) {
