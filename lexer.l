@@ -233,13 +233,10 @@ try              { Console::Log(lineno(), "KEYWORD: try"); }
     commentBuf.setStartLine(lineno());
     BEGIN(COMMENT_TWO_CHAR);
 }
-<COMMENT_TWO_CHAR>[^*(]* {
+<COMMENT_TWO_CHAR>[^*(]+ {
     commentBuf.append(yytext);
 }
-<COMMENT_TWO_CHAR>\(+[^*(]* {
-    commentBuf.append(yytext);
-}
-<COMMENT_TWO_CHAR>\*+[^)*]* {
+<COMMENT_TWO_CHAR>[*(] {
     commentBuf.append(yytext);
 }
 <COMMENT_TWO_CHAR>\(\* {
