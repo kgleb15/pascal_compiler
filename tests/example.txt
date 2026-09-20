@@ -8,6 +8,13 @@ end
 else
 begin
     y := 0;
+    x += 1; x -= 1; x*=2; x /= 2;
+    a := b << 2; c := d >> 1; e := f ** 2; g := h >< i;
+    arr(.1.) := 5;
+    &begin := 1; &do := 2; &else := &17;
+    type PInt = ^Integer;
+    p^.x := 1;
+    var index, name, read, write, exit, true: integer;
 end;
 
 a := 255;
