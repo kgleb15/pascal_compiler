@@ -164,6 +164,7 @@ try              { Console::Log("KEYWORD: try"); }
 \^  { Console::Log("OPERATOR: ^"); }
 \@  { Console::Log("OPERATOR: @"); }
 
+        /* ---------- Числовые константы ---------- */
 \${HEX_DIGIT}+ {
     long long value = strtoll(yytext + 1, nullptr, 16);
     Console::Log("HEX_INT: " + std::to_string(value));
@@ -190,6 +191,7 @@ try              { Console::Log("KEYWORD: try"); }
 }
 
 
+    /* ---------- Комментарии ---------- */
 \/\/[^\n]* {
     Console::Log("COMMENT: " + string(yytext));
 }
@@ -257,6 +259,7 @@ try              { Console::Log("KEYWORD: try"); }
 }
 
 
+    /* ---------- Строковые константы ---------- */
 \' {
     stringBuf.reset();
     stringBuf.setStartLine(lineno());
@@ -289,6 +292,7 @@ try              { Console::Log("KEYWORD: try"); }
     stringBuf.append(string(1, (char) (toupper(yytext[1]) - 'A' + 1)));
     BEGIN(STRING_CONT);
 }
+
 
 <STRING>[^'\n]* {
     stringBuf.append(yytext);
@@ -341,6 +345,8 @@ try              { Console::Log("KEYWORD: try"); }
     BEGIN(INITIAL);
 }
 
+
+    /* ---------- Идентификаторы ---------- */
 {ID} {
     Console::Log("IDENTIFIER: " + toLower(yytext));
 }
@@ -350,12 +356,16 @@ try              { Console::Log("KEYWORD: try"); }
 }
 
 
+    /* ------------------------------------- */
 [ \t\r\n]+ { }
+
 <*>. {
     Console::Error("Line " + std::to_string(lineno()) + ": UNKNOWN CHARACTER: " + string(yytext));
 }
 
+
 %%
+
 
 string toLower(const string& s) {
     string lowStr = s;
