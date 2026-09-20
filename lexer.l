@@ -6,10 +6,14 @@
 
 %{
     #include <string>
+    #include <algorithm>
+    #include <cctype>
     #include "core/Console.h"
     #include "core/Buffer.h"
 
     using std::string;
+
+    string toLower(const string& s);
 %}
 
 /* ----------------------------
@@ -338,11 +342,11 @@ try              { Console::Log("KEYWORD: try"); }
 }
 
 {ID} {
-    Console::Log("IDENTIFIER: " + string(yytext));
+    Console::Log("IDENTIFIER: " + toLower(yytext));
 }
 
 \&(and|array|asm|begin|case|const|constructor|destructor|div|do|downto|else|end|file|for|function|goto|if|implementation|in|inherited|interface|label|mod|nil|not|object|of|operator|or|procedure|program|record|repeat|self|set|shl|shr|string|then|to|type|unit|until|uses|var|while|with|xor|as|class|dispinterface|except|exports|finalization|finally|initialization|inline|is|library|on|out|packed|property|raise|resourcestring|threadvar|try) {
-    Console::Log("IDENTIFIER: " + string(yytext + 1));
+    Console::Log("IDENTIFIER: " + toLower(yytext + 1));
 }
 
 
@@ -352,3 +356,9 @@ try              { Console::Log("KEYWORD: try"); }
 }
 
 %%
+
+string toLower(const string& s) {
+    string lowStr = s;
+    std::transform(lowStr.begin(), lowStr.end(), lowStr.begin(), [](unsigned char c) { return std::tolower(c); });
+    return lowStr;
+}
