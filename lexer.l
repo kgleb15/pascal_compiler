@@ -353,7 +353,7 @@ try              { Console::Log(lineno(), "KEYWORD: try"); }
     Console::Log(lineno(), "IDENTIFIER: " + toLower(yytext));
 }
 
-\&(and|array|asm|begin|case|const|constructor|destructor|div|do|downto|else|end|file|for|function|goto|if|implementation|in|inherited|interface|label|mod|nil|not|object|of|operator|or|procedure|program|record|repeat|self|set|shl|shr|string|then|to|type|unit|until|uses|var|while|with|xor|as|class|dispinterface|except|exports|finalization|finally|initialization|inline|is|library|on|out|packed|property|raise|resourcestring|threadvar|try) {
+\&{ID} {
     Console::Log(lineno(), "IDENTIFIER: " + toLower(yytext + 1));
 }
 

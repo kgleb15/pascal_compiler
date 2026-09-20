@@ -25,5 +25,5 @@ begin
     &begin := 1; &do := 2; &else := &17;
     type PInt = ^Integer;
     p^.x := 1;
-    var index, name, read, write, &class, &else: integer;
+    var index, name, read, &write, &class, &else: integer;
 end;
