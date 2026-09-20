@@ -5,11 +5,11 @@
 %option case-insensitive
 
 %{
-#include <string>
-#include "core/Console.h"
-#include "core/Buffer.h"
+    #include <string>
+    #include "core/Console.h"
+    #include "core/Buffer.h"
 
-using std::string;
+    using std::string;
 %}
 
 /* ----------------------------
