@@ -31,19 +31,19 @@
    ---------------------------- */
 
 /* Раздел с макросами, для более читабельного вида регулярок. Примеры макросов: */
-DIGIT      [0-9]
-HEX_DIGIT  [0-9A-Fa-f]
-OCT_DIGIT  [0-7]
-BIN_DIGIT  [01]
+DIGIT               [0-9]
+HEX_DIGIT           [0-9A-Fa-f]
+OCT_DIGIT           [0-7]
+BIN_DIGIT           [01]
 
-SCALE      [Ee][+-]?{DIGIT}+
-REAL       ({DIGIT}+\.{DIGIT}+{SCALE}?)|({DIGIT}+{SCALE})
+SCALE               [Ee][+-]?{DIGIT}+
+REAL                ({DIGIT}+\.{DIGIT}+{SCALE}?)|({DIGIT}+{SCALE})
 
-LETTER     [A-Za-z_]
-ID         {LETTER}({LETTER}|{DIGIT})*
+LETTER              [A-Za-z_]
+ID                  {LETTER}({LETTER}|{DIGIT})*
 
-CONTROL_CODE       \#({DIGIT}+|\${HEX_DIGIT}+|\&{OCT_DIGIT}+|\%{BIN_DIGIT}+)
-CONTROL_CARET_CODE \^[A-Za-z][^A-Za-z0-9_]
+CONTROL_CODE        \#({DIGIT}+|\${HEX_DIGIT}+|\&{OCT_DIGIT}+|\%{BIN_DIGIT}+)
+CONTROL_CARET_CODE  \^[A-Za-z][^A-Za-z0-9_]
 
 %%
 
