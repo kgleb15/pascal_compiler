@@ -51,76 +51,76 @@ CONTROL_CARET_CODE \^[A-Za-z]\b
 
 
     /* ---------- Ключевые слова  ---------- */
-and            { Console::Log("KEYWORD: and"); }
-array          { Console::Log("KEYWORD: array"); }
-asm            { Console::Log("KEYWORD: asm"); }
-begin          { Console::Log("KEYWORD: begin"); }
-case           { Console::Log("KEYWORD: case"); }
-const          { Console::Log("KEYWORD: const"); }
-constructor    { Console::Log("KEYWORD: constructor"); }
-destructor     { Console::Log("KEYWORD: destructor"); }
-div            { Console::Log("KEYWORD: div"); }
-do             { Console::Log("KEYWORD: do"); }
-downto         { Console::Log("KEYWORD: downto"); }
-else           { Console::Log("KEYWORD: else"); }
-end            { Console::Log("KEYWORD: end"); }
-file           { Console::Log("KEYWORD: file"); }
-for            { Console::Log("KEYWORD: for"); }
-function       { Console::Log("KEYWORD: function"); }
-goto           { Console::Log("KEYWORD: goto"); }
-if             { Console::Log("KEYWORD: if"); }
-implementation { Console::Log("KEYWORD: implementation"); }
-in             { Console::Log("KEYWORD: in"); }
-inherited      { Console::Log("KEYWORD: inherited"); }
-interface      { Console::Log("KEYWORD: interface"); }
-label          { Console::Log("KEYWORD: label"); }
-mod            { Console::Log("KEYWORD: mod"); }
-nil            { Console::Log("KEYWORD: nil"); }
-not            { Console::Log("KEYWORD: not"); }
-object         { Console::Log("KEYWORD: object"); }
-of             { Console::Log("KEYWORD: of"); }
-operator       { Console::Log("KEYWORD: operator"); }
-or             { Console::Log("KEYWORD: or"); }
-procedure      { Console::Log("KEYWORD: procedure"); }
-program        { Console::Log("KEYWORD: program"); }
-record         { Console::Log("KEYWORD: record"); }
-repeat         { Console::Log("KEYWORD: repeat"); }
-self           { Console::Log("KEYWORD: self"); }
-set            { Console::Log("KEYWORD: set"); }
-shl            { Console::Log("KEYWORD: shl"); }
-shr            { Console::Log("KEYWORD: shr"); }
-string         { Console::Log("KEYWORD: string"); }
-then           { Console::Log("KEYWORD: then"); }
-to             { Console::Log("KEYWORD: to"); }
-type           { Console::Log("KEYWORD: type"); }
-unit           { Console::Log("KEYWORD: unit"); }
-until          { Console::Log("KEYWORD: until"); }
-uses           { Console::Log("KEYWORD: uses"); }
-var            { Console::Log("KEYWORD: var"); }
-while          { Console::Log("KEYWORD: while"); }
-with           { Console::Log("KEYWORD: with"); }
-xor            { Console::Log("KEYWORD: xor"); }
+and             { Console::Log("KEYWORD: and"); }
+array           { Console::Log("KEYWORD: array"); }
+asm             { Console::Log("KEYWORD: asm"); }
+begin           { Console::Log("KEYWORD: begin"); }
+case            { Console::Log("KEYWORD: case"); }
+const           { Console::Log("KEYWORD: const"); }
+constructor     { Console::Log("KEYWORD: constructor"); }
+destructor      { Console::Log("KEYWORD: destructor"); }
+div             { Console::Log("KEYWORD: div"); }
+do              { Console::Log("KEYWORD: do"); }
+downto          { Console::Log("KEYWORD: downto"); }
+else            { Console::Log("KEYWORD: else"); }
+end             { Console::Log("KEYWORD: end"); }
+file            { Console::Log("KEYWORD: file"); }
+for             { Console::Log("KEYWORD: for"); }
+function        { Console::Log("KEYWORD: function"); }
+goto            { Console::Log("KEYWORD: goto"); }
+if              { Console::Log("KEYWORD: if"); }
+implementation  { Console::Log("KEYWORD: implementation"); }
+in              { Console::Log("KEYWORD: in"); }
+inherited       { Console::Log("KEYWORD: inherited"); }
+interface       { Console::Log("KEYWORD: interface"); }
+label           { Console::Log("KEYWORD: label"); }
+mod             { Console::Log("KEYWORD: mod"); }
+nil             { Console::Log("KEYWORD: nil"); }
+not             { Console::Log("KEYWORD: not"); }
+object          { Console::Log("KEYWORD: object"); }
+of              { Console::Log("KEYWORD: of"); }
+operator        { Console::Log("KEYWORD: operator"); }
+or              { Console::Log("KEYWORD: or"); }
+procedure       { Console::Log("KEYWORD: procedure"); }
+program         { Console::Log("KEYWORD: program"); }
+record          { Console::Log("KEYWORD: record"); }
+repeat          { Console::Log("KEYWORD: repeat"); }
+self            { Console::Log("KEYWORD: self"); }
+set             { Console::Log("KEYWORD: set"); }
+shl             { Console::Log("KEYWORD: shl"); }
+shr             { Console::Log("KEYWORD: shr"); }
+string          { Console::Log("KEYWORD: string"); }
+then            { Console::Log("KEYWORD: then"); }
+to              { Console::Log("KEYWORD: to"); }
+type            { Console::Log("KEYWORD: type"); }
+unit            { Console::Log("KEYWORD: unit"); }
+until           { Console::Log("KEYWORD: until"); }
+uses            { Console::Log("KEYWORD: uses"); }
+var             { Console::Log("KEYWORD: var"); }
+while           { Console::Log("KEYWORD: while"); }
+with            { Console::Log("KEYWORD: with"); }
+xor             { Console::Log("KEYWORD: xor"); }
 
     /* ---------- Специфичные для Object Pascal ---------- */
-as              { Console::Log("KEYWORD: as"); }
-class           { Console::Log("KEYWORD: class"); }
-dispinterface   { Console::Log("KEYWORD: dispinterface"); }
-except          { Console::Log("KEYWORD: except"); }
-exports        { Console::Log("KEYWORD: exports"); }
-finalization   { Console::Log("KEYWORD: finalization"); }
-finally         { Console::Log("KEYWORD: finally"); }
-initialization { Console::Log("KEYWORD: initialization"); }
-inline          { Console::Log("KEYWORD: inline"); }
-is              { Console::Log("KEYWORD: is"); }
-library        { Console::Log("KEYWORD: library"); }
-on              { Console::Log("KEYWORD: on"); }
-out             { Console::Log("KEYWORD: out"); }
-packed         { Console::Log("KEYWORD: packed"); }
-property       { Console::Log("KEYWORD: property"); }
-raise           { Console::Log("KEYWORD: raise"); }
-resourcestring { Console::Log("KEYWORD: resourcestring"); }
-threadvar      { Console::Log("KEYWORD: threadvar"); }
-try             { Console::Log("KEYWORD: try"); }
+as               { Console::Log("KEYWORD: as"); }
+class            { Console::Log("KEYWORD: class"); }
+dispinterface    { Console::Log("KEYWORD: dispinterface"); }
+except           { Console::Log("KEYWORD: except"); }
+exports         { Console::Log("KEYWORD: exports"); }
+finalization    { Console::Log("KEYWORD: finalization"); }
+finally          { Console::Log("KEYWORD: finally"); }
+initialization  { Console::Log("KEYWORD: initialization"); }
+inline           { Console::Log("KEYWORD: inline"); }
+is               { Console::Log("KEYWORD: is"); }
+library         { Console::Log("KEYWORD: library"); }
+on               { Console::Log("KEYWORD: on"); }
+out              { Console::Log("KEYWORD: out"); }
+packed          { Console::Log("KEYWORD: packed"); }
+property        { Console::Log("KEYWORD: property"); }
+raise            { Console::Log("KEYWORD: raise"); }
+resourcestring  { Console::Log("KEYWORD: resourcestring"); }
+threadvar       { Console::Log("KEYWORD: threadvar"); }
+try              { Console::Log("KEYWORD: try"); }
 
     /* ---------- Операторы ---------- */
     /* ---------- Длинные операторы ---------- */
@@ -338,12 +338,16 @@ try             { Console::Log("KEYWORD: try"); }
     BEGIN(INITIAL);
 }
 
-{ID} { Console::Log("IDENTIFIER: " + string(yytext)); }
+{ID} {
+    Console::Log("IDENTIFIER: " + string(yytext));
+}
+
 \&(and|array|asm|begin|case|const|constructor|destructor|div|do|downto|else|end|file|for|function|goto|if|implementation|in|inherited|interface|label|mod|nil|not|object|of|operator|or|procedure|program|record|repeat|self|set|shl|shr|string|then|to|type|unit|until|uses|var|while|with|xor|as|class|dispinterface|except|exports|finalization|finally|initialization|inline|is|library|on|out|packed|property|raise|resourcestring|threadvar|try) {
     Console::Log("IDENTIFIER: " + string(yytext + 1));
 }
 
-[ \t\r\n]+              { /* ignore */ }
+
+[ \t\r\n]+ { }
 <*>. {
     Console::Error("Line " + std::to_string(lineno()) + ": UNKNOWN CHARACTER: " + string(yytext));
 }
