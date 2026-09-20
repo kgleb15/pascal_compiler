@@ -362,7 +362,7 @@ try              { Console::Log(lineno(), "KEYWORD: try"); }
 [ \t\r\n]+ { }
 
 <*>. {
-    Console::Error(commentBuf.getStartLine(), "UNKNOWN CHARACTER: " + string(yytext));
+    Console::Error(lineno(), "UNKNOWN CHARACTER: " + string(yytext));
 }
 
 
