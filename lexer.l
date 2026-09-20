@@ -125,7 +125,7 @@ try              { Console::Log("KEYWORD: try"); }
     /* ---------- Операторы ---------- */
     /* ---------- Длинные операторы ---------- */
 \<\<    { Console::Log("OPERATOR: <<"); }
-\>\>    { Console::Log("OPERATOR: <<"); }
+\>\>    { Console::Log("OPERATOR: >>"); }
 \*\*    { Console::Log("OPERATOR: **"); }
 \<\>    { Console::Log("OPERATOR: <>"); }
 \>\<    { Console::Log("OPERATOR: ><"); }
@@ -135,9 +135,9 @@ try              { Console::Log("KEYWORD: try"); }
 \+\=    { Console::Log("OPERATOR: +="); }
 \-\=    { Console::Log("OPERATOR: -="); }
 \*\=    { Console::Log("OPERATOR: *="); }
-\/\=    { Console::Log("OPERATOR: :="); }
-\(\.    { Console::Log("OPERATOR: (*"); }
-\.\)    { Console::Log("OPERATOR: :="); }
+\/\=    { Console::Log("OPERATOR: /="); }
+\(\.    { Console::Log("OPERATOR: (."); }
+\.\)    { Console::Log("OPERATOR: .)"); }
 \.\.        { Console::Log("OPERATOR: .."); }
 
 
