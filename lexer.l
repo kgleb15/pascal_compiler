@@ -4,6 +4,7 @@
 %option c++
 %option case-insensitive
 
+
 %{
     #include <string>
     #include <algorithm>
@@ -16,6 +17,7 @@
     string toLower(const string& s);
 %}
 
+
 /* ----------------------------
    States
    ---------------------------- */
@@ -24,6 +26,7 @@
 %x COMMENT_TWO_CHAR
 %x STRING
 %x STRING_CONT
+
 
 /* ----------------------------
    Macros
@@ -124,6 +127,7 @@ resourcestring  { Console::Log("KEYWORD: resourcestring"); }
 threadvar       { Console::Log("KEYWORD: threadvar"); }
 try              { Console::Log("KEYWORD: try"); }
 
+
     /* ---------- Операторы ---------- */
     /* ---------- Длинные операторы ---------- */
 \<\<    { Console::Log("OPERATOR: <<"); }
@@ -140,8 +144,7 @@ try              { Console::Log("KEYWORD: try"); }
 \/\=    { Console::Log("OPERATOR: /="); }
 \(\.    { Console::Log("OPERATOR: (."); }
 \.\)    { Console::Log("OPERATOR: .)"); }
-\.\.        { Console::Log("OPERATOR: .."); }
-
+\.\.    { Console::Log("OPERATOR: .."); }
 
     /* ---------- Односимвольные операторы ---------- */
 \+  { Console::Log("OPERATOR: +"); }
@@ -161,6 +164,7 @@ try              { Console::Log("KEYWORD: try"); }
 \:  { Console::Log("OPERATOR: :"); }
 \^  { Console::Log("OPERATOR: ^"); }
 \@  { Console::Log("OPERATOR: @"); }
+
 
         /* ---------- Числовые константы ---------- */
 \${HEX_DIGIT}+ {
