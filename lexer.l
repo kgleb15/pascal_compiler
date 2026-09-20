@@ -139,7 +139,6 @@ try              { Console::Log("KEYWORD: try"); }
 \(\.    { Console::Log("OPERATOR: (*"); }
 \.\)    { Console::Log("OPERATOR: :="); }
 \.\.        { Console::Log("OPERATOR: .."); }
-\*\*        { Console::Log("OPERATOR: **"); }
 
 
     /* ---------- Односимвольные операторы ---------- */
