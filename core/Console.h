@@ -11,7 +11,6 @@ using std::string;
 class Console {
 public:
     static void Log(const string& message);
-    static void Warning(const string& message);
     static void Error(const string& message);
 };
 

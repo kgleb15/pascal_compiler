@@ -14,10 +14,6 @@ void Console::Log(const string& message) {
     cout << message << endl;
 }
 
-void Console::Warning(const string& message) {
-    cerr << "WARNING: " << message << endl;
-}
-
 void Console::Error(const string& message) {
     cerr << "ERROR: " << message << endl;
 }
