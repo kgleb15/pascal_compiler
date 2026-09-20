@@ -10,10 +10,10 @@ using std::cout;
 using std::cerr;
 using std::endl;
 
-void Console::Log(const string& message) {
-    cout << message << endl;
+void Console::Log(int line, const string& message) {
+    cout << "[" << line << "] " << message << endl;
 }
 
-void Console::Error(const string& message) {
-    cerr << "ERROR: " << message << endl;
+void Console::Error(int line, const string& message) {
+    cerr << "ERROR [" << line << "]: " << message << endl;
 }

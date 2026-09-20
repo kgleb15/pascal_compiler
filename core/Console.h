@@ -10,8 +10,8 @@ using std::string;
 
 class Console {
 public:
-    static void Log(const string& message);
-    static void Error(const string& message);
+    static void Log(int line, const string& message);
+    static void Error(int line, const string& message);
 };
 
 #endif //PASCAL_COMPILER_CONSOLE_H
