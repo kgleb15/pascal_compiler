@@ -50,6 +50,7 @@ CONTROL_CARET_CODE  \^[A-Za-z]
 
 %{
     int commentDepth = 0;
+    bool isDirective = false;
     Buffer commentBuf;
     Buffer stringBuf;
 %}
@@ -205,6 +206,15 @@ try              { Console::Log(lineno(), "KEYWORD: try"); }
     commentDepth = 1;
     commentBuf.reset();
     commentBuf.setStartLine(lineno());
+    isDirective = false;
+    BEGIN(COMMENT_ONE_CHAR);
+}
+\{\$ {
+    commentDepth = 1;
+    commentBuf.reset();
+    commentBuf.setStartLine(lineno());
+    commentBuf.append("$");
+    isDirective = true;
     BEGIN(COMMENT_ONE_CHAR);
 }
 <COMMENT_ONE_CHAR>[^{}]* {
@@ -217,7 +227,7 @@ try              { Console::Log(lineno(), "KEYWORD: try"); }
 <COMMENT_ONE_CHAR>\} {
     commentDepth--;
     if (commentDepth == 0) {
-        Console::Log(commentBuf.getStartLine(), "COMMENT: {" + commentBuf.current() + "}");
+        Console::Log(commentBuf.getStartLine(), string(isDirective ? "DIRECTIVE" : "COMMENT") + ": {" + commentBuf.current() + "}");
         BEGIN(INITIAL);
     } else {
         commentBuf.append(yytext);
