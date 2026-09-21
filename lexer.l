@@ -11,6 +11,7 @@
     #include <cctype>
     #include "core/Console.h"
     #include "core/Buffer.h"
+    #include <cstdlib>
 
     using std::string;
 
@@ -172,27 +173,27 @@ try              { Console::Log(lineno(), "KEYWORD: try"); }
         /* ---------- Числовые константы ---------- */
 \${HEX_DIGIT}+ {
     long long value = strtoll(yytext + 1, nullptr, 16);
-    Console::Log(lineno(), "HEX_INT: " + std::to_string(value));
+    Console::LogInt(lineno(), "HEX_INT", value);
 }
 
 \&{OCT_DIGIT}+ {
     long long value = strtoll(yytext + 1, nullptr, 8);
-    Console::Log(lineno(), "OCT_INT: " + std::to_string(value));
+    Console::LogInt(lineno(), "OCT_INT", value);
 }
 
 \%{BIN_DIGIT}+ {
     long long value = strtoll(yytext + 1, nullptr, 2);
-    Console::Log(lineno(), "BIN_INT: " + std::to_string(value));
+    Console::LogInt(lineno(), "BIN_INT", value);
 }
 
 {REAL} {
     double value = strtod(yytext, nullptr);
-    Console::Log(lineno(), "REAL: " + std::to_string(value));
+    Console::LogReal(lineno(), "REAL", value);
 }
 
 {DIGIT}+ {
     long long value = strtoll(yytext, nullptr, 10);
-    Console::Log(lineno(), "INTEGER: " + std::to_string(value));
+    Console::LogInt(lineno(), "INTEGER", value);
 }
 
 

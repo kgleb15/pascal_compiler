@@ -30,3 +30,11 @@ void Console::PrintErrors() {
 bool Console::HasErrors() {
     return !_errors.empty();
 }
+
+void Console::LogInt(int line, const string& kind, long long value) {
+    printf("[%d] %s: %lld\n", line, kind.c_str(), value);
+}
+
+void Console::LogReal(int line, const string& kind, double value) {
+    printf("[%d] %s: %f\n", line, kind.c_str(), value);
+}
