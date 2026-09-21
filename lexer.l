@@ -58,7 +58,6 @@ CONTROL_CARET_CODE  \^[A-Za-z]
 
 
     /* ---------- Ключевые слова  ---------- */
-and             { Console::Log(lineno(), "KEYWORD: and"); }
 array           { Console::Log(lineno(), "KEYWORD: array"); }
 asm             { Console::Log(lineno(), "KEYWORD: asm"); }
 absolute        { Console::Log(lineno(), "KEYWORD: absolute"); }
@@ -67,7 +66,6 @@ case            { Console::Log(lineno(), "KEYWORD: case"); }
 const           { Console::Log(lineno(), "KEYWORD: const"); }
 constructor     { Console::Log(lineno(), "KEYWORD: constructor"); }
 destructor      { Console::Log(lineno(), "KEYWORD: destructor"); }
-div             { Console::Log(lineno(), "KEYWORD: div"); }
 do              { Console::Log(lineno(), "KEYWORD: do"); }
 downto          { Console::Log(lineno(), "KEYWORD: downto"); }
 else            { Console::Log(lineno(), "KEYWORD: else"); }
@@ -78,17 +76,13 @@ function        { Console::Log(lineno(), "KEYWORD: function"); }
 goto            { Console::Log(lineno(), "KEYWORD: goto"); }
 if              { Console::Log(lineno(), "KEYWORD: if"); }
 implementation  { Console::Log(lineno(), "KEYWORD: implementation"); }
-in              { Console::Log(lineno(), "KEYWORD: in"); }
 inherited       { Console::Log(lineno(), "KEYWORD: inherited"); }
 interface       { Console::Log(lineno(), "KEYWORD: interface"); }
 label           { Console::Log(lineno(), "KEYWORD: label"); }
-mod             { Console::Log(lineno(), "KEYWORD: mod"); }
 nil             { Console::Log(lineno(), "KEYWORD: nil"); }
-not             { Console::Log(lineno(), "KEYWORD: not"); }
 object          { Console::Log(lineno(), "KEYWORD: object"); }
 of              { Console::Log(lineno(), "KEYWORD: of"); }
 operator        { Console::Log(lineno(), "KEYWORD: operator"); }
-or              { Console::Log(lineno(), "KEYWORD: or"); }
 procedure       { Console::Log(lineno(), "KEYWORD: procedure"); }
 program         { Console::Log(lineno(), "KEYWORD: program"); }
 record          { Console::Log(lineno(), "KEYWORD: record"); }
@@ -96,8 +90,6 @@ repeat          { Console::Log(lineno(), "KEYWORD: repeat"); }
 reintroduce     { Console::Log(lineno(), "KEYWORD: reintroduce"); }
 self            { Console::Log(lineno(), "KEYWORD: self"); }
 set             { Console::Log(lineno(), "KEYWORD: set"); }
-shl             { Console::Log(lineno(), "KEYWORD: shl"); }
-shr             { Console::Log(lineno(), "KEYWORD: shr"); }
 string          { Console::Log(lineno(), "KEYWORD: string"); }
 then            { Console::Log(lineno(), "KEYWORD: then"); }
 to              { Console::Log(lineno(), "KEYWORD: to"); }
@@ -108,10 +100,8 @@ uses            { Console::Log(lineno(), "KEYWORD: uses"); }
 var             { Console::Log(lineno(), "KEYWORD: var"); }
 while           { Console::Log(lineno(), "KEYWORD: while"); }
 with            { Console::Log(lineno(), "KEYWORD: with"); }
-xor             { Console::Log(lineno(), "KEYWORD: xor"); }
 
     /* ---------- Специфичные для Object Pascal ---------- */
-as               { Console::Log(lineno(), "KEYWORD: as"); }
 class            { Console::Log(lineno(), "KEYWORD: class"); }
 dispinterface    { Console::Log(lineno(), "KEYWORD: dispinterface"); }
 except           { Console::Log(lineno(), "KEYWORD: except"); }
@@ -120,7 +110,6 @@ finalization    { Console::Log(lineno(), "KEYWORD: finalization"); }
 finally          { Console::Log(lineno(), "KEYWORD: finally"); }
 initialization  { Console::Log(lineno(), "KEYWORD: initialization"); }
 inline           { Console::Log(lineno(), "KEYWORD: inline"); }
-is               { Console::Log(lineno(), "KEYWORD: is"); }
 library         { Console::Log(lineno(), "KEYWORD: library"); }
 on               { Console::Log(lineno(), "KEYWORD: on"); }
 out              { Console::Log(lineno(), "KEYWORD: out"); }
@@ -131,6 +120,19 @@ resourcestring  { Console::Log(lineno(), "KEYWORD: resourcestring"); }
 threadvar       { Console::Log(lineno(), "KEYWORD: threadvar"); }
 try              { Console::Log(lineno(), "KEYWORD: try"); }
 
+    /* ---------- Ключевые слова, являющиеся операторами ---------- */
+and             { Console::Log(lineno(), "OPERATOR: and"); }
+as              { Console::Log(lineno(), "OPERATOR: as"); }
+div             { Console::Log(lineno(), "OPERATOR: div"); }
+in              { Console::Log(lineno(), "OPERATOR: in"); }
+or              { Console::Log(lineno(), "OPERATOR: or"); }
+mod             { Console::Log(lineno(), "OPERATOR: mod"); }
+not             { Console::Log(lineno(), "OPERATOR: not"); }
+or              { Console::Log(lineno(), "OPERATOR: or"); }
+is              { Console::Log(lineno(), "OPERATOR: is"); }
+shl             { Console::Log(lineno(), "OPERATOR: shl"); }
+shr             { Console::Log(lineno(), "OPERATOR: shr"); }
+xor             { Console::Log(lineno(), "OPERATOR: xor"); }
 
     /* ---------- Операторы ---------- */
     /* ---------- Длинные операторы ---------- */
