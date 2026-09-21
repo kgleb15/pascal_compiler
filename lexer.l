@@ -370,6 +370,18 @@ try              { Console::Log(lineno(), "KEYWORD: try"); }
     /* ------------------------------------- */
 [ \t\r\n]+ { }
 
+\# {
+    Console::Error(lineno(), "'#' must be followed by a character code");
+}
+\$ {
+    Console::Error(lineno(), "hex digits expected after '$'");
+}
+\% {
+    Console::Error(lineno(), "binary digits expected after '%'");
+}
+\& {
+    Console::Error(lineno(), "octal digits or identifier expected after '&'");
+}
 <*>. {
     Console::Error(lineno(), "UNKNOWN CHARACTER: " + string(yytext));
 }
