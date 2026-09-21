@@ -59,6 +59,7 @@ CONTROL_CARET_CODE  \^[A-Za-z]
 and             { Console::Log(lineno(), "KEYWORD: and"); }
 array           { Console::Log(lineno(), "KEYWORD: array"); }
 asm             { Console::Log(lineno(), "KEYWORD: asm"); }
+absolute        { Console::Log(lineno(), "KEYWORD: absolute"); }
 begin           { Console::Log(lineno(), "KEYWORD: begin"); }
 case            { Console::Log(lineno(), "KEYWORD: case"); }
 const           { Console::Log(lineno(), "KEYWORD: const"); }
@@ -90,6 +91,7 @@ procedure       { Console::Log(lineno(), "KEYWORD: procedure"); }
 program         { Console::Log(lineno(), "KEYWORD: program"); }
 record          { Console::Log(lineno(), "KEYWORD: record"); }
 repeat          { Console::Log(lineno(), "KEYWORD: repeat"); }
+reintroduce     { Console::Log(lineno(), "KEYWORD: reintroduce"); }
 self            { Console::Log(lineno(), "KEYWORD: self"); }
 set             { Console::Log(lineno(), "KEYWORD: set"); }
 shl             { Console::Log(lineno(), "KEYWORD: shl"); }
