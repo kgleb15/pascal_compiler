@@ -2,6 +2,8 @@
 #include <iostream>
 #include <FlexLexer.h>
 
+#include "core/Console.h"
+
 int main(int argc, char **argv) {
     std::ifstream file;
     std::istream *input = &std::cin;
@@ -17,6 +19,7 @@ int main(int argc, char **argv) {
 
     yyFlexLexer lexer(input, &std::cout);
     lexer.yylex();
+    Console::PrintErrors();
 
     return 0;
 }
