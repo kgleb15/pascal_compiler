@@ -36,5 +36,5 @@ void Console::LogInt(int line, const string& kind, long long value) {
 }
 
 void Console::LogReal(int line, const string& kind, double value) {
-    printf("[%d] %s: %f\n", line, kind.c_str(), value);
+    printf("[%d] %s: %g\n", line, kind.c_str(), value);
 }
