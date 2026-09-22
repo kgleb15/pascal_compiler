@@ -102,23 +102,23 @@ while           { Console::Log(lineno(), "KEYWORD: while"); }
 with            { Console::Log(lineno(), "KEYWORD: with"); }
 
     /* ---------- Специфичные для Object Pascal ---------- */
-class            { Console::Log(lineno(), "KEYWORD: class"); }
-dispinterface    { Console::Log(lineno(), "KEYWORD: dispinterface"); }
-except           { Console::Log(lineno(), "KEYWORD: except"); }
+class           { Console::Log(lineno(), "KEYWORD: class"); }
+dispinterface   { Console::Log(lineno(), "KEYWORD: dispinterface"); }
+except          { Console::Log(lineno(), "KEYWORD: except"); }
 exports         { Console::Log(lineno(), "KEYWORD: exports"); }
 finalization    { Console::Log(lineno(), "KEYWORD: finalization"); }
-finally          { Console::Log(lineno(), "KEYWORD: finally"); }
+finally         { Console::Log(lineno(), "KEYWORD: finally"); }
 initialization  { Console::Log(lineno(), "KEYWORD: initialization"); }
-inline           { Console::Log(lineno(), "KEYWORD: inline"); }
+inline          { Console::Log(lineno(), "KEYWORD: inline"); }
 library         { Console::Log(lineno(), "KEYWORD: library"); }
-on               { Console::Log(lineno(), "KEYWORD: on"); }
-out              { Console::Log(lineno(), "KEYWORD: out"); }
+on              { Console::Log(lineno(), "KEYWORD: on"); }
+out             { Console::Log(lineno(), "KEYWORD: out"); }
 packed          { Console::Log(lineno(), "KEYWORD: packed"); }
 property        { Console::Log(lineno(), "KEYWORD: property"); }
-raise            { Console::Log(lineno(), "KEYWORD: raise"); }
+raise           { Console::Log(lineno(), "KEYWORD: raise"); }
 resourcestring  { Console::Log(lineno(), "KEYWORD: resourcestring"); }
 threadvar       { Console::Log(lineno(), "KEYWORD: threadvar"); }
-try              { Console::Log(lineno(), "KEYWORD: try"); }
+try             { Console::Log(lineno(), "KEYWORD: try"); }
 
     /* ---------- Ключевые слова, являющиеся операторами ---------- */
 and             { Console::Log(lineno(), "OPERATOR: and"); }
