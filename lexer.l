@@ -12,10 +12,13 @@
     #include "core/Console.h"
     #include "core/Buffer.h"
     #include <cstdlib>
-
+    #include <cerrno>
+    #include <cstdlib>
     using std::string;
 
     string toLower(const string& s);
+    void logIntToken(int line, const char* kind, const char* lexeme, const char* digits, int base);
+    void logRealToken(int line, const char* lexeme);
 %}
 
 
@@ -170,28 +173,23 @@ xor             { Console::Log(lineno(), "OPERATOR: xor"); }
 
         /* ---------- Числовые константы ---------- */
 \${HEX_DIGIT}+ {
-    long long value = strtoll(yytext + 1, nullptr, 16);
-    Console::LogInt(lineno(), "HEX_INT", value);
+    logIntToken(lineno(), "HEX_INT", yytext, yytext + 1, 16);
 }
 
 \&{OCT_DIGIT}+ {
-    long long value = strtoll(yytext + 1, nullptr, 8);
-    Console::LogInt(lineno(), "OCT_INT", value);
+    logIntToken(lineno(), "OCT_INT", yytext, yytext + 1, 8);
 }
 
 \%{BIN_DIGIT}+ {
-    long long value = strtoll(yytext + 1, nullptr, 2);
-    Console::LogInt(lineno(), "BIN_INT", value);
+    logIntToken(lineno(), "BIN_INT", yytext, yytext + 1, 2);
 }
 
 {REAL} {
-    double value = strtod(yytext, nullptr);
-    Console::LogReal(lineno(), "REAL", value);
+    logRealToken(lineno(), yytext);
 }
 
 {DIGIT}+ {
-    long long value = strtoll(yytext, nullptr, 10);
-    Console::LogInt(lineno(), "INTEGER", value);
+    logIntToken(lineno(), "INTEGER", yytext, yytext, 10);
 }
 
 
@@ -393,4 +391,20 @@ string toLower(const string& s) {
     string lowStr = s;
     std::transform(lowStr.begin(), lowStr.end(), lowStr.begin(), [](unsigned char c) { return std::tolower(c); });
     return lowStr;
+}
+
+void logIntToken(int line, const char* kind, const char* lexeme, const char* digits, int base) {
+    errno = 0;
+    long long v = strtoll(digits, nullptr, base);
+    if (errno == ERANGE)
+        Console::Error(line, string("integer literal is out of range: ") + lexeme);
+    Console::LogInt(line, kind, v);
+}
+
+void logRealToken(int line, const char* lexeme) {
+    errno = 0;
+    double v = strtod(lexeme, nullptr);
+    if (errno == ERANGE)
+        Console::Error(line, string("real literal is out of range: ") + lexeme);
+    Console::LogReal(line, "REAL", v);
 }
