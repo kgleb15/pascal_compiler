@@ -8,23 +8,21 @@
 
 #include <string>
 
-using std::string;
-
 class Buffer {
 private:
-    string _content;
+    std::string _content;
     int _startLine = -1;
 
 public:
     void reset();
 
-    void append(const string& text);
+    void append(const std::string& text);
 
     void setStartLine(int line);
 
     int getStartLine() const;
 
-    string current() const;
+    std::string current() const;
 };
 
 

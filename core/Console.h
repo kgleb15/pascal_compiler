@@ -7,19 +7,18 @@
 
 #include <string>
 #include <vector>
-#include <cstdio>
-using std::string;
+
 
 class Console {
 public:
-    static void Log(int line, const string& message);
-    static void Error(int line, const string& message);
+    static void Log(int line, const std::string& message);
+    static void Error(int line, const std::string& message);
     static void PrintErrors();
     static bool HasErrors();
-    static void LogInt(int line, const string& kind, long long value);
-    static void LogReal(int line, const string& kind, double value);
+    static void LogInt(int line, const std::string& kind, long long value);
+    static void LogReal(int line, const std::string& kind, double value);
 private:
-    static std::vector<string> _errors;
+    static std::vector<std::string> _errors;
 };
 
 #endif //PASCAL_COMPILER_CONSOLE_H

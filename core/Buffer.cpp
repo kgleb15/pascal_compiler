@@ -4,6 +4,8 @@
 
 #include "Buffer.h"
 
+using std::string;
+
 void Buffer::reset() {
     _content.clear();
     _startLine = -1;
