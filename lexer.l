@@ -13,7 +13,6 @@
     #include "core/Buffer.h"
     #include <cstdlib>
     #include <cerrno>
-    #include <cstdlib>
     using std::string;
 
     string toLower(const string& s);
