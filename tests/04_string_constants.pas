@@ -1,6 +1,6 @@
 q := 'Hello, world!';
 r := '';
-s := 'a';
+s := 'a'; ss := 'b';
 
 
 t := 'it''s a test';
