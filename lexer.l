@@ -343,7 +343,7 @@ xor             { Console::Log(lineno(), "OPERATOR: xor"); }
     stringBuf.append(string(1, (char) (toupper(yytext[1]) - 'A' + 1)));
 }
 <STRING_CONT>(.|\n) {
-    yyless(0);
+    unput(yytext[0]);
     Console::Log(stringBuf.getStartLine(), "STRING: " + stringBuf.current());
     BEGIN(INITIAL);
 }
