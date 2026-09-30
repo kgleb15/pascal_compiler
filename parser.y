@@ -70,6 +70,29 @@ stmt : ID ASSIGN expr
 
 expr : INT_L
      | ID
+     | expr '=' expr
+     | expr '<' expr
+     | expr '>' expr
+     | expr NOT_EQUAL expr
+     | expr LESS_OR_EQUAL expr
+     | expr GREATER_OR_EQUAL expr
+     | expr IN expr
+     | expr IS expr
+     | expr '+' expr
+     | expr '-' expr
+     | expr OR expr
+     | expr XOR expr
+     | expr '*' expr
+     | expr '/' expr
+     | expr DIV expr
+     | expr MOD expr
+     | expr AND expr
+     | expr SHL expr
+     | expr SHR expr
+     | expr AS expr
+     | '-' expr %prec UNARY_MINUS
+     | '+' expr %prec UNARY_PLUS
+     | NOT expr
      ;
 
 %%
