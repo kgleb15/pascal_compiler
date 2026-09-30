@@ -43,8 +43,15 @@
 %token REAL_L
 %token STRING_L
 
-
 %token ASSIGN
+
+
+	/* приоритеты */
+%left '=' '>' '<' NOT_EQUAL LESS_OR_EQUAL GREATER_OR_EQUAL IN IS
+%left '+' '-' OR XOR
+%left '*' '/' DIV MOD AND SHR SHL AS
+%right UNARY_MINUS UNARY_PLUS NOT
+
 
 %%
 
