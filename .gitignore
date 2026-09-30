@@ -21,3 +21,5 @@ lex.yy.c
 lex.yy.h
 *.tab.c
 *.tab.h
+
+parser.output
