@@ -126,7 +126,6 @@ in              { Console::Log(lineno(), "OPERATOR: in"); }
 or              { Console::Log(lineno(), "OPERATOR: or"); }
 mod             { Console::Log(lineno(), "OPERATOR: mod"); }
 not             { Console::Log(lineno(), "OPERATOR: not"); }
-or              { Console::Log(lineno(), "OPERATOR: or"); }
 is              { Console::Log(lineno(), "OPERATOR: is"); }
 shl             { Console::Log(lineno(), "OPERATOR: shl"); }
 shr             { Console::Log(lineno(), "OPERATOR: shr"); }
