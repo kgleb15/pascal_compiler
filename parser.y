@@ -36,8 +36,14 @@
 %token VAR
 %token WHILE
 %token WITH
+
+	/* Литераты и идентификаторы */
 %token ID
 %token INT_L
+%token REAL_L
+%token STRING_L
+
+
 %token ASSIGN
 
 %%
