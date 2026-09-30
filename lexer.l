@@ -133,8 +133,8 @@ xor             { Console::Log(lineno(), "OPERATOR: xor"); }
 
     /* ---------- Операторы ---------- */
     /* ---------- Длинные операторы ---------- */
-\<\<    { Console::Log(lineno(), "OPERATOR: <<"); }
-\>\>    { Console::Log(lineno(), "OPERATOR: >>"); }
+\<\<    { Console::Log(lineno(), "OPERATOR: shl"); }
+\>\>    { Console::Log(lineno(), "OPERATOR: shr"); }
 \*\*    { Console::Log(lineno(), "OPERATOR: **"); }
 \<\>    { Console::Log(lineno(), "OPERATOR: <>"); }
 \>\<    { Console::Log(lineno(), "OPERATOR: ><"); }
