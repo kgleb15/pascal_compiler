@@ -99,6 +99,8 @@ expr : INT_L
      | expr '.' ID
      | expr '[' expr ']'
      | expr '^'
+     | ID '(' expr_list_e ')'
+     | expr '.' ID '(' expr_list_e ')'
      ;
 
 expr_list : expr
