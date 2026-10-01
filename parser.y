@@ -94,6 +94,7 @@ expr : INT_L
      | '-' expr %prec UNARY_MINUS
      | '+' expr %prec UNARY_PLUS
      | NOT expr
+     | '(' expr ')'
      ;
 
 %%
