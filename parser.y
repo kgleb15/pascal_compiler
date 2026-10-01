@@ -61,8 +61,26 @@
 
 %%
 
-program : PROGRAM ID ';' compound_statement '.'
-	;
+program : PROGRAM ID ';' declaration_part compound_statement '.'
+	    ;
+
+declaration_part : /* empty */
+                 | declaration_part declaration
+                 ;
+
+/* разные типы объявлений */
+declaration : constant_declaration_list
+            ;
+
+constant_declaration_list : CONST constant_declaration
+                          | constant_declaration_list constant_declaration
+                          ;
+
+constant_declaration : ID '=' expr ';'
+                     | ID ':' ID '=' expr ';'
+                     | ID ':' STRING '=' expr ';' /* TODO: раскрыть */
+                     ;
+
 
 stmt : expr ASSIGN expr
      | expr ADD_ASSIGN expr
