@@ -51,7 +51,7 @@
 %left '=' '>' '<' NOT_EQUAL LESS_OR_EQUAL GREATER_OR_EQUAL IN IS
 %left '+' '-' OR XOR
 %left '*' '/' DIV MOD AND SHR SHL AS SYMMETRIC_DIFFERENCE
-%right UNARY_MINUS UNARY_PLUS NOT
+%right UNARY_MINUS UNARY_PLUS NOT '@'
 %nonassoc '.' '[' '(' '^'
 
 
@@ -106,6 +106,7 @@ expr : INT_L
      | ID '(' expr_list_e ')'
      | expr '.' ID '(' expr_list_e ')'
      | '[' set_group_list_e ']'
+     | '@' expr
      ;
 
 expr_list : expr
