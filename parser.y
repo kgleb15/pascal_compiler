@@ -51,6 +51,7 @@
 %left '+' '-' OR XOR
 %left '*' '/' DIV MOD AND SHR SHL AS SYMMETRIC_DIFFERENCE
 %right UNARY_MINUS UNARY_PLUS NOT
+%nonassoc '.' '[' '(' '^'
 
 
 %%
