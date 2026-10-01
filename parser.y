@@ -71,11 +71,11 @@ stmt_list : stmt
 	  | stmt_list stmt
 	  ;
 
-stmt : ID ASSIGN expr
-     | ID ADD_ASSIGN expr
-     | ID SUB_ASSIGN expr
-     | ID DIV_ASSIGN expr
-     | ID MUL_ASSIGN expr
+stmt : expr ASSIGN expr ';'
+     | expr ADD_ASSIGN expr ';'
+     | expr SUB_ASSIGN expr ';'
+     | expr DIV_ASSIGN expr ';'
+     | expr MUL_ASSIGN expr ';'
      ;
 
 expr : INT_L
