@@ -105,6 +105,7 @@ expr : INT_L
      | expr '^'
      | ID '(' expr_list_e ')'
      | expr '.' ID '(' expr_list_e ')'
+     | '[' set_group_list_e ']'
      ;
 
 expr_list : expr
