@@ -101,4 +101,12 @@ expr : INT_L
      | expr '^'
      ;
 
+expr_list : expr
+          | expr_list ',' expr
+          ;
+
+expr_list_e : /* empty */
+            | expr_list
+            ;
+
 %%
