@@ -44,6 +44,7 @@
 %token STRING_L
 
 %token ASSIGN
+%token RANGE
 
 
 	/* приоритеты */
@@ -114,4 +115,15 @@ expr_list_e : /* empty */
             | expr_list
             ;
 
+set_group_list_e : /* empty */
+                 | set_group_list
+                 ;
+
+set_group_list : set_group
+               | set_group_list ',' set_group
+               ;
+
+set_group : expr
+          | expr RANGE expr
+          ;
 %%
