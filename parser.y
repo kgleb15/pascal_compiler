@@ -71,7 +71,14 @@ stmt : expr ASSIGN expr
      | expr MUL_ASSIGN expr
      | expr
      | compound_statement
+     | for_stmt
      ;
+
+for_stmt : FOR ID ASSIGN expr TO expr DO stmt
+         | FOR ID ASSIGN expr DOWNTO expr DO stmt
+         | FOR ID IN expr DO stmt
+         ;
+
 compound_statement : BEGIN stmt_list END
                    ;
 
