@@ -95,6 +95,9 @@ expr : INT_L
      | '+' expr %prec UNARY_PLUS
      | NOT expr
      | '(' expr ')'
+     | expr '.' ID
+     | expr '[' expr ']'
+     | expr '^'
      ;
 
 %%
