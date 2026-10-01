@@ -70,6 +70,9 @@ stmt : ID ASSIGN expr
      ;
 
 expr : INT_L
+     | REAL_L
+     | STRING_L
+     | NIL
      | ID
      | expr '=' expr
      | expr '<' expr
