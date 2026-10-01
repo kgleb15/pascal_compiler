@@ -61,22 +61,24 @@
 
 %%
 
-program : PROGRAM ID ';' block '.'
+program : PROGRAM ID ';' compound_statement '.'
 	;
 
-block : BEGIN stmt_list END	 /* вопрос с ; */
-      ;
+stmt : expr ASSIGN expr
+     | expr ADD_ASSIGN expr
+     | expr SUB_ASSIGN expr
+     | expr DIV_ASSIGN expr
+     | expr MUL_ASSIGN expr
+     | expr
+     | compound_statement
+     ;
+compound_statement : BEGIN stmt_list END
+                   ;
 
 stmt_list : stmt
-	  | stmt_list stmt
+	  | stmt_list ';' stmt
+	  | stmt_list ';'
 	  ;
-
-stmt : expr ASSIGN expr ';'
-     | expr ADD_ASSIGN expr ';'
-     | expr SUB_ASSIGN expr ';'
-     | expr DIV_ASSIGN expr ';'
-     | expr MUL_ASSIGN expr ';'
-     ;
 
 expr : INT_L
      | REAL_L
