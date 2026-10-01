@@ -72,12 +72,16 @@ stmt : expr ASSIGN expr
      | expr
      | compound_statement
      | for_stmt
+     | repeat_stmt
      ;
 
 for_stmt : FOR ID ASSIGN expr TO expr DO stmt
          | FOR ID ASSIGN expr DOWNTO expr DO stmt
          | FOR ID IN expr DO stmt
          ;
+
+repeat_stmt : REPEAT stmt UNTIL expr
+            ;
 
 compound_statement : BEGIN stmt_list END
                    ;
