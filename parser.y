@@ -73,6 +73,7 @@ stmt : expr ASSIGN expr
      | compound_statement
      | for_stmt
      | repeat_stmt
+     | while_stmt
      ;
 
 for_stmt : FOR ID ASSIGN expr TO expr DO stmt
@@ -82,6 +83,9 @@ for_stmt : FOR ID ASSIGN expr TO expr DO stmt
 
 repeat_stmt : REPEAT stmt UNTIL expr
             ;
+
+while_stmt : WHILE expr DO stmt
+           ;
 
 compound_statement : BEGIN stmt_list END
                    ;
