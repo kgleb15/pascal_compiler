@@ -44,6 +44,10 @@
 %token STRING_L
 
 %token ASSIGN
+%token ADD_ASSIGN
+%token SUB_ASSIGN
+%token DIV_ASSIGN
+%token MUL_ASSIGN
 %token RANGE
 
 
@@ -68,6 +72,10 @@ stmt_list : stmt
 	  ;
 
 stmt : ID ASSIGN expr
+     | ID ADD_ASSIGN expr
+     | ID SUB_ASSIGN expr
+     | ID DIV_ASSIGN expr
+     | ID MUL_ASSIGN expr
      ;
 
 expr : INT_L
