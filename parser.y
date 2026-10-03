@@ -146,7 +146,7 @@ field_list_e : /* empty */
 field_list : fixed_fields
            | fixed_fields ';'
            | fixed_fields ';' variant_part
-           | variant_part
+           | variant_part /* ';' может быть и после variant_part но это обрабатывает variant_list*/
            ;
 
 fixed_fields : fixed_field
