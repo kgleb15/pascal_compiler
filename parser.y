@@ -103,6 +103,7 @@ not_array_type : ordinal_type
                | record_type
                | set_type
                | '^' ID      /* pounter type */
+               | procedural_type
                ;
 
 ordinal_type : ID
@@ -182,6 +183,36 @@ variant : expr_list ':' '(' field_list_e ')'
 
 set_type : SET OF ordinal_type
          ;
+procedural_type : procedural_or_func_header
+                | procedural_or_func_header OF OBJECT
+                ;
+
+procedural_or_func_header : PROCEDURE formal_parameter_list_e
+                          | FUNCTION formal_parameter_list_e ':' result_type
+                          ;
+
+formal_parameter_list_e : /* empty */
+                        | '(' ')'
+                        | '(' formal_parameters ')'
+                        ;
+
+formal_parameters : parameter_declaration
+                  | formal_parameters ';' parameter_declaration
+                  ;
+
+/* TODO: пока упрощенная версия */
+parameter_declaration : parameter_modifier id_list ':' type
+                      | id_list ':' type
+                      | parameter_modifier id_list
+                      ;
+
+parameter_modifier : VAR
+                   | CONST
+                   ; /* TODO: out */
+
+result_type : ID
+            | STRING
+            ;
 
 stmt : expr ASSIGN expr
      | expr ADD_ASSIGN expr
