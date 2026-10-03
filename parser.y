@@ -37,6 +37,8 @@
 %token WHILE
 %token WITH
 
+%token PACKED
+
 	/* Литераты и идентификаторы */
 %token ID
 %token INT_L
@@ -93,7 +95,8 @@ type : ID
      | STRING
      | STRING '[' INT_L ']'
      | TYPE STRING '(' INT_L ')'
-     | ordinal_constant_bound RANGE ordinal_constant_bound
+     | ordinal_constant_bound RANGE ordinal_constant_bound /* Диапазоны */
+     | array_type   /* Массивы */
      ;
 
 ordinal_constant_bound : integer_bound
@@ -110,6 +113,21 @@ integer_bound : INT_L
               | '+' integer_bound %prec UNARY_PLUS
               | '(' integer_bound ')'
               ;
+
+array_type : array_base type /* Уточнить типы type */
+           | PACKED array_base type
+           | dynamic_array_base type /* Динамические массивы */
+           ;
+
+array_base : ARRAY '[' range_list ']' OF
+           ;
+
+dynamic_array_base : ARRAY OF
+                   ;
+
+range_list : ordinal_constant_bound RANGE ordinal_constant_bound
+           | range_list ',' ordinal_constant_bound RANGE ordinal_constant_bound
+           ;
 
 stmt : expr ASSIGN expr
      | expr ADD_ASSIGN expr
