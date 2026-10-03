@@ -101,6 +101,7 @@ not_array_type : ordinal_type
                | STRING '[' INT_L ']'
                | TYPE STRING '(' INT_L ')'
                | record_type
+               | set_type
                ;
 
 ordinal_type : ID
@@ -177,6 +178,9 @@ variant_list_body : variant
 
 variant : expr_list ':' '(' field_list_e ')'
         ;
+
+set_type : SET OF ordinal_type
+         ;
 
 stmt : expr ASSIGN expr
      | expr ADD_ASSIGN expr
