@@ -172,7 +172,7 @@ variant_list_body : variant
                   | variant_list_body ';' variant
                   ;
 
-variant : expr_list ':' '(' field_list ')'
+variant : expr_list ':' '(' field_list_e ')'
         ;
 
 stmt : expr ASSIGN expr
