@@ -83,7 +83,7 @@ of              { Console::Log(lineno(), "KEYWORD: of"); }
 operator        { Console::Log(lineno(), "KEYWORD: operator"); } /**/
 procedure       { Console::Log(lineno(), "KEYWORD: procedure"); }
 program         { Console::Log(lineno(), "KEYWORD: program"); }
-record          { Console::Log(lineno(), "KEYWORD: record"); } /**/
+record          { Console::Log(lineno(), "KEYWORD: record"); }
 repeat          { Console::Log(lineno(), "KEYWORD: repeat"); }
 reintroduce     { Console::Log(lineno(), "KEYWORD: reintroduce"); } /**/
 self            { Console::Log(lineno(), "KEYWORD: self"); }

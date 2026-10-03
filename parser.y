@@ -25,6 +25,7 @@
 %token OF
 %token PROCEDURE
 %token PROGRAM
+%token RECORD
 %token REPEAT
 %token SELF
 %token SET
@@ -91,15 +92,16 @@ type_declaration_list : TYPE type_declaration
 type_declaration : ID '=' type ';'
                  ;
 
-type : simple_type
+type : not_array_type
      | array_type   /* Массивы */
      ;
 
-simple_type : ID
+not_array_type : ID
             | STRING
             | STRING '[' INT_L ']'
             | TYPE STRING '(' INT_L ')'
             | ordinal_constant_bound RANGE ordinal_constant_bound  /* Диапазоны */
+            | record_type
             ;
 
 ordinal_constant_bound : integer_bound
@@ -117,7 +119,7 @@ integer_bound : INT_L
               | '(' integer_bound ')'
               ;
 
-array_type : array_bases simple_type /* Уточнить типы type */
+array_type : array_bases not_array_type /* Уточнить типы type */
            ;
 
 array_bases : array_base
@@ -132,6 +134,40 @@ array_base : ARRAY '[' range_list ']' OF
 range_list : ordinal_constant_bound RANGE ordinal_constant_bound
            | range_list ',' ordinal_constant_bound RANGE ordinal_constant_bound
            ;
+
+record_type : RECORD field_list END
+            | PACKED RECORD field_list END
+            ;
+
+field_list : fixed_fields
+           | fixed_fields ';'
+           | fixed_fields ';' variant_part
+           | fixed_fields ';' variant_part ';'
+           | variant_part
+           | variant_part ';'
+           ;
+
+fixed_fields : fixed_field
+             | fixed_fields ';' fixed_field
+             ;
+
+fixed_field : id_list ':' type
+            ;
+
+id_list : ID
+        | id_list ID
+        ;
+
+variant_part : CASE type OF variant_list
+             | CASE ID ':' type OF variant_list
+             ;
+
+variant_list : variant
+             | variant_list ';' variant
+             ;
+
+variant : expr_list ':' '(' field_list ')'
+        ;
 
 stmt : expr ASSIGN expr
      | expr ADD_ASSIGN expr
