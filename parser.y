@@ -101,7 +101,7 @@ not_array_type : ordinal_type
                | STRING '[' INT_L ']'
                | TYPE STRING '(' INT_L ')'
                | record_type
-               | set_type
+               | SET OF ordinal_type /* set type */
                | '^' ID      /* pounter type */
                | procedural_type
                ;
@@ -181,8 +181,6 @@ variant_list_body : variant
 variant : expr_list ':' '(' field_list_e ')'
         ;
 
-set_type : SET OF ordinal_type
-         ;
 procedural_type : procedural_or_func_header
                 | procedural_or_func_header OF OBJECT
                 ;
