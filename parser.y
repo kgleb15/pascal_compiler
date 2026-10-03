@@ -104,6 +104,7 @@ not_array_type : ordinal_type
                | SET OF ordinal_type /* set type */
                | '^' ID      /* pounter type */
                | procedural_type
+               | TYPE ID     /* Type aliase */
                ;
 
 ordinal_type : ID
