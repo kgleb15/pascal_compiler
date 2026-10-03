@@ -97,12 +97,12 @@ type : not_array_type
      ;
 
 not_array_type : ID
-            | STRING
-            | STRING '[' INT_L ']'
-            | TYPE STRING '(' INT_L ')'
-            | ordinal_constant_bound RANGE ordinal_constant_bound  /* Диапазоны */
-            | record_type
-            ;
+               | STRING
+               | STRING '[' INT_L ']'
+               | TYPE STRING '(' INT_L ')'
+               | ordinal_constant_bound RANGE ordinal_constant_bound  /* Диапазоны */
+               | record_type
+               ;
 
 ordinal_constant_bound : integer_bound
                        | ID
