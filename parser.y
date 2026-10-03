@@ -135,9 +135,13 @@ range_list : ordinal_constant_bound RANGE ordinal_constant_bound
            | range_list ',' ordinal_constant_bound RANGE ordinal_constant_bound
            ;
 
-record_type : RECORD field_list END
-            | PACKED RECORD field_list END
+record_type : RECORD field_list_e END
+            | PACKED RECORD field_list_e END
             ;
+
+field_list_e : /* empty */
+             | field_list
+             ;
 
 field_list : fixed_fields
            | fixed_fields ';'
