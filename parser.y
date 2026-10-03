@@ -93,7 +93,13 @@ type : ID
      | STRING
      | STRING '[' INT_L ']'
      | TYPE STRING '(' INT_L ')'
+     | ordinal_constant RANGE ordinal_constant
      ;
+
+ordinal_constant : INT_L
+                 | ID
+                 | STRING_L
+                 ;
 
 stmt : expr ASSIGN expr
      | expr ADD_ASSIGN expr
