@@ -91,13 +91,16 @@ type_declaration_list : TYPE type_declaration
 type_declaration : ID '=' type ';'
                  ;
 
-type : ID
-     | STRING
-     | STRING '[' INT_L ']'
-     | TYPE STRING '(' INT_L ')'
-     | ordinal_constant_bound RANGE ordinal_constant_bound /* Диапазоны */
+type : simple_type
      | array_type   /* Массивы */
      ;
+
+simple_type : ID
+            | STRING
+            | STRING '[' INT_L ']'
+            | TYPE STRING '(' INT_L ')'
+            | ordinal_constant_bound RANGE ordinal_constant_bound  /* Диапазоны */
+            ;
 
 ordinal_constant_bound : integer_bound
                        | ID
@@ -114,16 +117,17 @@ integer_bound : INT_L
               | '(' integer_bound ')'
               ;
 
-array_type : array_base type /* Уточнить типы type */
-           | PACKED array_base type
-           | dynamic_array_base type /* Динамические массивы */
+array_type : array_bases simple_type /* Уточнить типы type */
            ;
+
+array_bases : array_base
+            | array_bases array_base
+            ;
 
 array_base : ARRAY '[' range_list ']' OF
+           | PACKED ARRAY '[' range_list ']' OF
+           | ARRAY OF /* Динамические массивы */
            ;
-
-dynamic_array_base : ARRAY OF
-                   ;
 
 range_list : ordinal_constant_bound RANGE ordinal_constant_bound
            | range_list ',' ordinal_constant_bound RANGE ordinal_constant_bound
