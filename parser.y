@@ -164,10 +164,13 @@ variant_part : CASE type OF variant_list
              | CASE ID ':' type OF variant_list
              ;
 
-variant_list : variant
-             | variant_list ';' variant
-             | variant_list ';'
+variant_list : variant_list_body
+             | variant_list_body ';'
              ;
+
+variant_list_body : variant
+                  | variant_list_body ';' variant
+                  ;
 
 variant : expr_list ':' '(' field_list ')'
         ;
