@@ -102,6 +102,7 @@ not_array_type : ordinal_type
                | TYPE STRING '(' INT_L ')'
                | record_type
                | set_type
+               | '^' ID      /* pounter type */
                ;
 
 ordinal_type : ID
