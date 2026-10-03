@@ -90,6 +90,10 @@ type_declaration : ID '=' type ';'
                  ;
 
 type : ID
+     | STRING
+     | STRING '[' INT_L ']'
+     | TYPE STRING '(' INT_L ')'
+     ;
 
 stmt : expr ASSIGN expr
      | expr ADD_ASSIGN expr
