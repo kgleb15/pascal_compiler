@@ -93,13 +93,22 @@ type : ID
      | STRING
      | STRING '[' INT_L ']'
      | TYPE STRING '(' INT_L ')'
-     | ordinal_constant RANGE ordinal_constant
+     | ordinal_constant_bound RANGE ordinal_constant_bound
      ;
 
-ordinal_constant : INT_L
-                 | ID
-                 | STRING_L
-                 ;
+ordinal_constant_bound : integer_bound
+                       | ID
+                       | STRING_L
+                       ;
+
+integer_bound : INT_L
+              | integer_bound '+' integer_bound
+              | integer_bound '-' integer_bound
+              | integer_bound '*' integer_bound
+              | integer_bound DIV integer_bound
+              | '-' integer_bound %prec UNARY_MINUS
+              | '+' integer_bound %prec UNARY_PLUS
+              ;
 
 stmt : expr ASSIGN expr
      | expr ADD_ASSIGN expr
