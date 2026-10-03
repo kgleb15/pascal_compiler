@@ -70,6 +70,7 @@ declaration_part : /* empty */
 
 /* разные типы объявлений */
 declaration : constant_declaration_list
+            | type_declaration_list
             ;
 
 constant_declaration_list : CONST constant_declaration
@@ -78,9 +79,17 @@ constant_declaration_list : CONST constant_declaration
 
 constant_declaration : ID '=' expr ';'
                      | ID ':' ID '=' expr ';'
-                     | ID ':' STRING '=' expr ';' /* TODO: раскрыть */
+                     | ID ':' STRING '=' expr ';' /* TODO: использовать type */
                      ;
 
+type_declaration_list : TYPE type_declaration
+                      | type_declaration_list type_declaration
+                      ;
+
+type_declaration : ID '=' type ';'
+                 ;
+
+type : ID
 
 stmt : expr ASSIGN expr
      | expr ADD_ASSIGN expr
