@@ -108,6 +108,7 @@ integer_bound : INT_L
               | integer_bound DIV integer_bound
               | '-' integer_bound %prec UNARY_MINUS
               | '+' integer_bound %prec UNARY_PLUS
+              | '(' integer_bound ')'
               ;
 
 stmt : expr ASSIGN expr
