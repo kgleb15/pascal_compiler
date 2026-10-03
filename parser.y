@@ -142,9 +142,7 @@ record_type : RECORD field_list END
 field_list : fixed_fields
            | fixed_fields ';'
            | fixed_fields ';' variant_part
-           | fixed_fields ';' variant_part ';'
            | variant_part
-           | variant_part ';'
            ;
 
 fixed_fields : fixed_field
@@ -164,6 +162,7 @@ variant_part : CASE type OF variant_list
 
 variant_list : variant
              | variant_list ';' variant
+             | variant_list ';'
              ;
 
 variant : expr_list ':' '(' field_list ')'
