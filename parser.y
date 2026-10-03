@@ -157,7 +157,7 @@ fixed_field : id_list ':' type
             ;
 
 id_list : ID
-        | id_list ID
+        | id_list ',' ID
         ;
 
 variant_part : CASE type OF variant_list
