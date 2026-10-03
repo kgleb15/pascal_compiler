@@ -135,8 +135,8 @@ array_base : ARRAY '[' range_list ']' OF
            | ARRAY OF /* Динамические массивы */
            ;
 
-range_list : ordinal_constant_bound RANGE ordinal_constant_bound
-           | range_list ',' ordinal_constant_bound RANGE ordinal_constant_bound
+range_list : ordinal_type
+           | range_list ',' ordinal_type
            ;
 
 record_type : RECORD field_list_e END
