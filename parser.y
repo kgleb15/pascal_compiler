@@ -164,8 +164,8 @@ id_list : ID
         | id_list ',' ID
         ;
 
-variant_part : CASE type OF variant_list
-             | CASE ID ':' type OF variant_list
+variant_part : CASE ordinal_type OF variant_list
+             | CASE ID ':' ordinal_type OF variant_list
              ;
 
 variant_list : variant_list_body
