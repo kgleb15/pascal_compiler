@@ -96,13 +96,16 @@ type : not_array_type
      | array_type   /* Массивы */
      ;
 
-not_array_type : ID
+not_array_type : ordinal_type
                | STRING
                | STRING '[' INT_L ']'
                | TYPE STRING '(' INT_L ')'
-               | ordinal_constant_bound RANGE ordinal_constant_bound  /* Диапазоны */
                | record_type
                ;
+
+ordinal_type : ID
+             | ordinal_constant_bound RANGE ordinal_constant_bound  /* Диапазоны */
+             ; /* TODO: enum */
 
 ordinal_constant_bound : integer_bound
                        | ID
