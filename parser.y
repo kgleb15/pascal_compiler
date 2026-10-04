@@ -398,6 +398,9 @@ expr : INT_L
      | '[' set_group_list_e ']'
      | '@' expr
      | SELF
+     | INHERITED
+     | INHERITED ID
+     | INHERITED ID '(' expr_list_e ')'
      ;
 
 expr_list : expr
