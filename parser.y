@@ -82,8 +82,8 @@ constant_declaration_list : CONST constant_declaration
                           ;
 
 constant_declaration : ID '=' expr ';'
-                     | ID ':' ID '=' expr ';'
-                     | ID ':' STRING '=' expr ';' /* TODO: использовать type */
+                     | ID ':' ID '=' init_value ';'
+                     | ID ':' STRING '=' init_value ';' /* TODO: использовать type */
                      ;
 
 type_declaration_list : TYPE type_declaration
