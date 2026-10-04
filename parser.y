@@ -318,8 +318,10 @@ method_definition : CLASS method_header ';' method_directive_list
 
 method_header : FUNCTION ID formal_parameter_list_e ':' result_type
               | PROCEDURE ID formal_parameter_list_e
-              | CONSTRUCTOR ID formal_parameter_list_e
-              | DESTRUCTOR ID formal_parameter_list_e
+              | CONSTRUCTOR ID
+              | DESTRUCTOR ID
+              | CONSTRUCTOR ID '(' ')'
+              | DESTRUCTOR ID '(' ')'
               ;
 
 method_directive_list : method_directive
