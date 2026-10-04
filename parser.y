@@ -71,8 +71,11 @@
 
 %%
 
-program : PROGRAM ID ';' declaration_part compound_statement '.'
+program : PROGRAM ID ';' block '.'
 	    ;
+
+block : declaration_part compound_statement
+      ;
 
 declaration_part : /* empty */
                  | declaration_part declaration
@@ -82,6 +85,7 @@ declaration_part : /* empty */
 declaration : constant_declaration_list
             | type_declaration_list
             | variable_declaration_list
+            | subroutine_declaration
             ;
 
 constant_declaration_list : CONST constant_declaration
@@ -191,36 +195,10 @@ variant_list_body : variant
 variant : expr_list ':' '(' field_list_e ')'
         ;
 
-procedural_type : procedural_or_func_header
-                | procedural_or_func_header OF OBJECT
+/* Вернуть? */
+procedural_type : subroutine_header
+                | subroutine_header OF OBJECT
                 ;
-
-procedural_or_func_header : PROCEDURE formal_parameter_list_e
-                          | FUNCTION formal_parameter_list_e ':' result_type
-                          ;
-
-formal_parameter_list_e : /* empty */
-                        | '(' ')'
-                        | '(' formal_parameters ')'
-                        ;
-
-formal_parameters : parameter_declaration
-                  | formal_parameters ';' parameter_declaration
-                  ;
-
-/* TODO: пока упрощенная версия */
-parameter_declaration : parameter_modifier id_list ':' type
-                      | id_list ':' type
-                      | parameter_modifier id_list
-                      ;
-
-parameter_modifier : VAR
-                   | CONST
-                   ; /* TODO: out */
-
-result_type : ID
-            | STRING
-            ;
 
 
 variable_declaration_list : VAR variable_declaration
@@ -343,6 +321,43 @@ property_body : ID ':' ID property_specifiers ';'
 property_specifiers : ID ID
                     | property_specifiers ID ID
                     ;
+
+
+subroutine_declaration : subroutine_header ';' subroutine_block ';'
+                       ;
+
+subroutine_header : PROCEDURE ID formal_parameter_list_e
+                  | PROCEDURE ID '.' ID formal_parameter_list_e
+                  | FUNCTION ID formal_parameter_list_e ':' result_type
+                  | FUNCTION ID '.' ID formal_parameter_list_e ':' result_type
+                  ;
+
+formal_parameter_list_e : /* empty */
+                        | '(' ')'
+                        | '(' formal_parameters ')'
+                        ;
+
+formal_parameters : parameter_declaration
+                  | formal_parameters ';' parameter_declaration
+                  ;
+
+/* TODO: пока упрощенная версия */
+parameter_declaration : parameter_modifier id_list ':' type
+                      | id_list ':' type
+                      | parameter_modifier id_list
+                      ;
+
+parameter_modifier : VAR
+                   | CONST
+                   ; /* TODO: out */
+
+result_type : ID
+            | STRING
+            ;
+
+subroutine_block : block
+                 | ID /* FORWARD */
+                 ;
 
 stmt : expr ASSIGN expr
      | expr ADD_ASSIGN expr
