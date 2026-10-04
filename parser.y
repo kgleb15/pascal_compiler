@@ -45,6 +45,7 @@
 
 %token PACKED
 %token CLASS
+%token PROPERTY
 
 	/* Литераты и идентификаторы */
 %token ID
@@ -307,7 +308,7 @@ member : variable_declaration_list
        | constant_declaration_list
        | type_declaration_list
        | method_definition
-       /* | property_definition */
+       | property_definition
        ;
 
 method_definition : CLASS method_header ';' method_directive_list
@@ -330,6 +331,19 @@ method_directive_list : method_directive
 
 method_directive : ID ';' /* abstract, virtual, dynamic ... */
                  ;
+
+property_definition : PROPERTY property_body
+                    | CLASS PROPERTY property_body /* Статическое свойство */
+                    ;
+
+/* Название : тип ... */
+property_body : ID ':' ID property_specifiers ';'
+              ;
+
+/* read GetX write SetX ... */
+property_specifiers : ID ID
+                    | property_specifiers ID ID
+                    ;
 
 stmt : expr ASSIGN expr
      | expr ADD_ASSIGN expr
