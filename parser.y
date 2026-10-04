@@ -330,6 +330,7 @@ method_directive_list : method_directive
                       ;
 
 method_directive : ID ';' /* abstract, virtual, dynamic ... */
+                 | STATIC ';'
                  ;
 
 property_definition : PROPERTY property_body
