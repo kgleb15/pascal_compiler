@@ -37,8 +37,14 @@
 %token VAR
 %token WHILE
 %token WITH
+%token STATIC
+%token PRIVATE
+%token PROTECTED
+%token PUBLIC
+%token STRICT
 
 %token PACKED
+%token CLASS
 
 	/* Литераты и идентификаторы */
 %token ID
@@ -91,6 +97,7 @@ type_declaration_list : TYPE type_declaration
                       ;
 
 type_declaration : ID '=' type ';'
+                 | ID '=' class_type ';'
                  ;
 
 type : not_array_type
@@ -238,6 +245,89 @@ record_init_value_list : record_init_value
 
 record_init_value : ID ':' init_value
                   ;
+
+
+class_type : CLASS
+           | CLASS END
+           | CLASS heritage
+           | CLASS heritage END
+           | CLASS heritage component_list END
+           | CLASS component_list END
+           ;
+
+heritage : '(' ID ')' /* Наследование */
+         ;
+
+component_list : initial_part visible_sections
+               | initial_part
+               | visible_sections
+               ;
+
+initial_part : field_definition_list member_list
+             | field_definition_list
+             | member_list
+             ;
+
+visible_sections : visible_section
+                 | visible_sections visible_section
+                 ;
+
+visible_section : visibility_specifier field_definition_list_e member_list_e
+                ;
+
+visibility_specifier : PRIVATE
+                     | PROTECTED
+                     | PUBLIC
+                     | STRICT PRIVATE
+                     | STRICT PROTECTED
+                     ;
+
+field_definition_list_e : /* empty */
+                        | field_definition_list
+                        ;
+
+field_definition_list : field_definition
+                      | field_definition_list field_definition
+                      ;
+
+field_definition : id_list ':' type ';'
+                 | id_list ':' type ';' STATIC ';'
+                 ;
+
+member_list_e : /* empty */
+              | member_list
+              ;
+
+member_list : member
+            | member_list member
+            ;
+
+member : variable_declaration_list
+       | CLASS variable_declaration_list
+       | constant_declaration_list
+       | type_declaration_list
+       | method_definition
+       /* | property_definition */
+       ;
+
+method_definition : CLASS method_header ';' method_directive_list
+                  | method_header ';' method_directive_list
+                  | CLASS method_header ';'
+                  | method_header ';'
+                  ;
+
+method_header : FUNCTION ID formal_parameter_list_e ':' result_type
+              | PROCEDURE ID formal_parameter_list_e
+              | CONSTRUCTOR ID formal_parameter_list_e
+              | DESTRUCTOR ID formal_parameter_list_e
+              ;
+
+method_directive_list : method_directive
+                      | method_directive_list method_directive
+                      ;
+
+method_directive : ID ';' /* abstract, virtual, dynamic ... */
+                 ;
 
 stmt : expr ASSIGN expr
      | expr ADD_ASSIGN expr
