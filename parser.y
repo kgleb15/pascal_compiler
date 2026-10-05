@@ -329,11 +329,13 @@ property_specifiers : ID ID
 subroutine_declaration : subroutine_header ';' modifiers_list_e subroutine_block ';'
                        ;
 
-subroutine_header : PROCEDURE ID formal_parameter_list_e
-                  | PROCEDURE ID '.' ID formal_parameter_list_e
-                  | FUNCTION ID formal_parameter_list_e ':' result_type
-                  | FUNCTION ID '.' ID formal_parameter_list_e ':' result_type
+subroutine_header : PROCEDURE subroutine_name formal_parameter_list_e
+                  | FUNCTION subroutine_name formal_parameter_list_e ':' result_type
                   ;
+
+subroutine_name : ID
+                | ID '.' ID
+                ;
 
 formal_parameter_list_e : /* empty */
                         | '(' ')'
