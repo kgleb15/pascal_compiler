@@ -282,6 +282,9 @@ case_stmt : CASE expr OF case_variant_list END
           | CASE expr OF case_variant_list ELSE stmt_list END
           ;
 
+with_stmt : WITH expr_list DO stmt
+          ;
+
 compound_statement : BEGIN stmt_list END
                    ;
 
