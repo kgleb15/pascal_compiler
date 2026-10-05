@@ -292,15 +292,9 @@ member : variable_declaration_list
        | property_definition
        ;
 
-method_definition : CLASS method_header ';' modifiers_list_e
-                  | method_header ';' modifiers_list_e
+method_definition : CLASS subroutine_header ';' modifiers_list_e
+                  | subroutine_header ';' modifiers_list_e
                   ;
-
-method_header : FUNCTION ID formal_parameter_list_e ':' result_type
-              | PROCEDURE ID formal_parameter_list_e
-              | CONSTRUCTOR ID formal_parameter_list_e
-              | DESTRUCTOR ID formal_parameter_list_e
-              ;
 
 modifiers_list_e : /* empty */
                  | modifiers_list
