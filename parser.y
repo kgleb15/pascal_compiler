@@ -354,6 +354,7 @@ paramater_declarations : parameter_declaration
 /* TODO: пока упрощенная версия */
 parameter_declaration : value_parameter
                       | var_parameter
+                      | out_parameter
                       ;
 
 value_parameter : big_id_list ':' type
@@ -362,6 +363,10 @@ value_parameter : big_id_list ':' type
 
 var_parameter : VAR id_list ':' type
               | VAR id_list
+              ;
+
+out_parameter : OUT id_list ':' type
+              | OUT id_list
               ;
 
 result_type : ID
