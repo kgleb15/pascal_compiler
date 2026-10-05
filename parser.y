@@ -339,12 +339,12 @@ subroutine_name : ID
 
 formal_parameter_list_e : /* empty */
                         | '(' ')'
-                        | '(' formal_parameters ')'
+                        | '(' paramater_declarations ')'
                         ;
 
-formal_parameters : parameter_declaration
-                  | formal_parameters ';' parameter_declaration
-                  ;
+paramater_declarations : parameter_declaration
+                       | paramater_declarations ';' parameter_declaration
+                       ;
 
 /* TODO: пока упрощенная версия */
 parameter_declaration : parameter_modifier id_list ':' type
