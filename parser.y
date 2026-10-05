@@ -358,9 +358,7 @@ value_parameter : big_id_list ':' type
                 | ID ':' type '=' expr
                 ;
 
-parameter_modifier : VAR
-                   | CONST
-                   ; /* TODO: out */
+
 
 result_type : ID
             | STRING
