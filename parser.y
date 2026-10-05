@@ -261,6 +261,14 @@ if_stmt : IF expr THEN stmt
         | IF expr THEN stmt ELSE stmt
         ;
 
+case_label : expr
+           | expr RANGE expr
+           ;
+
+case_label_list : case_label
+                | case_label_list ',' case_label
+                ;
+
 compound_statement : BEGIN stmt_list END
                    ;
 
