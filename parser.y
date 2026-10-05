@@ -206,7 +206,7 @@ procedural_type : procedural_type_header
                 ;
 
 procedural_type_header : PROCEDURE formal_parameter_list_e
-                       | FUNCTION formal_parameter_list_e ':' result_type /* Уточнить */
+                       | FUNCTION formal_parameter_list_e ':' type_id
                        ;
 
 variable_declaration_list : VAR variable_declaration
@@ -332,7 +332,7 @@ subroutine_declaration : subroutine_header ';' modifiers_list_e subroutine_block
                        ;
 
 subroutine_header : PROCEDURE subroutine_name formal_parameter_list_e
-                  | FUNCTION subroutine_name formal_parameter_list_e ':' result_type
+                  | FUNCTION subroutine_name formal_parameter_list_e ':' type_id
                   | CONSTRUCTOR subroutine_name formal_parameter_list_e
                   | DESTRUCTOR subroutine_name
                   | DESTRUCTOR subroutine_name '(' ')'
@@ -374,9 +374,6 @@ const_parameter : CONST big_id_list ':' parameter_type
                 | CONST ID ':' type '=' expr
                 ;
 
-result_type : ID
-            | STRING
-            ;
 parameter_type : type_id
                | ARRAY OF type_id
                ;
