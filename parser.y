@@ -181,6 +181,10 @@ id_list : ID
         | id_list ',' ID
         ;
 
+big_id_list : ID ',' ID
+            | big_id_list ',' ID
+            ;
+
 variant_part : CASE ordinal_type OF variant_list
              | CASE ID ':' ordinal_type OF variant_list
              ;
@@ -347,10 +351,12 @@ paramater_declarations : parameter_declaration
                        ;
 
 /* TODO: пока упрощенная версия */
-parameter_declaration : parameter_modifier id_list ':' type
-                      | id_list ':' type
-                      | parameter_modifier id_list
+parameter_declaration : value_parameter
                       ;
+
+value_parameter : big_id_list ':' type
+                | ID ':' type '=' expr
+                ;
 
 parameter_modifier : VAR
                    | CONST
