@@ -269,6 +269,14 @@ case_label_list : case_label
                 | case_label_list ',' case_label
                 ;
 
+case_variant : case_label_list ':' stmt
+             ;
+
+case_variant_list : case_variant
+                  | case_variant_list ';' case_variant
+                  | case_variant_list ';'
+                  ;
+
 compound_statement : BEGIN stmt_list END
                    ;
 
