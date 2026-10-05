@@ -47,6 +47,7 @@
 %token PACKED
 %token CLASS
 %token PROPERTY
+%token OUT
 
 	/* Литераты и идентификаторы */
 %token ID
@@ -352,13 +353,16 @@ paramater_declarations : parameter_declaration
 
 /* TODO: пока упрощенная версия */
 parameter_declaration : value_parameter
+                      | var_parameter
                       ;
 
 value_parameter : big_id_list ':' type
                 | ID ':' type '=' expr
                 ;
 
-
+var_parameter : VAR id_list ':' type
+              | VAR id_list
+              ;
 
 result_type : ID
             | STRING
