@@ -351,26 +351,25 @@ paramater_declarations : parameter_declaration
                        | paramater_declarations ';' parameter_declaration
                        ;
 
-/* TODO: пока упрощенная версия */
 parameter_declaration : value_parameter
                       | var_parameter
                       | out_parameter
                       | const_parameter
                       ;
 
-value_parameter : big_id_list ':' type
+value_parameter : big_id_list ':' parameter_type
                 | ID ':' type '=' expr
                 ;
 
-var_parameter : VAR id_list ':' type
+var_parameter : VAR id_list ':' parameter_type
               | VAR id_list
               ;
 
-out_parameter : OUT id_list ':' type
+out_parameter : OUT id_list ':' type_id
               | OUT id_list
               ;
 
-const_parameter : CONST big_id_list ':' type
+const_parameter : CONST big_id_list ':' parameter_type
                 | CONST big_id_list
                 | CONST ID ':' type '=' expr
                 ;
@@ -378,6 +377,13 @@ const_parameter : CONST big_id_list ':' type
 result_type : ID
             | STRING
             ;
+parameter_type : type_id
+               | ARRAY OF type_id
+               ;
+
+type_id : ID
+        | STRING
+        ;
 
 subroutine_block : block
                  | FORWARD
