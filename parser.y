@@ -402,6 +402,7 @@ stmt : expr ASSIGN expr
      | for_stmt
      | repeat_stmt
      | while_stmt
+     | /* empty */
      ;
 
 for_stmt : FOR ID ASSIGN expr TO expr DO stmt
@@ -419,9 +420,8 @@ compound_statement : BEGIN stmt_list END
                    ;
 
 stmt_list : stmt
-	  | stmt_list ';' stmt
-	  | stmt_list ';'
-	  ;
+	      | stmt_list ';' stmt
+	      ;
 
 expr : INT_L
      | REAL_L
