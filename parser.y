@@ -331,6 +331,9 @@ subroutine_declaration : subroutine_header ';' modifiers_list_e subroutine_block
 
 subroutine_header : PROCEDURE subroutine_name formal_parameter_list_e
                   | FUNCTION subroutine_name formal_parameter_list_e ':' result_type
+                  | CONSTRUCTOR subroutine_name formal_parameter_list_e
+                  | DESTRUCTOR subroutine_name
+                  | DESTRUCTOR subroutine_name '(' ')'
                   ;
 
 subroutine_name : ID
