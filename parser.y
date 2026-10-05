@@ -42,6 +42,7 @@
 %token PROTECTED
 %token PUBLIC
 %token STRICT
+%token FORWARD
 
 %token PACKED
 %token CLASS
@@ -325,7 +326,7 @@ property_specifiers : ID ID
                     ;
 
 
-subroutine_declaration : subroutine_header ';' directive_list subroutine_block ';'
+subroutine_declaration : subroutine_header ';' modifiers_list_e subroutine_block ';'
                        ;
 
 subroutine_header : PROCEDURE ID formal_parameter_list_e
@@ -357,8 +358,17 @@ result_type : ID
             | STRING
             ;
 
+modifiers_list_e : /* empty */
+                 | modifiers_list
+                 ;
+
+modifiers_list : ID
+               | modifiers_list ID
+               | modifiers_list STATIC
+               ;
+
 subroutine_block : block
-                 | ID /* FORWARD */
+                 | FORWARD
                  ;
 
 stmt : expr ASSIGN expr
