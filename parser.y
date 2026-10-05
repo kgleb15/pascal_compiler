@@ -367,10 +367,13 @@ modifiers_list_e : /* empty */
                  | modifiers_list
                  ;
 
-modifiers_list : ID
-               | modifiers_list ID
-               | modifiers_list STATIC
+modifiers_list : modifier
+               | modifiers_list modifier
                ;
+
+modifier : ID ';'
+         | STATIC ';'
+         ;
 
 subroutine_block : block
                  | FORWARD
