@@ -195,11 +195,13 @@ variant_list_body : variant
 variant : expr_list ':' '(' field_list_e ')'
         ;
 
-/* Вернуть? */
-procedural_type : subroutine_header
-                | subroutine_header OF OBJECT
+procedural_type : procedural_type_header
+                | procedural_type_header OF OBJECT
                 ;
 
+procedural_type_header : PROCEDURE formal_parameter_list_e
+                       | FUNCTION formal_parameter_list_e ':' result_type /* Уточнить */
+                       ;
 
 variable_declaration_list : VAR variable_declaration
                           | variable_declaration_list variable_declaration
@@ -323,7 +325,7 @@ property_specifiers : ID ID
                     ;
 
 
-subroutine_declaration : subroutine_header ';' subroutine_block ';'
+subroutine_declaration : subroutine_header ';' directive_list subroutine_block ';'
                        ;
 
 subroutine_header : PROCEDURE ID formal_parameter_list_e
