@@ -129,7 +129,8 @@ not_array_type : ordinal_type
 
 ordinal_type : ID
              | ordinal_constant_bound RANGE ordinal_constant_bound  /* Диапазоны */
-             ; /* TODO: enum */
+             | enum_type
+             ;
 
 ordinal_constant_bound : integer_bound
                        | ID
@@ -145,6 +146,9 @@ integer_bound : INT_L
               | '+' integer_bound %prec UNARY_PLUS
               | '(' integer_bound ')'
               ;
+
+enum_type : '(' enum_element_list ')'
+          ;
 
 enum_element : ID
              | ID ASSIGN expr
