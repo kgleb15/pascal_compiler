@@ -245,6 +245,7 @@ stmt : expr ASSIGN expr
      | while_stmt
      | if_stmt
      | case_stmt
+     | with_stmt
      ;
 
 for_stmt : FOR ID ASSIGN expr TO expr DO stmt
