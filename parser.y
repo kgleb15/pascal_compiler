@@ -322,7 +322,7 @@ property_definition : PROPERTY property_body
                     ;
 
 /* Название : тип ... */
-property_body : ID ':' ID property_specifiers ';'
+property_body : ID ':' type_id property_specifiers ';'
               ;
 
 /* read GetX write SetX ... */
