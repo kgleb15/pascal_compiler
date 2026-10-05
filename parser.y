@@ -244,6 +244,7 @@ stmt : expr ASSIGN expr
      | repeat_stmt
      | while_stmt
      | if_stmt
+     | case_stmt
      ;
 
 for_stmt : FOR ID ASSIGN expr TO expr DO stmt
@@ -276,6 +277,10 @@ case_variant_list : case_variant
                   | case_variant_list ';' case_variant
                   | case_variant_list ';'
                   ;
+
+case_stmt : CASE expr OF case_variant_list END
+          | CASE expr OF case_variant_list ELSE stmt_list END
+          ;
 
 compound_statement : BEGIN stmt_list END
                    ;
