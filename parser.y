@@ -363,6 +363,7 @@ parameter_declaration : value_parameter
 
 value_parameter : big_id_list ':' parameter_type
                 | ID ':' type '=' expr
+                | ID ':' type
                 ;
 
 var_parameter : VAR id_list ':' parameter_type
@@ -376,6 +377,7 @@ out_parameter : OUT id_list ':' type_id
 const_parameter : CONST big_id_list ':' parameter_type
                 | CONST big_id_list
                 | CONST ID ':' type '=' expr
+                | CONST ID ':' type
                 ;
 
 parameter_type : type_id
