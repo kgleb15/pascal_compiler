@@ -323,6 +323,7 @@ property_specifiers : ID ID
 
 
 subroutine_declaration : subroutine_header ';' modifiers_list_e subroutine_block ';'
+                       | CLASS subroutine_header ';' modifiers_list_e subroutine_block ';'
                        ;
 
 subroutine_header : PROCEDURE subroutine_name formal_parameter_list_e
