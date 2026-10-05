@@ -78,6 +78,8 @@
 %left '*' '/' DIV MOD AND SHR SHL AS SYMMETRIC_DIFFERENCE
 %right UNARY_MINUS UNARY_PLUS NOT '@'
 %nonassoc '.' '[' '(' '^'
+%nonassoc THEN
+%nonassoc ELSE
 
 
 %%
@@ -241,6 +243,7 @@ stmt : expr ASSIGN expr
      | for_stmt
      | repeat_stmt
      | while_stmt
+     | if_stmt
      ;
 
 for_stmt : FOR ID ASSIGN expr TO expr DO stmt
@@ -253,6 +256,10 @@ repeat_stmt : REPEAT stmt UNTIL expr
 
 while_stmt : WHILE expr DO stmt
            ;
+
+if_stmt : IF expr THEN stmt
+        | IF expr THEN stmt ELSE stmt
+        ;
 
 compound_statement : BEGIN stmt_list END
                    ;
