@@ -146,6 +146,14 @@ integer_bound : INT_L
               | '(' integer_bound ')'
               ;
 
+enum_element : ID
+             | ID ASSIGN expr
+             ;
+
+enum_element_list : enum_element
+                  | enum_element_list ',' enum_element
+                  ;
+
 array_type : array_bases not_array_type /* Уточнить типы type */
            ;
 
