@@ -292,10 +292,8 @@ member : variable_declaration_list
        | property_definition
        ;
 
-method_definition : CLASS method_header ';' method_directive_list
-                  | method_header ';' method_directive_list
-                  | CLASS method_header ';'
-                  | method_header ';'
+method_definition : CLASS method_header ';' modifiers_list_e
+                  | method_header ';' modifiers_list_e
                   ;
 
 method_header : FUNCTION ID formal_parameter_list_e ':' result_type
@@ -304,13 +302,17 @@ method_header : FUNCTION ID formal_parameter_list_e ':' result_type
               | DESTRUCTOR ID formal_parameter_list_e
               ;
 
-method_directive_list : method_directive
-                      | method_directive_list method_directive
-                      ;
-
-method_directive : ID ';' /* abstract, virtual, dynamic ... */
-                 | STATIC ';'
+modifiers_list_e : /* empty */
+                 | modifiers_list
                  ;
+
+modifiers_list : modifier /* abstract, virtual, dynamic ... */
+               | modifiers_list modifier
+               ;
+
+modifier : ID ';'
+         | STATIC ';'
+         ;
 
 property_definition : PROPERTY property_body
                     | CLASS PROPERTY property_body /* Статическое свойство */
@@ -362,18 +364,6 @@ parameter_modifier : VAR
 result_type : ID
             | STRING
             ;
-
-modifiers_list_e : /* empty */
-                 | modifiers_list
-                 ;
-
-modifiers_list : modifier
-               | modifiers_list modifier
-               ;
-
-modifier : ID ';'
-         | STATIC ';'
-         ;
 
 subroutine_block : block
                  | FORWARD
