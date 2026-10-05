@@ -76,10 +76,14 @@
 program : PROGRAM ID ';' block '.'
 	    ;
 
-block : declaration_part compound_statement
+block : declaration_part_e compound_statement
       ;
 
-declaration_part : /* empty */
+declaration_part_e : /* empty */
+                   | declaration_part
+                   ;
+
+declaration_part : declaration
                  | declaration_part declaration
                  ;
 
