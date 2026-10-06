@@ -87,8 +87,6 @@
 %left '*' '/' DIV MOD AND SHR SHL AS SYMMETRIC_DIFFERENCE
 %right UNARY_MINUS UNARY_PLUS NOT '@'
 %nonassoc '.' '[' '(' '^'
-%nonassoc THEN
-%nonassoc ELSE
 
 
 %%
