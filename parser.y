@@ -496,7 +496,6 @@ expr : INT_L
      | expr '^'
      | ID '(' expr_list_e ')'
      | expr '.' ID '(' expr_list_e ')'
-     | '[' set_group_list_e ']'
      | '@' expr
      | SELF
      | INHERITED
@@ -511,16 +510,4 @@ expr_list : expr
 expr_list_e : /* empty */
             | expr_list
             ;
-
-set_group_list_e : /* empty */
-                 | set_group_list
-                 ;
-
-set_group_list : set_group
-               | set_group_list ',' set_group
-               ;
-
-set_group : expr
-          | expr RANGE expr
-          ;
 %%
