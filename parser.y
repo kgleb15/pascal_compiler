@@ -146,6 +146,12 @@ integer_bound : INT_L
               | '-' integer_bound %prec UNARY_MINUS
               | '+' integer_bound %prec UNARY_PLUS
               | '(' integer_bound ')'
+              | integer_bound AND integer_bound
+              | integer_bound OR integer_bound
+              | integer_bound XOR integer_bound
+              | NOT integer_bound
+              | integer_bound SHR integer_bound
+              | integer_bound SHL integer_bound
               ;
 
 /* Перечисления */
