@@ -85,7 +85,6 @@ record          { Console::Log(lineno(), "KEYWORD: record"); }
 repeat          { Console::Log(lineno(), "KEYWORD: repeat"); }
 reintroduce     { Console::Log(lineno(), "KEYWORD: reintroduce"); } /**/
 self            { Console::Log(lineno(), "KEYWORD: self"); }
-set             { Console::Log(lineno(), "KEYWORD: set"); }
 string          { Console::Log(lineno(), "KEYWORD: string"); }
 then            { Console::Log(lineno(), "KEYWORD: then"); }
 to              { Console::Log(lineno(), "KEYWORD: to"); }

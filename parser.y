@@ -26,7 +26,6 @@
 %token RECORD
 %token REPEAT
 %token SELF
-%token SET
 %token STRING
 %token THEN
 %token TO
@@ -121,7 +120,6 @@ not_array_type : ordinal_type
                | STRING '[' INT_L ']'
                | TYPE STRING '(' INT_L ')'
                | record_type
-               | SET OF ordinal_type /* set type */
                | '^' ID      /* pounter type */
                | procedural_type
                | TYPE ID     /* Type aliase */
