@@ -10,7 +10,6 @@
 
 %{
     #include <string>
-    #include <algorithm>
     #include <cctype>   // для tolower / toupper
     #include "core/Console.h"
     #include "core/Buffer.h"
@@ -384,7 +383,8 @@ xor             { Console::Log(lineno(), "OPERATOR: xor"); }
 
 string toLower(const string& s) {
     string lowStr = s;
-    std::transform(lowStr.begin(), lowStr.end(), lowStr.begin(), [](unsigned char c) { return std::tolower(c); });
+    for (int i = 0; i < lowStr.size(); i++)
+        lowStr[i] = std::tolower(lowStr[i]);
     return lowStr;
 }
 
