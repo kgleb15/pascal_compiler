@@ -99,14 +99,10 @@ with            { Console::Log(lineno(), "KEYWORD: with"); }
 
     /* ---------- Специфичные для Object Pascal ---------- */
 class           { Console::Log(lineno(), "KEYWORD: class"); }
-dispinterface   { Console::Log(lineno(), "KEYWORD: dispinterface"); }
-inline          { Console::Log(lineno(), "KEYWORD: inline"); }
 otherwise       { Console::Log(lineno(), "KEYWORD: otherwise"); }
 out             { Console::Log(lineno(), "KEYWORD: out"); }
 packed          { Console::Log(lineno(), "KEYWORD: packed"); }
 property        { Console::Log(lineno(), "KEYWORD: property"); }
-resourcestring  { Console::Log(lineno(), "KEYWORD: resourcestring"); }
-threadvar       { Console::Log(lineno(), "KEYWORD: threadvar"); }
 
     /* ---------- Ключевые слова, являющиеся операторами ---------- */
 and             { Console::Log(lineno(), "OPERATOR: and"); }

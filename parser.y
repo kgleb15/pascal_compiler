@@ -49,13 +49,9 @@
 
 	/* Специфичные для Object Pascal */
 %token CLASS
-%token DISPINTERFACE
-%token INLINE
 %token OTHERWISE
 %token OUT
 %token PROPERTY
-%token RESOURCESTRING
-%token THREADVAR
 
 	/* Литераты и идентификаторы */
 %token ID
