@@ -17,9 +17,7 @@
 %token FOR
 %token FUNCTION
 %token IF
-%token IMPLEMENTATION
 %token INHERITED
-%token INTERFACE
 %token NIL
 %token OBJECT
 %token OF
@@ -52,11 +50,7 @@
 	/* Специфичные для Object Pascal */
 %token CLASS
 %token DISPINTERFACE
-%token EXPORTS
-%token FINALIZATION
-%token INITIALIZATION
 %token INLINE
-%token LIBRARY
 %token OTHERWISE
 %token OUT
 %token PROPERTY

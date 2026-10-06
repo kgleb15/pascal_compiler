@@ -73,9 +73,7 @@ for             { Console::Log(lineno(), "KEYWORD: for"); }
 function        { Console::Log(lineno(), "KEYWORD: function"); }
 goto            { Console::Log(lineno(), "KEYWORD: goto"); } /**/
 if              { Console::Log(lineno(), "KEYWORD: if"); }
-implementation  { Console::Log(lineno(), "KEYWORD: implementation"); }
 inherited       { Console::Log(lineno(), "KEYWORD: inherited"); }
-interface       { Console::Log(lineno(), "KEYWORD: interface"); }
 label           { Console::Log(lineno(), "KEYWORD: label"); } /**/
 nil             { Console::Log(lineno(), "KEYWORD: nil"); }
 object          { Console::Log(lineno(), "KEYWORD: object"); }
@@ -102,11 +100,7 @@ with            { Console::Log(lineno(), "KEYWORD: with"); }
     /* ---------- Специфичные для Object Pascal ---------- */
 class           { Console::Log(lineno(), "KEYWORD: class"); }
 dispinterface   { Console::Log(lineno(), "KEYWORD: dispinterface"); }
-exports         { Console::Log(lineno(), "KEYWORD: exports"); }
-finalization    { Console::Log(lineno(), "KEYWORD: finalization"); }
-initialization  { Console::Log(lineno(), "KEYWORD: initialization"); }
 inline          { Console::Log(lineno(), "KEYWORD: inline"); }
-library         { Console::Log(lineno(), "KEYWORD: library"); }
 otherwise       { Console::Log(lineno(), "KEYWORD: otherwise"); }
 out             { Console::Log(lineno(), "KEYWORD: out"); }
 packed          { Console::Log(lineno(), "KEYWORD: packed"); }
