@@ -22,7 +22,6 @@ void Console::Error(int line, const string& message) {
 }
 
 void Console::PrintErrors() {
-    cout.flush();
     for (int i = 0; i < _errors.size(); ++i) {
         cerr << _errors[i] << endl;
     }
