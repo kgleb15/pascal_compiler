@@ -209,14 +209,11 @@ array_init_value_list : init_value
 /* Классы */
 class_type : CLASS
            | CLASS END
-           | CLASS heritage
-           | CLASS heritage END
-           | CLASS heritage component_list END
+           | CLASS '(' ID ')' /* Наследование */
+           | CLASS '(' ID ')' END
+           | CLASS '(' ID ')' component_list END
            | CLASS component_list END
            ;
-
-heritage : '(' ID ')' /* Наследование */
-         ;
 
 component_list : initial_part visible_sections
                | initial_part
