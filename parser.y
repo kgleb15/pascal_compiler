@@ -17,6 +17,7 @@
 %token FOR
 %token FUNCTION
 %token IF
+%token IN
 %token INHERITED
 %token NIL
 %token OBJECT
@@ -64,7 +65,7 @@
 
 
 	/* приоритеты */
-%left '=' '>' '<' NOT_EQUAL LESS_OR_EQUAL GREATER_OR_EQUAL IN IS
+%left '=' '>' '<' NOT_EQUAL LESS_OR_EQUAL GREATER_OR_EQUAL IS
 %left '+' '-' OR XOR
 %left '*' '/' DIV MOD AND SHR SHL AS
 %right UNARY_MINUS UNARY_PLUS NOT '@'
@@ -444,7 +445,6 @@ expr : INT_L
      | expr NOT_EQUAL expr
      | expr LESS_OR_EQUAL expr
      | expr GREATER_OR_EQUAL expr
-     | expr IN expr
      | expr IS expr
      | expr '+' expr
      | expr '-' expr
