@@ -82,7 +82,7 @@ program : PROGRAM ID ';' block '.'
 block : declaration_part_e compound_statement
       ;
 
-declaration_part_e : /* empty */
+declaration_part_e : %empty
                    | declaration_part
                    ;
 
@@ -251,7 +251,7 @@ visibility_specifier : PRIVATE
                      | STRICT PROTECTED
                      ;
 
-field_definition_list_e : /* empty */
+field_definition_list_e : %empty
                         | field_definition_list
                         ;
 
@@ -263,7 +263,7 @@ field_definition : id_list ':' type ';'
                  | id_list ':' type ';' STATIC ';'
                  ;
 
-member_list_e : /* empty */
+member_list_e : %empty
               | member_list
               ;
 
@@ -283,7 +283,7 @@ method_definition : CLASS subroutine_header ';' modifiers_list_e
                   | subroutine_header ';' modifiers_list_e
                   ;
 
-modifiers_list_e : /* empty */
+modifiers_list_e : %empty
                  | modifiers_list
                  ;
 
@@ -325,7 +325,7 @@ subroutine_name : ID
                 | ID '.' ID
                 ;
 
-formal_parameter_list_e : /* empty */
+formal_parameter_list_e : %empty
                         | '(' ')'
                         | '(' paramater_declarations ')'
                         ;
@@ -384,7 +384,7 @@ stmt : expr ASSIGN expr
      | while_stmt
      | if_stmt
      | case_stmt
-     | /* empty */
+     | %empty
      ;
 
 /* Циклы */
@@ -481,7 +481,7 @@ expr_list : expr
           | expr_list ',' expr
           ;
 
-expr_list_e : /* empty */
+expr_list_e : %empty
             | expr_list
             ;
 %%
