@@ -472,6 +472,7 @@ case_variant_list : case_variant
 
 case_stmt : CASE expr OF case_variant_list END
           | CASE expr OF case_variant_list ELSE stmt_list END
+          | CASE expr OF case_variant_list OTHERWISE stmt_list END
           ;
 
 with_stmt : WITH expr_list DO stmt
