@@ -101,8 +101,7 @@ constant_declaration_list : CONST constant_declaration
                           ;
 
 constant_declaration : ID '=' expr ';'
-                     | ID ':' ID '=' init_value ';'
-                     | ID ':' STRING '=' init_value ';' /* TODO: использовать type */
+                     | ID ':' type '=' init_value ';'
                      ;
 
 /* Объявления типов */
