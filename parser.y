@@ -65,7 +65,7 @@
 	/* приоритеты */
 %left '=' '>' '<' NOT_EQUAL LESS_OR_EQUAL GREATER_OR_EQUAL IN IS
 %left '+' '-' OR XOR
-%left '*' '/' DIV MOD AND SHR SHL AS SYMMETRIC_DIFFERENCE
+%left '*' '/' DIV MOD AND SHR SHL AS
 %right UNARY_MINUS UNARY_PLUS NOT '@'
 %nonassoc '.' '[' '(' '^'
 
@@ -486,7 +486,6 @@ expr : INT_L
      | expr SHL expr
      | expr SHR expr
      | expr AS expr
-     | expr SYMMETRIC_DIFFERENCE expr
      | '-' expr %prec UNARY_MINUS
      | '+' expr %prec UNARY_PLUS
      | NOT expr

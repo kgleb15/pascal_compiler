@@ -121,7 +121,6 @@ xor             { Console::Log(lineno(), "OPERATOR: xor"); }
 \>\>    { Console::Log(lineno(), "OPERATOR: shr"); }
 \*\*    { Console::Log(lineno(), "OPERATOR: **"); }
 \<\>    { Console::Log(lineno(), "OPERATOR: <>"); }
-\>\<    { Console::Log(lineno(), "OPERATOR: ><"); }
 \<\=    { Console::Log(lineno(), "OPERATOR: <="); }
 \>\=    { Console::Log(lineno(), "OPERATOR: >="); }
 \:\=    { Console::Log(lineno(), "OPERATOR: :="); }
