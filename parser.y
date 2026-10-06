@@ -23,7 +23,6 @@
 %token OF
 %token PROCEDURE
 %token PROGRAM
-%token RECORD
 %token REPEAT
 %token SELF
 %token STRING
@@ -118,7 +117,6 @@ not_array_type : ordinal_type
                | STRING
                | STRING '[' INT_L ']'
                | TYPE STRING '(' INT_L ')'
-               | record_type
                | '^' ID      /* pounter type */
                | procedural_type
                | TYPE ID     /* Type aliase */
@@ -171,27 +169,6 @@ range_list : ordinal_type
            | range_list ',' ordinal_type
            ;
 
-record_type : RECORD field_list_e END
-            | PACKED RECORD field_list_e END
-            ;
-
-field_list_e : /* empty */
-             | field_list
-             ;
-
-field_list : fixed_fields
-           | fixed_fields ';'
-           | fixed_fields ';' variant_part
-           | variant_part /* ';' может быть и после variant_part но это обрабатывает variant_list*/
-           ;
-
-fixed_fields : fixed_field
-             | fixed_fields ';' fixed_field
-             ;
-
-fixed_field : id_list ':' type
-            ;
-
 id_list : ID
         | id_list ',' ID
         ;
@@ -199,21 +176,6 @@ id_list : ID
 big_id_list : ID ',' ID
             | big_id_list ',' ID
             ;
-
-variant_part : CASE ordinal_type OF variant_list
-             | CASE ID ':' ordinal_type OF variant_list
-             ;
-
-variant_list : variant_list_body
-             | variant_list_body ';'
-             ;
-
-variant_list_body : variant
-                  | variant_list_body ';' variant
-                  ;
-
-variant : expr_list ':' '(' field_list_e ')'
-        ;
 
 procedural_type : procedural_type_header
                 | procedural_type_header OF OBJECT
