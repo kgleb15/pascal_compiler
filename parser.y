@@ -122,7 +122,6 @@ not_array_type : ordinal_type
                | STRING '[' INT_L ']'
                | TYPE STRING '(' INT_L ')'
                | '^' ID      /* pounter type */
-               | procedural_type
                | TYPE ID     /* Type aliase */
                ;
 
@@ -189,15 +188,6 @@ id_list : ID
 big_id_list : ID ',' ID
             | big_id_list ',' ID
             ;
-
-/* Процедурные типы */
-procedural_type : procedural_type_header
-                | procedural_type_header OF OBJECT
-                ;
-
-procedural_type_header : PROCEDURE formal_parameter_list_e
-                       | FUNCTION formal_parameter_list_e ':' type_id
-                       ;
 
 /* Объявления переменных */
 variable_declaration_list : VAR variable_declaration
