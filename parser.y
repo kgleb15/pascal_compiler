@@ -417,7 +417,6 @@ stmt : expr ASSIGN expr
      | while_stmt
      | if_stmt
      | case_stmt
-     | with_stmt
      | /* empty */
      ;
 
@@ -457,8 +456,6 @@ case_stmt : CASE expr OF case_variant_list END
           | CASE expr OF case_variant_list OTHERWISE stmt_list END
           ;
 
-with_stmt : WITH expr_list DO stmt
-          ;
 
 compound_statement : BEGIN stmt_list END
                    ;

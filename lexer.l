@@ -95,7 +95,6 @@ until           { Console::Log(lineno(), "KEYWORD: until"); }
 uses            { Console::Log(lineno(), "KEYWORD: uses"); } /**/
 var             { Console::Log(lineno(), "KEYWORD: var"); }
 while           { Console::Log(lineno(), "KEYWORD: while"); }
-with            { Console::Log(lineno(), "KEYWORD: with"); }
 
     /* ---------- Специфичные для Object Pascal ---------- */
 class           { Console::Log(lineno(), "KEYWORD: class"); }
