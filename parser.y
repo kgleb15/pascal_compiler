@@ -33,6 +33,8 @@
 %token UNTIL
 %token VAR
 %token WHILE
+
+	/* Модификаторы */
 %token STATIC
 %token PRIVATE
 %token PROTECTED
@@ -54,6 +56,7 @@
 %token REAL_L
 %token STRING_L
 
+	/* Операторы */
 %token ASSIGN
 %token ADD_ASSIGN
 %token SUB_ASSIGN
@@ -72,6 +75,7 @@
 
 %%
 
+/* Программа и блок */
 program : PROGRAM ID ';' block '.'
 	    ;
 
@@ -86,13 +90,14 @@ declaration_part : declaration
                  | declaration_part declaration
                  ;
 
-/* разные типы объявлений */
+/* Виды объявлений */
 declaration : constant_declaration_list
             | type_declaration_list
             | variable_declaration_list
             | subroutine_declaration
             ;
 
+/* Объявления констант */
 constant_declaration_list : CONST constant_declaration
                           | constant_declaration_list constant_declaration
                           ;
@@ -102,6 +107,7 @@ constant_declaration : ID '=' expr ';'
                      | ID ':' STRING '=' init_value ';' /* TODO: использовать type */
                      ;
 
+/* Объявления типов */
 type_declaration_list : TYPE type_declaration
                       | type_declaration_list type_declaration
                       ;
@@ -110,6 +116,7 @@ type_declaration : ID '=' type ';'
                  | ID '=' class_type ';'
                  ;
 
+/* Типы */
 type : not_array_type
      | array_type   /* Массивы */
      ;
@@ -123,6 +130,7 @@ not_array_type : ordinal_type
                | TYPE ID     /* Type aliase */
                ;
 
+/* Порядковые типы */
 ordinal_type : ID
              | ordinal_constant_bound RANGE ordinal_constant_bound  /* Диапазоны */
              | enum_type
@@ -143,6 +151,7 @@ integer_bound : INT_L
               | '(' integer_bound ')'
               ;
 
+/* Перечисления */
 enum_type : '(' enum_element_list ')'
           ;
 
@@ -154,6 +163,7 @@ enum_element_list : enum_element
                   | enum_element_list ',' enum_element
                   ;
 
+/* Массивы */
 array_type : array_bases not_array_type /* Уточнить типы type */
            ;
 
@@ -170,6 +180,7 @@ range_list : ordinal_type
            | range_list ',' ordinal_type
            ;
 
+/* Списки идентификаторов */
 id_list : ID
         | id_list ',' ID
         ;
@@ -178,6 +189,7 @@ big_id_list : ID ',' ID
             | big_id_list ',' ID
             ;
 
+/* Процедурные типы */
 procedural_type : procedural_type_header
                 | procedural_type_header OF OBJECT
                 ;
@@ -186,6 +198,7 @@ procedural_type_header : PROCEDURE formal_parameter_list_e
                        | FUNCTION formal_parameter_list_e ':' type_id
                        ;
 
+/* Объявления переменных */
 variable_declaration_list : VAR variable_declaration
                           | variable_declaration_list variable_declaration
                           ;
@@ -201,6 +214,8 @@ init_value : expr
 array_init_value_list : init_value
                       | array_init_value_list ',' init_value
                       ;
+
+/* Классы */
 class_type : CLASS
            | CLASS END
            | CLASS heritage
@@ -294,6 +309,7 @@ property_specifiers : ID ID
                     ;
 
 
+/* Процедуры и функции */
 subroutine_declaration : subroutine_header ';' modifiers_list_e subroutine_block ';'
                        | CLASS subroutine_header ';' modifiers_list_e subroutine_block ';'
                        ;
@@ -355,6 +371,7 @@ subroutine_block : block
                  | FORWARD
                  ;
 
+/* Операторы */
 stmt : expr ASSIGN expr
      | expr ADD_ASSIGN expr
      | expr SUB_ASSIGN expr
@@ -370,6 +387,7 @@ stmt : expr ASSIGN expr
      | /* empty */
      ;
 
+/* Циклы */
 for_stmt : FOR ID ASSIGN expr TO expr DO stmt
          | FOR ID ASSIGN expr DOWNTO expr DO stmt
          | FOR ID IN expr DO stmt
@@ -381,10 +399,12 @@ repeat_stmt : REPEAT stmt UNTIL expr
 while_stmt : WHILE expr DO stmt
            ;
 
+/* if...then...else */
 if_stmt : IF expr THEN stmt
         | IF expr THEN stmt ELSE stmt
         ;
 
+/* case...of */
 case_label : expr
            | expr RANGE expr
            ;
@@ -407,6 +427,7 @@ case_stmt : CASE expr OF case_variant_list END
           ;
 
 
+/* Составной оператор и список операторов */
 compound_statement : BEGIN stmt_list END
                    ;
 
@@ -414,6 +435,7 @@ stmt_list : stmt
 	      | stmt_list ';' stmt
 	      ;
 
+/* Выражения */
 expr : INT_L
      | REAL_L
      | STRING_L
