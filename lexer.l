@@ -75,21 +75,17 @@ for             { Console::Log(lineno(), "KEYWORD: for"); }
 function        { Console::Log(lineno(), "KEYWORD: function"); }
 goto            { Console::Log(lineno(), "KEYWORD: goto"); }
 if              { Console::Log(lineno(), "KEYWORD: if"); }
-implementation  { Console::Log(lineno(), "KEYWORD: implementation"); }
 inherited       { Console::Log(lineno(), "KEYWORD: inherited"); }
-interface       { Console::Log(lineno(), "KEYWORD: interface"); }
-label           { Console::Log(lineno(), "KEYWORD: label"); }
+label           { Console::Log(lineno(), "KEYWORD: label"); } /**/
 nil             { Console::Log(lineno(), "KEYWORD: nil"); }
 object          { Console::Log(lineno(), "KEYWORD: object"); }
 of              { Console::Log(lineno(), "KEYWORD: of"); }
 operator        { Console::Log(lineno(), "KEYWORD: operator"); }
 procedure       { Console::Log(lineno(), "KEYWORD: procedure"); }
 program         { Console::Log(lineno(), "KEYWORD: program"); }
-record          { Console::Log(lineno(), "KEYWORD: record"); }
 repeat          { Console::Log(lineno(), "KEYWORD: repeat"); }
 reintroduce     { Console::Log(lineno(), "KEYWORD: reintroduce"); }
 self            { Console::Log(lineno(), "KEYWORD: self"); }
-set             { Console::Log(lineno(), "KEYWORD: set"); }
 string          { Console::Log(lineno(), "KEYWORD: string"); }
 then            { Console::Log(lineno(), "KEYWORD: then"); }
 to              { Console::Log(lineno(), "KEYWORD: to"); }
@@ -99,26 +95,13 @@ until           { Console::Log(lineno(), "KEYWORD: until"); }
 uses            { Console::Log(lineno(), "KEYWORD: uses"); }
 var             { Console::Log(lineno(), "KEYWORD: var"); }
 while           { Console::Log(lineno(), "KEYWORD: while"); }
-with            { Console::Log(lineno(), "KEYWORD: with"); }
 
     /* ---------- Специфичные для Object Pascal ---------- */
 class           { Console::Log(lineno(), "KEYWORD: class"); }
-dispinterface   { Console::Log(lineno(), "KEYWORD: dispinterface"); }
-except          { Console::Log(lineno(), "KEYWORD: except"); }
-exports         { Console::Log(lineno(), "KEYWORD: exports"); }
-finalization    { Console::Log(lineno(), "KEYWORD: finalization"); }
-finally         { Console::Log(lineno(), "KEYWORD: finally"); }
-initialization  { Console::Log(lineno(), "KEYWORD: initialization"); }
-inline          { Console::Log(lineno(), "KEYWORD: inline"); }
-library         { Console::Log(lineno(), "KEYWORD: library"); }
-on              { Console::Log(lineno(), "KEYWORD: on"); }
+otherwise       { Console::Log(lineno(), "KEYWORD: otherwise"); }
 out             { Console::Log(lineno(), "KEYWORD: out"); }
 packed          { Console::Log(lineno(), "KEYWORD: packed"); }
 property        { Console::Log(lineno(), "KEYWORD: property"); }
-raise           { Console::Log(lineno(), "KEYWORD: raise"); }
-resourcestring  { Console::Log(lineno(), "KEYWORD: resourcestring"); }
-threadvar       { Console::Log(lineno(), "KEYWORD: threadvar"); }
-try             { Console::Log(lineno(), "KEYWORD: try"); }
 
     /* ---------- Ключевые слова, являющиеся операторами ---------- */
 and             { Console::Log(lineno(), "OPERATOR: and"); }
@@ -139,7 +122,6 @@ xor             { Console::Log(lineno(), "OPERATOR: xor"); }
 \>\>    { Console::Log(lineno(), "OPERATOR: shr"); }
 \*\*    { Console::Log(lineno(), "OPERATOR: **"); }
 \<\>    { Console::Log(lineno(), "OPERATOR: <>"); }
-\>\<    { Console::Log(lineno(), "OPERATOR: ><"); }
 \<\=    { Console::Log(lineno(), "OPERATOR: <="); }
 \>\=    { Console::Log(lineno(), "OPERATOR: >="); }
 \:\=    { Console::Log(lineno(), "OPERATOR: :="); }
