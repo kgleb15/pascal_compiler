@@ -177,7 +177,8 @@ zzz := 'a' #62 'b';
 
 // Caret-нотация
 kk := ^Z;
-kkk := ^ZZ; // >1 символа
+kkk := ^ZZ;
+kkkk := '123'^Z'123'// Внутри строки
 
 
 aa := 'contains // not a comment';

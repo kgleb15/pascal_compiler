@@ -292,12 +292,6 @@ xor             { Console::Log(lineno(), "OPERATOR: xor"); }
     stringBuf.append(string(1, (char) strtoll(numStart, nullptr, base)));
     BEGIN(STRING_CONT);
 }
-{CONTROL_CARET_CODE}/[^A-Za-z0-9_] {
-    stringBuf.reset();
-    stringBuf.setStartLine(lineno());
-    stringBuf.append(string(1, (char) (toupper(yytext[1]) - 'A' + 1)));
-    BEGIN(STRING_CONT);
-}
 
 
 <STRING>[^'\n]* {
