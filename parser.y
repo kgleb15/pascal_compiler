@@ -393,7 +393,7 @@ for_stmt : FOR ID ASSIGN expr TO expr DO stmt
          | FOR ID IN expr DO stmt
          ;
 
-repeat_stmt : REPEAT stmt UNTIL expr
+repeat_stmt : REPEAT stmt_list UNTIL expr
             ;
 
 while_stmt : WHILE expr DO stmt
