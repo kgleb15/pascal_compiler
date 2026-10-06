@@ -43,9 +43,6 @@
 %token FORWARD
 
 %token PACKED
-%token CLASS
-%token PROPERTY
-%token OUT
 
 	/* Специфичные для Object Pascal */
 %token CLASS
