@@ -1,7 +1,6 @@
 	/* Подробные сообщения об ошибках: bison перечисляет ожидаемые токены */
 %define parse.error verbose
 
-
 %start program
 
 	/* Терминальные символы */
@@ -41,7 +40,6 @@
 %token PUBLIC
 %token STRICT
 %token FORWARD
-
 %token PACKED
 
 	/* Специфичные для Object Pascal */
@@ -71,7 +69,6 @@
 %left '*' '/' DIV MOD AND SHR SHL AS
 %right UNARY_MINUS UNARY_PLUS NOT '@'
 %nonassoc '.' '[' '(' '^'
-
 
 %%
 
@@ -484,4 +481,6 @@ expr_list : expr
 expr_list_e : %empty
             | expr_list
             ;
+
+
 %%
