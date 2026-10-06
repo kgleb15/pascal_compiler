@@ -33,7 +33,6 @@
 %token UNTIL
 %token VAR
 %token WHILE
-%token WITH
 %token STATIC
 %token PRIVATE
 %token PROTECTED
