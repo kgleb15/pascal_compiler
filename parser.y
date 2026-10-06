@@ -52,21 +52,16 @@
 	/* Специфичные для Object Pascal */
 %token CLASS
 %token DISPINTERFACE
-%token EXCEPT
 %token EXPORTS
 %token FINALIZATION
-%token FINALLY
 %token INITIALIZATION
 %token INLINE
 %token LIBRARY
-%token ON
 %token OTHERWISE
 %token OUT
 %token PROPERTY
-%token RAISE
 %token RESOURCESTRING
 %token THREADVAR
-%token TRY
 
 	/* Литераты и идентификаторы */
 %token ID
