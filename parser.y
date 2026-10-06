@@ -41,7 +41,6 @@
 %token PUBLIC
 %token STRICT
 %token FORWARD
-%token PACKED
 
 	/* Специфичные для Object Pascal */
 %token CLASS
@@ -175,7 +174,6 @@ array_bases : array_base
             ;
 
 array_base : ARRAY '[' range_list ']' OF
-           | PACKED ARRAY '[' range_list ']' OF
            | ARRAY OF /* Динамические массивы */
            ;
 
