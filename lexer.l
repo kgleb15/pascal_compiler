@@ -110,6 +110,7 @@ initialization  { Console::Log(lineno(), "KEYWORD: initialization"); }
 inline          { Console::Log(lineno(), "KEYWORD: inline"); }
 library         { Console::Log(lineno(), "KEYWORD: library"); }
 on              { Console::Log(lineno(), "KEYWORD: on"); }
+otherwise       { Console::Log(lineno(), "KEYWORD: otherwise"); }
 out             { Console::Log(lineno(), "KEYWORD: out"); }
 packed          { Console::Log(lineno(), "KEYWORD: packed"); }
 property        { Console::Log(lineno(), "KEYWORD: property"); }

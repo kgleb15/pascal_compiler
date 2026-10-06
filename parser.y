@@ -60,6 +60,7 @@
 %token INLINE
 %token LIBRARY
 %token ON
+%token OTHERWISE
 %token OUT
 %token PROPERTY
 %token RAISE
