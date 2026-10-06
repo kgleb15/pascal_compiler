@@ -49,6 +49,24 @@
 %token PROPERTY
 %token OUT
 
+	/* Специфичные для Object Pascal */
+%token CLASS
+%token DISPINTERFACE
+%token EXCEPT
+%token EXPORTS
+%token FINALIZATION
+%token FINALLY
+%token INITIALIZATION
+%token INLINE
+%token LIBRARY
+%token ON
+%token OUT
+%token PROPERTY
+%token RAISE
+%token RESOURCESTRING
+%token THREADVAR
+%token TRY
+
 	/* Литераты и идентификаторы */
 %token ID
 %token INT_L
@@ -69,6 +87,8 @@
 %left '*' '/' DIV MOD AND SHR SHL AS SYMMETRIC_DIFFERENCE
 %right UNARY_MINUS UNARY_PLUS NOT '@'
 %nonassoc '.' '[' '(' '^'
+%nonassoc THEN
+%nonassoc ELSE
 
 
 %%
@@ -128,7 +148,8 @@ not_array_type : ordinal_type
 
 ordinal_type : ID
              | ordinal_constant_bound RANGE ordinal_constant_bound  /* Диапазоны */
-             ; /* TODO: enum */
+             | enum_type
+             ;
 
 ordinal_constant_bound : integer_bound
                        | ID
@@ -144,6 +165,17 @@ integer_bound : INT_L
               | '+' integer_bound %prec UNARY_PLUS
               | '(' integer_bound ')'
               ;
+
+enum_type : '(' enum_element_list ')'
+          ;
+
+enum_element : ID
+             | ID ASSIGN expr
+             ;
+
+enum_element_list : enum_element
+                  | enum_element_list ',' enum_element
+                  ;
 
 array_type : array_bases not_array_type /* Уточнить типы type */
            ;
@@ -402,6 +434,9 @@ stmt : expr ASSIGN expr
      | for_stmt
      | repeat_stmt
      | while_stmt
+     | if_stmt
+     | case_stmt
+     | with_stmt
      | /* empty */
      ;
 
@@ -415,6 +450,33 @@ repeat_stmt : REPEAT stmt UNTIL expr
 
 while_stmt : WHILE expr DO stmt
            ;
+
+if_stmt : IF expr THEN stmt
+        | IF expr THEN stmt ELSE stmt
+        ;
+
+case_label : expr
+           | expr RANGE expr
+           ;
+
+case_label_list : case_label
+                | case_label_list ',' case_label
+                ;
+
+case_variant : case_label_list ':' stmt
+             ;
+
+case_variant_list : case_variant
+                  | case_variant_list ';' case_variant
+                  | case_variant_list ';'
+                  ;
+
+case_stmt : CASE expr OF case_variant_list END
+          | CASE expr OF case_variant_list ELSE stmt_list END
+          ;
+
+with_stmt : WITH expr_list DO stmt
+          ;
 
 compound_statement : BEGIN stmt_list END
                    ;
