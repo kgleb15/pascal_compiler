@@ -195,21 +195,11 @@ variable_declaration : id_list ':' type ';'
 
 init_value : expr
            | '(' init_value ',' array_init_value_list ')' /* Инициализация массива из одного элемента считается как expr */
-           | '(' record_init_value_list ')'
            ;
 
 array_init_value_list : init_value
                       | array_init_value_list ',' init_value
                       ;
-
-record_init_value_list : record_init_value
-                       | record_init_value_list ';' record_init_value
-                       ;
-
-record_init_value : ID ':' init_value
-                  ;
-
-
 class_type : CLASS
            | CLASS END
            | CLASS heritage
