@@ -183,7 +183,7 @@ id_list : ID
         | id_list ',' ID
         ;
 
-big_id_list : ID ',' ID
+big_id_list : ID ',' ID /* Список от двух идентификаторов */
             | big_id_list ',' ID
             ;
 
@@ -325,7 +325,7 @@ parameter_declaration : value_parameter
                       ;
 
 value_parameter : big_id_list ':' parameter_type
-                | ID ':' type_id '=' expr
+                | ID ':' type_id '=' expr /* Присваивать нач. значение можно только одному параметру */
                 | ID ':' parameter_type
                 ;
 
@@ -339,7 +339,7 @@ out_parameter : OUT id_list ':' parameter_type
 
 const_parameter : CONST big_id_list ':' parameter_type
                 | CONST big_id_list
-                | CONST ID ':' type_id '=' expr
+                | CONST ID ':' type_id '=' expr /* Присваивать нач. значение можно только одному параметру */
                 | CONST ID ':' parameter_type
                 ;
 
