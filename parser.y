@@ -120,9 +120,7 @@ type : not_array_type
 not_array_type : ordinal_type
                | STRING
                | STRING '[' INT_L ']'
-               | TYPE STRING '(' INT_L ')'
                | '^' ID      /* pounter type */
-               | TYPE ID     /* Type aliase */
                ;
 
 /* Порядковые типы */
