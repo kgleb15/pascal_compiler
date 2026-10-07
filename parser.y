@@ -393,6 +393,7 @@ if_stmt : IF expr THEN stmt
 /* case...of */
 case_label : STRING_L
            | ID
+           | INT_L
            | ordinal_constant_bound RANGE ordinal_constant_bound
            ;
 
