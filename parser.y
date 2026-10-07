@@ -33,6 +33,7 @@
 %token UNTIL
 %token VAR
 %token WHILE
+%token FORWARD
 
 	/* Модификаторы */
 %token STATIC
@@ -40,7 +41,6 @@
 %token PROTECTED
 %token PUBLIC
 %token STRICT
-%token FORWARD
 
 	/* Специфичные для Object Pascal */
 %token CLASS
