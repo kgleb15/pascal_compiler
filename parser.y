@@ -108,8 +108,8 @@ type_declaration_list : TYPE type_declaration
                       | type_declaration_list type_declaration
                       ;
 
-type_declaration : ID '=' type ';'
-                 | ID '=' class_type ';'
+type_declaration : ID '=' type ';'          /* Обычные типы */
+                 | ID '=' class_type ';'    /* Объявление класса */
                  ;
 
 /* Типы */
@@ -124,13 +124,13 @@ not_array_type : ordinal_type
                ;
 
 /* Порядковые типы */
-ordinal_type : ID
+ordinal_type : ID /* Integer, Char, Boolean ... */
              | ordinal_constant_bound RANGE ordinal_constant_bound  /* Диапазоны */
              | enum_type
              ;
 
 ordinal_constant_bound : integer_bound
-                       | ID
+                       | ID /* константа или элемент перечисления */
                        | STRING_L
                        ;
 
@@ -155,7 +155,7 @@ enum_type : '(' enum_element_list ')'
           ;
 
 enum_element : ID
-             | ID ASSIGN expr
+             | ID ASSIGN expr /* ручное изменение порядкового номера */
              ;
 
 enum_element_list : enum_element
@@ -163,14 +163,14 @@ enum_element_list : enum_element
                   ;
 
 /* Массивы */
-array_type : array_bases not_array_type /* Уточнить типы type */
+array_type : array_bases not_array_type
            ;
 
 array_bases : array_base
-            | array_bases array_base
+            | array_bases array_base /* Допустимо несколько array of или array[..] */
             ;
 
-array_base : ARRAY '[' range_list ']' OF
+array_base : ARRAY '[' range_list ']' OF /* скобки с диапазоном пустыми быть не могут */
            | ARRAY OF /* Динамические массивы */
            ;
 
@@ -197,7 +197,7 @@ variable_declaration : id_list ':' type ';'
                      ;
 
 init_value : expr
-           | '(' init_value ',' array_init_value_list ')' /* Инициализация массива из одного элемента считается как expr */
+           | '(' init_value ',' array_init_value_list ')' /* Инициализация массива (от двух элементов) */
            ;
 
 array_init_value_list : init_value
@@ -205,7 +205,7 @@ array_init_value_list : init_value
                       ;
 
 /* Классы */
-class_type : CLASS
+class_type : CLASS /* forward объявление */
            | CLASS END
            | CLASS '(' ID ')' /* Наследование */
            | CLASS '(' ID ')' END
@@ -214,7 +214,7 @@ class_type : CLASS
            ;
 
 component_list : initial_part visible_sections
-               | initial_part
+               | initial_part /* секция без видимости - по умолчанию public */
                | visible_sections
                ;
 
@@ -230,7 +230,7 @@ visible_sections : visible_section
 visible_section : visibility_specifier field_definition_list_e member_list_e
                 ;
 
-visibility_specifier : PRIVATE
+visibility_specifier : PRIVATE /* !!! */
                      | PROTECTED
                      | PUBLIC
                      | STRICT PRIVATE
@@ -246,7 +246,7 @@ field_definition_list : field_definition
                       ;
 
 field_definition : id_list ':' type ';'
-                 | id_list ':' type ';' STATIC ';'
+                 | id_list ':' type ';' STATIC ';' /* !!! */
                  ;
 
 member_list_e : %empty
@@ -258,14 +258,14 @@ member_list : member
             ;
 
 member : variable_declaration_list
-       | CLASS variable_declaration_list
+       | CLASS variable_declaration_list /* Аналог статических поля */
        | constant_declaration_list
        | type_declaration_list
        | method_definition
        | property_definition
        ;
 
-method_definition : CLASS subroutine_header ';' modifiers_list_e
+method_definition : CLASS subroutine_header ';' modifiers_list_e /* Статический метод */
                   | subroutine_header ';' modifiers_list_e
                   ;
 
@@ -273,11 +273,11 @@ modifiers_list_e : %empty
                  | modifiers_list
                  ;
 
-modifiers_list : modifier /* abstract, virtual, dynamic ... */
+modifiers_list : modifier
                | modifiers_list modifier
                ;
 
-modifier : ID ';'
+modifier : ID ';' /* abstract, virtual, dynamic ... */
          | STATIC ';'
          ;
 
@@ -285,12 +285,10 @@ property_definition : PROPERTY property_body
                     | CLASS PROPERTY property_body /* Статическое свойство */
                     ;
 
-/* Название : тип ... */
-property_body : ID ':' type_id property_specifiers ';'
+property_body : ID ':' type_id property_specifiers ';' /* Название : тип ... */
               ;
 
-/* read GetX write SetX ... */
-property_specifiers : ID ID
+property_specifiers : ID ID /* read GetX write SetX ... */
                     | property_specifiers ID ID
                     ;
 
@@ -308,7 +306,7 @@ subroutine_header : PROCEDURE subroutine_name formal_parameter_list_e
                   ;
 
 subroutine_name : ID
-                | ID '.' ID
+                | ID '.' ID /* название с указанием класса */
                 ;
 
 formal_parameter_list_e : %empty
@@ -327,22 +325,22 @@ parameter_declaration : value_parameter
                       ;
 
 value_parameter : big_id_list ':' parameter_type
-                | ID ':' type '=' expr
-                | ID ':' type
+                | ID ':' type_id '=' expr
+                | ID ':' parameter_type
                 ;
 
 var_parameter : VAR id_list ':' parameter_type
               | VAR id_list
               ;
 
-out_parameter : OUT id_list ':' type_id
+out_parameter : OUT id_list ':' parameter_type
               | OUT id_list
               ;
 
 const_parameter : CONST big_id_list ':' parameter_type
                 | CONST big_id_list
-                | CONST ID ':' type '=' expr
-                | CONST ID ':' type
+                | CONST ID ':' type_id '=' expr
+                | CONST ID ':' parameter_type
                 ;
 
 parameter_type : type_id
@@ -376,7 +374,7 @@ stmt : expr ASSIGN expr
 /* Циклы */
 for_stmt : FOR ID ASSIGN expr TO expr DO stmt
          | FOR ID ASSIGN expr DOWNTO expr DO stmt
-         | FOR ID IN expr DO stmt
+         | FOR ID IN expr DO stmt /* через перечисление */
          ;
 
 repeat_stmt : REPEAT stmt_list UNTIL expr
@@ -428,7 +426,7 @@ expr : INT_L
      | REAL_L
      | STRING_L
      | NIL
-     | ID
+     | ID /* Вызов функции без скобок или, например True*/
      | expr '=' expr
      | expr '<' expr
      | expr '>' expr
@@ -452,14 +450,14 @@ expr : INT_L
      | '+' expr %prec UNARY_PLUS
      | NOT expr
      | '(' expr ')'
-     | expr '.' ID
-     | expr '[' expr ']'
-     | expr '^'
-     | ID '(' expr_list_e ')'
+     | expr '.' ID /* Вызов метода без скобок */
+     | expr '[' expr ']' /* Доступ к эл-ту массива */
+     | expr '^' /* Взятие значения по адресу */
+     | ID '(' expr_list_e ')' /* Вызов функции/процедуры */
      | expr '.' ID '(' expr_list_e ')'
-     | '@' expr
+     | '@' expr /* Взятие адреса */
      | SELF
-     | INHERITED
+     | INHERITED /* Вызов метода родительского класса */
      | INHERITED ID
      | INHERITED ID '(' expr_list_e ')'
      ;
