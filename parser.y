@@ -67,8 +67,8 @@
 %left '=' '>' '<' NOT_EQUAL LESS_OR_EQUAL GREATER_OR_EQUAL IS
 %left '+' '-' OR XOR
 %left '*' '/' DIV MOD AND SHR SHL AS
-%right UNARY_MINUS UNARY_PLUS NOT '@'
-%nonassoc '.' '[' '(' '^'
+%right UNARY_MINUS UNARY_PLUS NOT
+%nonassoc '.' '[' '('
 
 %%
 
@@ -120,7 +120,6 @@ type : not_array_type
 not_array_type : ordinal_type
                | STRING
                | STRING '[' INT_L ']'
-               | '^' ID      /* pounter type */
                ;
 
 /* Порядковые типы */
@@ -452,10 +451,8 @@ expr : INT_L
      | '(' expr ')'
      | expr '.' ID /* Вызов метода без скобок */
      | expr '[' expr ']' /* Доступ к эл-ту массива */
-     | expr '^' /* Взятие значения по адресу */
      | ID '(' expr_list_e ')' /* Вызов функции/процедуры */
      | expr '.' ID '(' expr_list_e ')'
-     | '@' expr /* Взятие адреса */
      | SELF
      | INHERITED /* Вызов метода родительского класса */
      | INHERITED ID
