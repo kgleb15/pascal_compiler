@@ -360,7 +360,13 @@ stmt : expr ASSIGN expr
      | expr SUB_ASSIGN expr
      | expr DIV_ASSIGN expr
      | expr MUL_ASSIGN expr
-     | expr
+     | ID
+     | expr '.' ID /* Вызов метода без скобок */
+     | ID '(' expr_list_e ')' /* Вызов функции/процедуры */
+     | expr '.' ID '(' expr_list_e ')' /* Вызов метода с параметрами */
+     | INHERITED /* Вызов метода родительского класса */
+     | INHERITED ID
+     | INHERITED ID '(' expr_list_e ')'
      | compound_statement
      | for_stmt
      | repeat_stmt
@@ -425,7 +431,7 @@ expr : INT_L
      | REAL_L
      | STRING_L
      | NIL
-     | ID /* Вызов функции без скобок или, например True*/
+     | ID /* Вызов функции без скобок, просто идентификатор или, например True*/
      | expr '=' expr
      | expr '<' expr
      | expr '>' expr
