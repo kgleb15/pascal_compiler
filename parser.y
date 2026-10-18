@@ -195,13 +195,9 @@ variable_declaration : id_list ':' type ';'
                      | id_list ':' type '=' init_value ';'
                      ;
 
-init_value : expr
-           | '(' init_value ',' array_init_value_list ')' /* Инициализация массива (от двух элементов) */
+init_value : expr /* включает случай инициализации массива одним элементом */
+           | '(' expr ',' expr_list ')' /* Инициализация массива (от двух элементов) */
            ;
-
-array_init_value_list : init_value
-                      | array_init_value_list ',' init_value
-                      ;
 
 /* Классы */
 class_type : CLASS /* forward объявление */
