@@ -66,7 +66,7 @@
 	/* приоритеты */
 %left '=' '>' '<' NOT_EQUAL LESS_OR_EQUAL GREATER_OR_EQUAL IS
 %left '+' '-' OR XOR
-%left '*' '/' DIV MOD AND SHR SHL AS
+%left '*' '/' DIV MOD AND AS
 %right UNARY_MINUS UNARY_PLUS NOT
 %nonassoc '.' '[' '('
 
@@ -145,8 +145,6 @@ integer_bound : INT_L
               | integer_bound OR integer_bound
               | integer_bound XOR integer_bound
               | NOT integer_bound
-              | integer_bound SHR integer_bound
-              | integer_bound SHL integer_bound
               ;
 
 /* Перечисления */
@@ -438,8 +436,6 @@ expr : INT_L
      | expr DIV expr
      | expr MOD expr
      | expr AND expr
-     | expr SHL expr
-     | expr SHR expr
      | expr AS expr
      | '-' expr %prec UNARY_MINUS
      | '+' expr %prec UNARY_PLUS
