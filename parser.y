@@ -241,7 +241,6 @@ field_definition_list : field_definition
                       ;
 
 field_definition : id_list ':' type ';'
-                 | id_list ':' type ';' STATIC ';' /* !!! */
                  ;
 
 member_list_e : %empty
@@ -253,15 +252,13 @@ member_list : member
             ;
 
 member : variable_declaration_list
-       | CLASS variable_declaration_list /* Аналог статических поля */
        | constant_declaration_list
        | type_declaration_list
        | method_definition
        | property_definition
        ;
 
-method_definition : CLASS subroutine_header ';' modifiers_list_e /* Статический метод */
-                  | subroutine_header ';' modifiers_list_e
+method_definition : subroutine_header ';' modifiers_list_e
                   ;
 
 modifiers_list_e : %empty
@@ -273,11 +270,9 @@ modifiers_list : modifier
                ;
 
 modifier : ID ';' /* abstract, virtual, dynamic ... */
-         | STATIC ';'
          ;
 
 property_definition : PROPERTY property_body
-                    | CLASS PROPERTY property_body /* Статическое свойство */
                     ;
 
 property_body : ID ':' type_id property_specifiers ';' /* Название : тип ... */
@@ -290,7 +285,6 @@ property_specifiers : ID ID /* read GetX write SetX ... */
 
 /* Процедуры и функции */
 subroutine_declaration : subroutine_header ';' modifiers_list_e subroutine_block ';'
-                       | CLASS subroutine_header ';' modifiers_list_e subroutine_block ';'
                        ;
 
 subroutine_header : PROCEDURE subroutine_name formal_parameter_list_e
