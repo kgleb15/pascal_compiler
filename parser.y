@@ -224,12 +224,9 @@ member_list : member
 member : variable_declaration_list
        | constant_declaration_list
        | type_declaration_list
-       | method_definition
+       | subroutine_header ';' modifiers_list_e /* Определение метода */
        | property_definition
        ;
-
-method_definition : subroutine_header ';' modifiers_list_e
-                  ;
 
 modifiers_list_e : %empty
                  | modifiers_list
