@@ -124,27 +124,24 @@ not_array_type : ordinal_type
 
 /* Порядковые типы */
 ordinal_type : ID /* Integer, Char, Boolean ... */
-             | ordinal_constant_bound RANGE ordinal_constant_bound  /* Диапазоны */
+             | range_bound RANGE range_bound  /* Диапазоны */
              | enum_type
              ;
 
-ordinal_constant_bound : integer_bound
-                       | ID /* константа или элемент перечисления */
-                       | STRING_L
-                       ;
-
-integer_bound : INT_L
-              | integer_bound '+' integer_bound
-              | integer_bound '-' integer_bound
-              | integer_bound '*' integer_bound
-              | integer_bound DIV integer_bound
-              | '-' integer_bound %prec UNARY_MINUS
-              | '+' integer_bound %prec UNARY_PLUS
-              | '(' integer_bound ')'
-              | integer_bound AND integer_bound
-              | integer_bound OR integer_bound
-              | NOT integer_bound
-              ;
+range_bound : INT_L
+            | STRING_L
+            | ID
+            | range_bound '+' range_bound
+            | range_bound '-' range_bound
+            | range_bound '*' range_bound
+            | range_bound DIV range_bound
+            | '-' range_bound %prec UNARY_MINUS
+            | '+' range_bound %prec UNARY_PLUS
+            | range_bound AND range_bound
+            | range_bound OR range_bound
+            | NOT range_bound
+            | range_bound '.' ID
+            ;
 
 /* Перечисления */
 enum_type : '(' enum_element_list ')'
@@ -345,7 +342,7 @@ if_stmt : IF expr THEN stmt
 case_label : STRING_L
            | ID
            | INT_L
-           | ordinal_constant_bound RANGE ordinal_constant_bound
+           | range_bound RANGE range_bound
            ;
 
 case_label_list : case_label
