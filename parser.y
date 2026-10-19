@@ -401,7 +401,7 @@ expr : INT_L
      | NOT expr
      | '(' expr ')'
      | expr '.' ID /* Вызов метода без скобок */
-     | expr '[' expr ']' /* Доступ к эл-ту массива */
+     | expr '[' expr_list ']' /* Доступ к эл-ту массива */
      | ID '(' expr_list_e ')' /* Вызов функции/процедуры */
      | expr '.' ID '(' expr_list_e ')'
      | SELF
