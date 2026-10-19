@@ -206,33 +206,10 @@ class_type : CLASS /* forward объявление */
            | CLASS component_list END
            ;
 
-component_list : initial_part visible_sections
-               | initial_part /* секция без видимости - по умолчанию public */
-               | visible_sections
+component_list : field_definition_list member_list
+               | field_definition_list
+               | member_list
                ;
-
-initial_part : field_definition_list member_list
-             | field_definition_list
-             | member_list
-             ;
-
-visible_sections : visible_section
-                 | visible_sections visible_section
-                 ;
-
-visible_section : visibility_specifier field_definition_list_e member_list_e
-                ;
-
-visibility_specifier : PRIVATE /* !!! */
-                     | PROTECTED
-                     | PUBLIC
-                     | STRICT PRIVATE
-                     | STRICT PROTECTED
-                     ;
-
-field_definition_list_e : %empty
-                        | field_definition_list
-                        ;
 
 field_definition_list : field_definition
                       | field_definition_list field_definition
@@ -240,10 +217,6 @@ field_definition_list : field_definition
 
 field_definition : id_list ':' type ';'
                  ;
-
-member_list_e : %empty
-              | member_list
-              ;
 
 member_list : member
             | member_list member
