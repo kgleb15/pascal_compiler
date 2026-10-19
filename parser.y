@@ -235,12 +235,9 @@ modifiers_list_e : %empty
                  | modifiers_list
                  ;
 
-modifiers_list : modifier
-               | modifiers_list modifier
+modifiers_list : ID ';' /* abstract, virtual, dynamic ... */
+               | modifiers_list ID ';'
                ;
-
-modifier : ID ';' /* abstract, virtual, dynamic ... */
-         ;
 
 property_definition : PROPERTY property_body
                     ;
