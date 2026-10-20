@@ -256,11 +256,11 @@ subroutine_name : ID
 
 formal_parameter_list_e : %empty
                         | '(' ')'
-                        | '(' paramater_declarations ')'
+                        | '(' parameter_declarations ')'
                         ;
 
-paramater_declarations : parameter_declaration
-                       | paramater_declarations ';' parameter_declaration
+parameter_declarations : parameter_declaration
+                       | parameter_declarations ';' parameter_declaration
                        ;
 
 parameter_declaration : value_parameter
