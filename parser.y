@@ -4,6 +4,13 @@
     #include <string>
 }
 
+%union {
+    long long       f_liter_int;
+    double          f_liter_float;
+    std::string*    f_liter_str;
+    std::string*    f_id;
+}
+
 	/* Подробные сообщения об ошибках: bison перечисляет ожидаемые токены */
 %define parse.error verbose
 
@@ -55,10 +62,11 @@
 %token PROPERTY
 
 	/* Литераты и идентификаторы */
-%token ID
-%token INT_L
-%token REAL_L
-%token STRING_L
+%token<f_id> ID
+%token<f_liter_int> INT_L
+%token<f_liter_float> REAL_L
+%token<f_liter_str> STRING_L
+
 %token ASM ABSOLUTE FILE_KW GOTO LABEL OPERATOR PACKED REINTRODUCE UNIT USES SHL SHR XOR POWER
 
 	/* Операторы */
