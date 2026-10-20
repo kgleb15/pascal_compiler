@@ -68,7 +68,8 @@
 %left '+' '-' OR
 %left '*' '/' DIV MOD AND AS
 %right UNARY_MINUS UNARY_PLUS NOT
-%nonassoc '.' '[' '('
+%nonassoc '[' '('
+%left '.'
 
 %%
 
