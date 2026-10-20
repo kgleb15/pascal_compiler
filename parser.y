@@ -354,14 +354,16 @@ case_variant : case_label_list ':' stmt
 
 case_variant_list : case_variant
                   | case_variant_list ';' case_variant
-                  | case_variant_list ';'
                   ;
 
-case_stmt : CASE expr OF case_variant_list END
-          | CASE expr OF case_variant_list ELSE stmt_list END
-          | CASE expr OF case_variant_list OTHERWISE stmt_list END
+case_stmt : CASE expr OF case_variant_list opt_semicolon END
+          | CASE expr OF case_variant_list opt_semicolon ELSE stmt_list END
+          | CASE expr OF case_variant_list opt_semicolon OTHERWISE stmt_list END
           ;
 
+opt_semicolon : %empty
+              | ';'
+              ;
 
 /* Составной оператор и список операторов */
 compound_statement : BEGIN stmt_list END
