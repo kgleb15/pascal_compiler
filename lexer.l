@@ -27,7 +27,7 @@
 
 %x COMMENT_ONE_CHAR
 %x COMMENT_TWO_CHAR
-%x STRING
+%x STRING_BODY
 %x STRING_CONT
 
 
@@ -254,7 +254,7 @@ xor             { return XOR; }
 \' {
     stringBuf.reset();
     stringBuf.setStartLine(lineno());
-    BEGIN(STRING);
+    BEGIN(STRING_BODY);
 }
 {CONTROL_CODE} {
     stringBuf.reset();
@@ -285,27 +285,27 @@ xor             { return XOR; }
 }
 
 
-<STRING>[^'\n]* {
+<STRING_BODY>[^'\n]* {
     stringBuf.append(yytext);
 }
-<STRING>\'\' {
+<STRING_BODY>\'\' {
     stringBuf.append("'");
 }
-<STRING>\' {
+<STRING_BODY>\' {
     BEGIN(STRING_CONT);
 }
-<STRING>\n {
+<STRING_BODY>\n {
     Console::Error(stringBuf.getStartLine(), "string contains a line break");
     BEGIN(INITIAL);
 }
-<STRING><<EOF>> {
+<STRING_BODY><<EOF>> {
     Console::Error(stringBuf.getStartLine(), "unterminated string");
     BEGIN(INITIAL);
 }
 
 
 <STRING_CONT>\' {
-    BEGIN(STRING);
+    BEGIN(STRING_BODY);
 }
 <STRING_CONT>{CONTROL_CODE} {
     const char* numStart = yytext + 1;
