@@ -1,3 +1,9 @@
+%define parse.trace
+
+%code requires {
+    #include <string>
+}
+
 	/* Подробные сообщения об ошибках: bison перечисляет ожидаемые токены */
 %define parse.error verbose
 
