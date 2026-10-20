@@ -251,7 +251,7 @@ subroutine_header : PROCEDURE subroutine_name formal_parameter_list_e
                   ;
 
 subroutine_name : ID
-                | ID '.' ID /* название с указанием класса */
+                | subroutine_name '.' ID /* название с указанием класса */
                 ;
 
 formal_parameter_list_e : %empty
