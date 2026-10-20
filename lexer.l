@@ -333,22 +333,26 @@ xor             { return XOR; }
 }
 <STRING_CONT>(.|\n) {
     unput(yytext[0]); // возвращаем символ обратно во входной поток
-    Console::Log(stringBuf.getStartLine(), "STRING: " + stringBuf.current());
+    yylval.f_liter_str = new string(stringBuf.current());
     BEGIN(INITIAL);
+    return STRING_L;
 }
 <STRING_CONT><<EOF>> {
-    Console::Log(stringBuf.getStartLine(), "STRING: " + stringBuf.current());
+    yylval.f_liter_str = new string(stringBuf.current());
     BEGIN(INITIAL);
+    return STRING_L;
 }
 
 
     /* ---------- Идентификаторы ---------- */
 {ID} {
-    Console::Log(lineno(), "IDENTIFIER: " + toLower(yytext));
+    yylval.f_id = new string(toLower(yytext));
+    return ID;
 }
 
 \&{ID} {
-    Console::Log(lineno(), "IDENTIFIER: " + toLower(yytext + 1));
+    yylval.f_id = new string(toLower(yytext + 1));
+    return ID;
 }
 
 
