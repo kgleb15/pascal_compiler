@@ -4,6 +4,16 @@
     #include <string>
 }
 
+%{
+    #include <cstdio>
+
+    extern int yylex(void);
+
+    void yyerror(const char *msg) {
+        fprintf(stderr, "%s\n", msg);
+    }
+%}
+
 %union {
     long long       f_liter_int;
     double          f_liter_float;

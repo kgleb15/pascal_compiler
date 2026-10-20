@@ -13,6 +13,7 @@
     #include <cctype>   // для tolower / toupper
     #include "core/Console.h"
     #include "core/Buffer.h"
+    #include "parser.hpp"   // коды токенов и yylval
     #include <cstdlib>  // функции общего назначения
     #include <cerrno>   // для макроса errno
     using std::string;
