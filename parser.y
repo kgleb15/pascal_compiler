@@ -1,6 +1,7 @@
 	/* Подробные сообщения об ошибках: bison перечисляет ожидаемые токены */
 %define parse.error verbose
 
+    /* Стартовый символ */
 %start program
 
 	/* Терминальные символы */
@@ -119,11 +120,11 @@ type : not_array_type
 
 not_array_type : ordinal_type
                | STRING
-               | STRING '[' INT_L ']'
+               | STRING '[' INT_L ']' /* Короткая строка */
                ;
 
 /* Порядковые типы */
-ordinal_type : ID /* Integer, Char, Boolean ... */
+ordinal_type : ID /* Integer, Char, Boolean, Real ... */
              | range_bound RANGE range_bound  /* Диапазоны */
              | enum_type
              ;
@@ -167,7 +168,7 @@ array_base : ARRAY '[' range_list ']' OF /* скобки с диапазоном
            | ARRAY OF /* Динамические массивы */
            ;
 
-range_list : ordinal_type
+range_list : ordinal_type /* диапазоны, перечисления, пользовательские типы (например, тоже перечислений) */
            | range_list ',' ordinal_type
            ;
 
@@ -189,7 +190,7 @@ variable_declaration : id_list ':' type ';'
                      | id_list ':' type '=' init_value ';'
                      ;
 
-init_value : expr /* включает случай инициализации массива одним элементом */
+init_value : expr /* Начальное значение. Включает случай инициализации массива одним элементом */
            | '(' expr ',' expr_list ')' /* Инициализация массива (от двух элементов) */
            ;
 
@@ -207,7 +208,7 @@ component_list : field_declaration_list member_list
                | member_list
                ;
 
-field_declaration_list : id_list ':' type ';'
+field_declaration_list : id_list ':' type ';'   /* Список полей класса вне var, const ... */
                        | field_declaration_list id_list ':' type ';'
                        ;
 
@@ -302,7 +303,7 @@ stmt : expr ASSIGN expr
      | expr SUB_ASSIGN expr
      | expr DIV_ASSIGN expr
      | expr MUL_ASSIGN expr
-     | ID
+     | ID          /* Вызов функции без скобок */
      | expr '.' ID /* Вызов метода без скобок */
      | ID '(' expr_list_e ')' /* Вызов функции/процедуры */
      | expr '.' ID '(' expr_list_e ')' /* Вызов метода с параметрами */
@@ -375,7 +376,7 @@ expr : INT_L
      | REAL_L
      | STRING_L
      | NIL
-     | ID /* Вызов функции без скобок, просто идентификатор или, например True*/
+     | ID /* Вызов функции без скобок, просто идентификатор или, например True */
      | expr '=' expr
      | expr '<' expr
      | expr '>' expr
@@ -400,7 +401,7 @@ expr : INT_L
      | expr '[' expr_list ']' /* Доступ к эл-ту массива */
      | ID '(' expr_list_e ')' /* Вызов функции/процедуры */
      | expr '.' ID '(' expr_list_e ')'
-     | SELF
+     | SELF      /* Ссылка на текущий экземпляр класса */
      | INHERITED /* Вызов метода родительского класса */
      | INHERITED ID
      | INHERITED ID '(' expr_list_e ')'
@@ -413,6 +414,5 @@ expr_list : expr
 expr_list_e : %empty
             | expr_list
             ;
-
 
 %%
