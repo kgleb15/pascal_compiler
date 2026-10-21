@@ -109,8 +109,7 @@
 %left '+' '-' OR
 %left '*' '/' DIV MOD AND AS
 %right UNARY_MINUS UNARY_PLUS NOT
-%nonassoc '[' '('
-%left '.'
+%left '.' '['
 
 %%
 
@@ -133,7 +132,7 @@ declaration_part : declaration
 declaration : constant_declaration_list
             | type_declaration_list
             | variable_declaration_list
-            | subroutine_declaration
+            | subroutine_definition
             ;
 
 /* Объявления констант */
@@ -244,17 +243,14 @@ class_type : CLASS /* forward объявление */
            | CLASS component_list END
            ;
 
-component_list : field_definition_list member_list
-               | field_definition_list
+component_list : field_declaration_list member_list
+               | field_declaration_list
                | member_list
                ;
 
-field_definition_list : field_definition
-                      | field_definition_list field_definition
-                      ;
-
-field_definition : id_list ':' type ';'
-                 ;
+field_declaration_list : id_list ':' type ';'
+                       | field_declaration_list id_list ':' type ';'
+                       ;
 
 member_list : member
             | member_list member
@@ -281,8 +277,8 @@ property_specifiers : ID ID /* read GetX write SetX ... */
 
 
 /* Процедуры и функции */
-subroutine_declaration : subroutine_header ';' modifiers_list_e subroutine_block ';'
-                       ;
+subroutine_definition : subroutine_header ';' modifiers_list_e subroutine_block ';'
+                      ;
 
 subroutine_header : PROCEDURE subroutine_name formal_parameter_list_e
                   | FUNCTION subroutine_name formal_parameter_list_e ':' type_id
