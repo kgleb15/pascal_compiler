@@ -91,7 +91,7 @@ declaration_part : declaration
 declaration : constant_declaration_list
             | type_declaration_list
             | variable_declaration_list
-            | subroutine_declaration
+            | subroutine_definition
             ;
 
 /* Объявления констант */
@@ -236,8 +236,8 @@ property_specifiers : ID ID /* read GetX write SetX ... */
 
 
 /* Процедуры и функции */
-subroutine_declaration : subroutine_header ';' modifiers_list_e subroutine_block ';'
-                       ;
+subroutine_definition : subroutine_header ';' modifiers_list_e subroutine_block ';'
+                      ;
 
 subroutine_header : PROCEDURE subroutine_name formal_parameter_list_e
                   | FUNCTION subroutine_name formal_parameter_list_e ':' type_id
