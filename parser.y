@@ -202,17 +202,14 @@ class_type : CLASS /* forward объявление */
            | CLASS component_list END
            ;
 
-component_list : field_definition_list member_list
-               | field_definition_list
+component_list : field_declaration_list member_list
+               | field_declaration_list
                | member_list
                ;
 
-field_definition_list : field_definition
-                      | field_definition_list field_definition
-                      ;
-
-field_definition : id_list ':' type ';'
-                 ;
+field_declaration_list : id_list ':' type ';'
+                       | field_declaration_list id_list ':' type ';'
+                       ;
 
 member_list : member
             | member_list member
