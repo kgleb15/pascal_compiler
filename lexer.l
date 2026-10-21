@@ -76,7 +76,7 @@ function        { Console::Log(lineno(), "KEYWORD: function"); }
 goto            { Console::Log(lineno(), "KEYWORD: goto"); }
 if              { Console::Log(lineno(), "KEYWORD: if"); }
 inherited       { Console::Log(lineno(), "KEYWORD: inherited"); }
-label           { Console::Log(lineno(), "KEYWORD: label"); } /**/
+label           { Console::Log(lineno(), "KEYWORD: label"); }
 nil             { Console::Log(lineno(), "KEYWORD: nil"); }
 object          { Console::Log(lineno(), "KEYWORD: object"); }
 of              { Console::Log(lineno(), "KEYWORD: of"); }
@@ -175,26 +175,26 @@ xor             { Console::Log(lineno(), "OPERATOR: xor"); }
 }
 
 
-    /* ---------- Комментарии ---------- */
+    /* ---------- Однострочный комментарий ---------- */
 \/\/[^\n]* {
     Console::Log(lineno(), "COMMENT: " + string(yytext));
 }
 
-
+    /* ---------- Многострочный комментарий ---------- */
 \{ {
     commentDepth = 1;
     commentBuf.reset();
     commentBuf.setStartLine(lineno());
     isDirective = false;
-    BEGIN(COMMENT_ONE_CHAR);
+    BEGIN(COMMENT_ONE_CHAR); // комментарий с фигурным скобками
 }
 \{\$ {
     commentDepth = 1;
     commentBuf.reset();
     commentBuf.setStartLine(lineno());
-    commentBuf.append("$");
+    commentBuf.append("$"); // Добавляем начало директивы в буфер
     isDirective = true;
-    BEGIN(COMMENT_ONE_CHAR);
+    BEGIN(COMMENT_ONE_CHAR); // директиву рассматриваем как комментарий
 }
 <COMMENT_ONE_CHAR>[^{}]* {
     commentBuf.append(yytext);
@@ -205,7 +205,7 @@ xor             { Console::Log(lineno(), "OPERATOR: xor"); }
 }
 <COMMENT_ONE_CHAR>\} {
     commentDepth--;
-    if (commentDepth == 0) {
+    if (commentDepth == 0) { // комментарий завершен
         Console::Log(commentBuf.getStartLine(), string(isDirective ? "DIRECTIVE" : "COMMENT") + ": {" + commentBuf.current() + "}");
         BEGIN(INITIAL);
     } else {
@@ -222,7 +222,7 @@ xor             { Console::Log(lineno(), "OPERATOR: xor"); }
     commentDepth = 1;
     commentBuf.reset();
     commentBuf.setStartLine(lineno());
-    BEGIN(COMMENT_TWO_CHAR);
+    BEGIN(COMMENT_TWO_CHAR); // комментарий с круглыми скобками
 }
 <COMMENT_TWO_CHAR>[^*(]+ {
     commentBuf.append(yytext);
@@ -236,7 +236,7 @@ xor             { Console::Log(lineno(), "OPERATOR: xor"); }
 }
 <COMMENT_TWO_CHAR>\*\) {
     commentDepth--;
-    if (commentDepth == 0) {
+    if (commentDepth == 0) { // комментарий завершен
         Console::Log(commentBuf.getStartLine(), "COMMENT: (*" + commentBuf.current() + "*)");
         BEGIN(INITIAL);
     } else {
@@ -259,9 +259,10 @@ xor             { Console::Log(lineno(), "OPERATOR: xor"); }
     stringBuf.reset();
     stringBuf.setStartLine(lineno());
 
-    const char* numStart = yytext + 1;
+    const char* numStart = yytext + 1; // откуда начинается число
     int base = 10;
 
+    // Определяем основание числа
     if (yytext[1] == '$') {
         base = 16;
         numStart = yytext + 2;
@@ -285,10 +286,10 @@ xor             { Console::Log(lineno(), "OPERATOR: xor"); }
 
 
 <STRING>[^'\n]* {
-    stringBuf.append(yytext);
+    stringBuf.append(yytext); // все, кроме кавычек и переводов строки
 }
 <STRING>\'\' {
-    stringBuf.append("'");
+    stringBuf.append("'");  // экранирование кавычек
 }
 <STRING>\' {
     BEGIN(STRING_CONT);
@@ -307,8 +308,10 @@ xor             { Console::Log(lineno(), "OPERATOR: xor"); }
     BEGIN(STRING);
 }
 <STRING_CONT>{CONTROL_CODE} {
-    const char* numStart = yytext + 1;
+    const char* numStart = yytext + 1; // откуда начинается число
     int base = 10;
+
+    // Определяем основание числа
     if (yytext[1] == '$') {
         base = 16;
         numStart = yytext + 2;
@@ -338,10 +341,10 @@ xor             { Console::Log(lineno(), "OPERATOR: xor"); }
 
     /* ---------- Идентификаторы ---------- */
 {ID} {
-    Console::Log(lineno(), "IDENTIFIER: " + toLower(yytext));
+    Console::Log(lineno(), "IDENTIFIER: " + toLower(yytext));   // id всегда выводим в нижнем регистре
 }
 
-\&{ID} {
+\&{ID} { // id, совпадающий с ключевым словом
     Console::Log(lineno(), "IDENTIFIER: " + toLower(yytext + 1));
 }
 
@@ -378,16 +381,16 @@ string toLower(const string& s) {
 
 void logIntToken(int line, const char* kind, const char* lexeme, const char* digits, int base) {
     errno = 0;
-    long long v = strtoll(digits, nullptr, base);
-    if (errno == ERANGE)
+    long long value = strtoll(digits, nullptr, base);
+    if (errno == ERANGE)    // Если число вне диапазона
         Console::Error(line, string("integer literal is out of range: ") + lexeme);
-    Console::LogInt(line, kind, v);
+    Console::LogInt(line, kind, value);
 }
 
 void logRealToken(int line, const char* lexeme) {
     errno = 0;
-    double v = strtod(lexeme, nullptr);
+    double value = strtod(lexeme, nullptr);
     if (errno == ERANGE)
         Console::Error(line, string("real literal is out of range: ") + lexeme);
-    Console::LogReal(line, "REAL", v);
+    Console::LogReal(line, "REAL", value);
 }
