@@ -4,14 +4,30 @@ import pprint
 # ================================================================
 #   FUNCTIONS
 # ================================================================
+# ----------------------------------------------------------------
+#   UTILS
+# ----------------------------------------------------------------
+def find_nth(string, substr, n):
+    index = string.find(substr, n)
+    for i in range(n-1):
+        index = string.find(substr, index+1)
+    return index
+
+# ----------------------------------------------------------------
+#   NODES
+# ----------------------------------------------------------------
 def create_token(id, token_type, token_value):
     return {"id": id, "node_type": "token", "type": token_type, "value": token_value}
 
 def create_nterm(id, nterm_type, nodes):
     return {"id": id, "node_type": "nterm", "type": nterm_type, "nodes": nodes}
 
+# ----------------------------------------------------------------
+#   DOT-FORMAT
+# ----------------------------------------------------------------
 def print_parse_tree(root):
     print("digraph {")
+    print("\"SCRIPT VERSION: 0.0.1\"")
     print_parse_node(root)
     print("}")
 
@@ -56,10 +72,7 @@ while i < len(lines):
     if line.startswith("Shifting"):
         components = line.split(" ")
 
-        value_i = line.find(" ")
-        value_i = line.find(" ", value_i+1)
-        value_i = line.find(" ", value_i+1)
-
+        value_i = find_nth(line, " ", 3)
         value = line[value_i+2:]
         if value[-1] == ")":
             value = value[:-1]
@@ -73,8 +86,9 @@ while i < len(lines):
                 line = lines[i]
             value += "\n" + line[:-1]
 
-        stack.append(create_token(i, components[2], value))
-        i += 1
+        token_name = components[2]
+        stack.append(create_token(i, token_name, value))
+
     elif line.startswith("Reducing"):
         i += 1
         nterm_rule_size = 0
@@ -82,18 +96,23 @@ while i < len(lines):
             if is_nterm_reduce_string(lines[i]):
                 nterm_rule_size += 1
             i += 1
+
         components = lines[i].split(" ")
-        nterm = create_nterm(i, components[4], stack[-nterm_rule_size:])
-        stack = stack[:-nterm_rule_size]
+        nterm_name = components[4]
+        nterm_body = []
+        if nterm_rule_size != 0:
+            nterm_body = stack[-nterm_rule_size:]
+            stack = stack[:-nterm_rule_size]
+
+        nterm = create_nterm(i, nterm_name, nterm_body)
         stack.append(nterm)
-        i += 1
+
     elif line.startswith("syntax"):
         components = lines[i].split(" ")
         stack.append(create_token(i, f"UNEXPECTED {components[3][:-1]}, EXPECTING {components[5]}", ""))
         nterm = create_nterm(i+1, "\"SYNTAX ERROR IN PROGRAM\"", stack)
         stack = [nterm]
-        i += 1
-    else:
-        i += 1
+
+    i += 1
 
 print_parse_tree(stack[0])
