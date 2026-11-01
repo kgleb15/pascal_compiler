@@ -362,7 +362,7 @@ xor             { Console::Log(lineno(), "OPERATOR: xor"); }
     Console::Error(lineno(), "binary digits expected after '%'");
 }
 \& {
-    Console::Error(lineno(), "octal digits or identifier expected after '&'");
+    Console::Error(lineno(), "octal digits expected after '&'");
 }
 <*>. {
     Console::Error(lineno(), "UNKNOWN CHARACTER: " + string(yytext));
@@ -390,7 +390,7 @@ void logIntToken(int line, const char* kind, const char* lexeme, const char* dig
 void logRealToken(int line, const char* lexeme) {
     errno = 0;
     double value = strtod(lexeme, nullptr);
-    if (errno == ERANGE)
+    if (errno == ERANGE)    // Если число вне диапазона
         Console::Error(line, string("real literal is out of range: ") + lexeme);
     Console::LogReal(line, "REAL", value);
 }

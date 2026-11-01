@@ -122,7 +122,7 @@ not_array_type : ordinal_type
                ;
 
 /* Порядковые типы */
-ordinal_type : ID /* Integer, Char, Boolean, Real ... */
+ordinal_type : ID /* Integer, Char, Boolean ... */
              | range_bound RANGE range_bound  /* Диапазоны */
              | enum_type
              ;
@@ -139,7 +139,7 @@ range_bound : INT_L
             | range_bound AND range_bound
             | range_bound OR range_bound
             | NOT range_bound
-            | range_bound '.' ID
+            | range_bound '.' ID    // элемент перечисления / константа класса
             ;
 
 /* Перечисления */
@@ -295,11 +295,11 @@ stmt : expr ASSIGN expr
      | expr SUB_ASSIGN expr
      | expr DIV_ASSIGN expr
      | expr MUL_ASSIGN expr
-     | ID          /* Вызов функции без скобок */
-     | expr '.' ID /* Вызов метода без скобок */
+     | ID                     /* Вызов функции без скобок */
+     | expr '.' ID            /* Вызов метода без скобок */
      | ID '(' expr_list_e ')' /* Вызов функции/процедуры */
      | expr '.' ID '(' expr_list_e ')' /* Вызов метода с параметрами */
-     | INHERITED /* Вызов метода родительского класса */
+     | INHERITED              /* Вызов метода родительского класса */
      | INHERITED ID
      | INHERITED ID '(' expr_list_e ')'
      | compound_statement
@@ -368,7 +368,7 @@ expr : INT_L
      | REAL_L
      | STRING_L
      | NIL
-     | ID /* Вызов функции без скобок, просто идентификатор или, например True */
+     | ID /* Вызов функции без скобок, просто идентификатор или, например, True */
      | expr '=' expr
      | expr '<' expr
      | expr '>' expr
@@ -389,12 +389,12 @@ expr : INT_L
      | '+' expr %prec UNARY_PLUS
      | NOT expr
      | '(' expr ')'
-     | expr '.' ID /* Вызов метода без скобок */
+     | expr '.' ID      /* Вызов метода без скобок */
      | expr '[' expr_list ']' /* Доступ к эл-ту массива */
      | ID '(' expr_list_e ')' /* Вызов функции/процедуры */
      | expr '.' ID '(' expr_list_e ')'
-     | SELF      /* Ссылка на текущий экземпляр класса */
-     | INHERITED /* Вызов метода родительского класса */
+     | SELF                   /* Ссылка на текущий экземпляр класса */
+     | INHERITED              /* Вызов метода родительского класса */
      | INHERITED ID
      | INHERITED ID '(' expr_list_e ')'
      ;
