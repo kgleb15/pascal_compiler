@@ -166,8 +166,8 @@ array_base : ARRAY '[' range_list ']' OF /* скобки с диапазоном
            | ARRAY OF /* Динамические массивы */
            ;
 
-range_list : ordinal_type /* диапазоны, перечисления, пользовательские типы (например, тоже перечислений) */
-           | range_list ',' ordinal_type
+range_list : range_bound RANGE range_bound
+           | range_list ',' range_bound RANGE range_bound
            ;
 
 /* Списки идентификаторов */
