@@ -273,7 +273,6 @@ out_parameter : OUT id_list ':' parameter_type
               ;
 
 const_parameter : CONST big_id_list ':' parameter_type
-                | CONST big_id_list
                 | CONST ID ':' type_id '=' expr /* Присваивать нач. значение можно только одному параметру */
                 | CONST ID ':' parameter_type
                 ;
