@@ -47,7 +47,6 @@
 %token CLASS
 %token OTHERWISE
 %token OUT
-%token PROPERTY
 
 	/* Литераты и идентификаторы */
 %token ID
@@ -219,7 +218,6 @@ member : variable_declaration_list
        | constant_declaration_list
        | type_declaration_list
        | subroutine_header ';' modifiers_list_e /* Определение метода */
-       | PROPERTY ID ':' type_id property_specifiers ';' /* Определение свойства --- Название : тип ... */
        ;
 
 modifiers_list_e : %empty
@@ -229,10 +227,6 @@ modifiers_list_e : %empty
 modifiers_list : ID ';' /* abstract, virtual, dynamic ... */
                | modifiers_list ID ';'
                ;
-
-property_specifiers : ID ID /* read GetX write SetX ... */
-                    | property_specifiers ID ID
-                    ;
 
 
 /* Процедуры и функции */
