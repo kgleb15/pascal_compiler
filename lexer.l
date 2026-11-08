@@ -157,22 +157,27 @@ xor             { return XOR; }
         /* ---------- Числовые константы ---------- */
 \${HEX_DIGIT}+ {
     logIntToken(lineno(), "HEX_INT", yytext, yytext + 1, 16);
+    return INT_L;
 }
 
 \&{OCT_DIGIT}+ {
     logIntToken(lineno(), "OCT_INT", yytext, yytext + 1, 8);
+    return INT_L;
 }
 
 \%{BIN_DIGIT}+ {
     logIntToken(lineno(), "BIN_INT", yytext, yytext + 1, 2);
+    return INT_L;
 }
 
 {REAL} {
     logRealToken(lineno(), yytext);
+    return REAL_L;
 }
 
 {DIGIT}+ {
     logIntToken(lineno(), "INTEGER", yytext, yytext, 10);
+    return INT_L;
 }
 
 
@@ -385,7 +390,7 @@ void logIntToken(int line, const char* kind, const char* lexeme, const char* dig
     long long value = strtoll(digits, nullptr, base);
     if (errno == ERANGE)    // Если число вне диапазона
         Console::Error(line, string("integer literal is out of range: ") + lexeme);
-    Console::LogInt(line, kind, value);
+    yylval.f_liter_int = value;
 }
 
 void logRealToken(int line, const char* lexeme) {
@@ -393,5 +398,5 @@ void logRealToken(int line, const char* lexeme) {
     double value = strtod(lexeme, nullptr);
     if (errno == ERANGE)    // Если число вне диапазона
         Console::Error(line, string("real literal is out of range: ") + lexeme);
-    Console::LogReal(line, "REAL", value);
+    yylval.f_liter_float = value;
 }
