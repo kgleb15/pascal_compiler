@@ -6,7 +6,7 @@
 
 	/* Терминальные символы */
 %token ARRAY
-%token BEGIN
+%token BEGIN_KW
 %token CASE
 %token CONST
 %token CONSTRUCTOR
@@ -356,7 +356,7 @@ opt_semicolon : %empty
               ;
 
 /* Составной оператор и список операторов */
-compound_statement : BEGIN stmt_list END
+compound_statement : BEGIN_KW stmt_list END
                    ;
 
 stmt_list : stmt
