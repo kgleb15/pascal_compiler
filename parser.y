@@ -11,6 +11,22 @@
     std::string*    f_id;
 }
 
+%printer {
+    fprintf(yyo, "%lld", $$);
+} <f_liter_int>
+
+%printer {
+    fprintf(yyo, "%g", $$);
+} <f_liter_float>
+
+%printer {
+    fprintf(yyo, "\"%s\"", $$->c_str());
+} <f_liter_str>
+
+%printer {
+    fprintf(yyo, "\"%s\"", $$->c_str());
+} <f_id>
+
 	/* Подробные сообщения об ошибках: bison перечисляет ожидаемые токены */
 %define parse.error verbose
 
