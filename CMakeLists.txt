@@ -31,7 +31,7 @@ FLEX_TARGET(PascalLexer
 
 ADD_FLEX_BISON_DEPENDENCY(PascalLexer PascalParser)
 
-add_executable(pascal_lexer
+add_executable(pascal_compiler
         main.cpp
         ${FLEX_PascalLexer_OUTPUTS}
         ${BISON_PascalParser_OUTPUTS}
@@ -41,7 +41,7 @@ add_executable(pascal_lexer
         core/Buffer.h
 )
 
-target_include_directories(pascal_lexer PRIVATE
+target_include_directories(pascal_compiler PRIVATE
         ${CMAKE_SOURCE_DIR}
         ${CMAKE_BINARY_DIR}
         ${FLEXLEXER_INCLUDE_DIR}
