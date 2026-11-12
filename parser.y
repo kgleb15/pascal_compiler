@@ -343,7 +343,6 @@ stmt : expr ASSIGN expr
      | repeat_stmt
      | while_stmt
      | if_stmt
-     | case_stmt
      | %empty
      ;
 
@@ -363,33 +362,6 @@ while_stmt : WHILE expr DO stmt
 if_stmt : IF expr THEN stmt
         | IF expr THEN stmt ELSE stmt
         ;
-
-/* case...of */
-case_label : STRING_L
-           | ID
-           | INT_L
-           | range_bound RANGE range_bound
-           ;
-
-case_label_list : case_label
-                | case_label_list ',' case_label
-                ;
-
-case_variant : case_label_list ':' stmt
-             ;
-
-case_variant_list : case_variant
-                  | case_variant_list ';' case_variant
-                  ;
-
-case_stmt : CASE expr OF case_variant_list opt_semicolon END
-          | CASE expr OF case_variant_list opt_semicolon ELSE stmt_list END
-          | CASE expr OF case_variant_list opt_semicolon OTHERWISE stmt_list END
-          ;
-
-opt_semicolon : %empty
-              | ';'
-              ;
 
 /* Составной оператор и список операторов */
 compound_statement : BEGIN_KW stmt_list END
