@@ -73,3 +73,28 @@ ExprNode* ExprNode::CreateSelfNode() {
     return result;
 }
 
+ExprNode* ExprNode::CreateMemberNode(ExprNode* object, const std::string& name) {
+    ExprNode* result = new ExprNode();
+    result->object = object;
+    result->nodeType = ENUM_EXPR_MEMBER;
+    result->name = name;
+    return result;
+}
+
+ExprNode* ExprNode::CreateIndexNode(ExprNode* arrayBase, std::vector<ExprNode*> arguments) {
+    ExprNode* result = new ExprNode();
+    result->arrayBase = arrayBase;
+    result->nodeType = ENUM_EXPR_INDEX;
+    result->arguments = std::move(arguments);
+    return result;
+}
+
+ExprNode* ExprNode::CreateMethodCallNode(ExprNode* object, std::string& name, std::vector<ExprNode*> arguments) {
+    ExprNode* result = new ExprNode();
+    result->object = object;
+    result->nodeType = ENUM_EXPR_METHOD_CALL;
+    result->name = name;
+    result->arguments = std::move(arguments);
+    return result;
+}
+

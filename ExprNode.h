@@ -51,6 +51,8 @@ protected:
     ExprNode* rightOperand;
     ExprNode* operand;
     std::vector<ExprNode*> arguments;
+    ExprNode* object; // для полей и методов класса (сам объект)
+    ExprNode* arrayBase;  // для массивов
 
     static ExprNode* CreateIntNode(long long intValue);
     static ExprNode* CreateRealNode(double realValue);
@@ -62,6 +64,9 @@ protected:
     static ExprNode* CreateCallNode(const std::string& name, std::vector<ExprNode*> arguments);
     static ExprNode* CreateInheritedNode(const std::string& name, std::vector<ExprNode*> arguments);
     static ExprNode* CreateSelfNode();
+    static ExprNode* CreateMemberNode(ExprNode* object, const std::string& name);
+    static ExprNode* CreateIndexNode(ExprNode* arrayBase, std::vector<ExprNode*> arguments);
+    static ExprNode* CreateMethodCallNode(ExprNode* object, std::string& name, std::vector<ExprNode*> arguments);
 };
 
 
