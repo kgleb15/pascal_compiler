@@ -39,6 +39,7 @@ add_executable(pascal_compiler
         core/Console.h
         core/Buffer.cpp
         core/Buffer.h
+        ExprNode.h
 )
 
 target_include_directories(pascal_compiler PRIVATE
