@@ -1,5 +1,7 @@
 #ifndef PASCAL_COMPILER_EXPRNODE_H
 #define PASCAL_COMPILER_EXPRNODE_H
+#include <string>
+#include <vector>
 
 
 enum ExprNodeType {
@@ -33,6 +35,33 @@ enum ExprNodeType {
     ENUM_EXPR_METHOD_CALL,
     ENUM_EXPR_INHERITED,
     ENUM_EXPR_SELF,
+};
+
+class ExprNode {
+protected:
+    int id;
+    ExprNodeType nodeType;
+
+    long long intValue;
+    double realValue;
+    std::string stringValue;
+    std::string name;
+
+    ExprNode* leftOperand;
+    ExprNode* rightOperand;
+    ExprNode* operand;
+    std::vector<ExprNode*> arguments;
+
+    static ExprNode* CreateIntNode(long long intValue);
+    static ExprNode* CreateRealNode(double realValue);
+    static ExprNode* CreateStringNode(const std::string& stringValue);
+    static ExprNode* CreateNilNode();
+    static ExprNode* CreateIdNode(const std::string& name);
+    static ExprNode* CreateBinaryNode(ExprNodeType nodeType, ExprNode* leftOperand, ExprNode* rightOperand);
+    static ExprNode* CreateUnaryNode(ExprNodeType nodeType, ExprNode* operand);
+    static ExprNode* CreateCallNode(const std::string& name, std::vector<ExprNode*> arguments);
+    static ExprNode* CreateInheritedNode(const std::string& name, std::vector<ExprNode*> arguments);
+    static ExprNode* CreateSelfNode();
 };
 
 
