@@ -71,4 +71,10 @@ StmtNode* StmtNode::CreateIfNode(ExprNode* condition, StmtNode* thenBranch, Stmt
     return result;
 }
 
+StmtNode* StmtNode::CreateEmptyNode() {
+    StmtNode* result = new StmtNode();
+    result->nodeType = ENUM_STMT_EMPTY;
+    return result;
+}
+
 

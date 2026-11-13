@@ -16,7 +16,8 @@ enum StmtNodeType {
     ENUM_STMT_FOR_IN,
     ENUM_STMT_REPEAT,
     ENUM_STMT_WHILE,
-    ENUM_STMT_IF
+    ENUM_STMT_IF,
+    ENUM_STMT_EMPTY
 };
 
 class StmtNode {
@@ -32,7 +33,7 @@ protected:
 
     std::string loopVariable; // переменная цикла
     ExprNode* startExpr;
-    ExprNode* endExpr;
+    ExprNode* endExpr; 
     ExprNode* collection; // Для for in
 
     ExprNode* condition;
@@ -50,6 +51,7 @@ public:
     static StmtNode* CreateRepeatNode(StmtNode* loopBody, ExprNode* condition);
     static StmtNode* CreateWhileNode(ExprNode* condition, StmtNode* loopBody);
     static StmtNode* CreateIfNode(ExprNode* condition, StmtNode* thenBranch, StmtNode* elseBranch);
+    static StmtNode* CreateEmptyNode();
 };
 
 #endif //PASCAL_COMPILER_STMTNODE_H
