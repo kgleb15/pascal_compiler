@@ -1,0 +1,17 @@
+#ifndef PASCAL_COMPILER_TYPENODE_H
+#define PASCAL_COMPILER_TYPENODE_H
+#include <string>
+
+#include "ExprNode.h"
+
+
+enum TypeNodeType {
+    ENUM_TYPE_NAME,
+    ENUM_TYPE_STRING,
+    ENUM_TYPE_RANGE,
+    ENUM_TYPE_ENUM,
+    ENUM_TYPE_ENUM_ELEMENT,
+    ENUM_TYPE_ARRAY
+};
+
+#endif //PASCAL_COMPILER_TYPENODE_H
