@@ -14,4 +14,19 @@ enum TypeNodeType {
     ENUM_TYPE_ARRAY
 };
 
+class TypeNode {
+protected:
+    int id;
+    TypeNodeType nodeType;
+
+    std::string name;
+    ExprNode* rangeLow = nullptr;
+    ExprNode* rangeHigh = nullptr;
+    std::vector<TypeNode*> enumElements;
+    ExprNode* enumElement = nullptr;
+    std::vector<TypeNode*> arrayRanges;
+    TypeNode* arrayElementType = nullptr;
+};
+
+
 #endif //PASCAL_COMPILER_TYPENODE_H
