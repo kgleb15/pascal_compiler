@@ -31,6 +31,10 @@ public:
     static TypeNode* CreateNameType(const std::string& name);
     static TypeNode* CreateStringType();
     static TypeNode* CreateRangeType(ExprNode* rangeLow, ExprNode* rangeHigh);
+
+    static TypeNode* CreateEnumType(TypeNode* firstEnumElement);
+    static TypeNode* CreateEnumElement(const std::string& name, ExprNode* enumElement);
+    static TypeNode* AddToEnumType(TypeNode* enumType, TypeNode* enumElement);
 };
 
 
