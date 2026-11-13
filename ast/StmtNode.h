@@ -1,0 +1,21 @@
+#ifndef PASCAL_COMPILER_STMTNODE_H
+#define PASCAL_COMPILER_STMTNODE_H
+#include "ExprNode.h"
+
+
+enum StmtNodeType {
+    ENUM_STMT_ASSIGN,
+    ENUM_STMT_ADD_ASSIGN,
+    ENUM_STMT_SUB_ASSIGN,
+    ENUM_STMT_MUL_ASSIGN,
+    ENUM_STMT_DIV_ASSIGN,
+    ENUM_STMT_CALL,         // вызовы процедуры, метода, inherited
+    ENUM_STMT_LIST,
+    ENUM_STMT_FOR_TO,
+    ENUM_STMT_FOR_DOWNTO,
+    ENUM_STMT_FOR_IN,
+    ENUM_STMT_REPEAT,
+    ENUM_STMT_WHILE,
+    ENUM_STMT_IF
+};
+#endif //PASCAL_COMPILER_STMTNODE_H

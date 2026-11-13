@@ -41,6 +41,7 @@ add_executable(pascal_compiler
         core/Buffer.h
         ast/ExprNode.h
         ast/ExprNode.cpp
+        ast/StmtNode.h
 )
 
 target_include_directories(pascal_compiler PRIVATE
