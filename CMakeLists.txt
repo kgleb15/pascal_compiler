@@ -46,6 +46,8 @@ add_executable(pascal_compiler
         ast/NodeId.h
         ast/TypeNode.h
         ast/TypeNode.cpp
+        ast/DeclNode.h
+        ast/DeclNode.cpp
 )
 
 target_include_directories(pascal_compiler PRIVATE
