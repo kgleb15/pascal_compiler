@@ -21,11 +21,11 @@ enum ExprNodeType {
     ENUM_EXPR_ADD,
     ENUM_EXPR_SUB,
     ENUM_EXPR_MUL,
+    ENUM_EXPR_DIVIDE, // Обычное деление
     ENUM_EXPR_DIV,
     ENUM_EXPR_MOD,
     ENUM_EXPR_OR,
     ENUM_EXPR_AND,
-    ENUM_EXPR_XOR,
     ENUM_EXPR_NOT,
     ENUM_EXPR_UNARY_MINUS,
     ENUM_EXPR_UNARY_PLUS,
