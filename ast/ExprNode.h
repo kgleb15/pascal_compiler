@@ -3,6 +3,8 @@
 #include <string>
 #include <vector>
 
+#include "NodeId.h"
+
 
 enum ExprNodeType {
     ENUM_EXPR_INT,
@@ -56,6 +58,10 @@ protected:
     ExprNode* arrayBase;  // для массивов
 
     std::vector<ExprNode*> list_elements; // Для expr_list
+
+    ExprNode() {
+        id = NextNodeId();
+    }
 
 public:
     static ExprNode* CreateIntNode(long long intValue);

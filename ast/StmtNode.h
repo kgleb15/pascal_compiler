@@ -1,6 +1,7 @@
 #ifndef PASCAL_COMPILER_STMTNODE_H
 #define PASCAL_COMPILER_STMTNODE_H
 #include "ExprNode.h"
+#include "NodeId.h"
 
 
 enum StmtNodeType {
@@ -33,13 +34,17 @@ protected:
 
     std::string loopVariable; // переменная цикла
     ExprNode* startExpr;
-    ExprNode* endExpr; 
+    ExprNode* endExpr;
     ExprNode* collection; // Для for in
 
     ExprNode* condition;
     StmtNode* loopBody;
     StmtNode* thenBranch;
     StmtNode* elseBranch;
+
+    StmtNode() {
+        id = NextNodeId();
+    }
 
 public:
     static StmtNode* CreateAssignNode(StmtNodeType nodeType, ExprNode* target, ExprNode* value);

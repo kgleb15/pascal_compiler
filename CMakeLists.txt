@@ -43,6 +43,7 @@ add_executable(pascal_compiler
         ast/ExprNode.cpp
         ast/StmtNode.h
         ast/StmtNode.cpp
+        ast/NodeId.h
 )
 
 target_include_directories(pascal_compiler PRIVATE
