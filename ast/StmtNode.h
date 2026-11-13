@@ -22,7 +22,7 @@ enum StmtNodeType {
 class StmtNode {
 protected:
     int id;
-    ExprNodeType nodeType;
+    StmtNodeType nodeType;
 
     ExprNode* target; // Левая часть присваивания
     ExprNode* value;  // Правая часть присваивания
