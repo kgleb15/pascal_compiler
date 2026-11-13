@@ -35,6 +35,7 @@ enum ExprNodeType {
     ENUM_EXPR_METHOD_CALL,
     ENUM_EXPR_INHERITED,
     ENUM_EXPR_SELF,
+    ENUM_EXPR_LIST
 };
 
 class ExprNode {
@@ -54,6 +55,8 @@ protected:
     ExprNode* object; // для полей и методов класса (сам объект)
     ExprNode* arrayBase;  // для массивов
 
+    std::vector<ExprNode*> list_elements; // Для expr_list
+
 public:
     static ExprNode* CreateIntNode(long long intValue);
     static ExprNode* CreateRealNode(double realValue);
@@ -68,6 +71,9 @@ public:
     static ExprNode* CreateMemberNode(ExprNode* object, const std::string& name);
     static ExprNode* CreateIndexNode(ExprNode* arrayBase, std::vector<ExprNode*> arguments);
     static ExprNode* CreateMethodCallNode(ExprNode* object, const std::string& name, std::vector<ExprNode*> arguments);
+    static ExprNode* CreateExprList(ExprNode* firstElement);
+    static ExprNode* CreateEmptyExprList();
+    static ExprNode* AddToExprList(ExprNode* list, ExprNode* element);
 };
 
 

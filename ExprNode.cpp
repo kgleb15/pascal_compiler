@@ -98,3 +98,21 @@ ExprNode* ExprNode::CreateMethodCallNode(ExprNode* object, const std::string& na
     return result;
 }
 
+ExprNode* ExprNode::CreateExprList(ExprNode* firstElement) {
+    ExprNode* result = new ExprNode();
+    result->nodeType = ENUM_EXPR_LIST;
+    result->list_elements.push_back(firstElement);
+    return result;
+}
+
+ExprNode* ExprNode::CreateEmptyExprList() {
+    ExprNode* result = new ExprNode();
+    result->nodeType = ENUM_EXPR_LIST;
+    return result;
+}
+
+ExprNode* ExprNode::AddToExprList(ExprNode* list, ExprNode* element) {
+    list->list_elements.push_back(element);
+    return list;
+}
+
