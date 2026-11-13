@@ -26,6 +26,11 @@ protected:
     ExprNode* enumElement = nullptr;
     std::vector<TypeNode*> arrayRanges;
     TypeNode* arrayElementType = nullptr;
+
+public:
+    static TypeNode* CreateNameType(const std::string& name);
+    static TypeNode* CreateStringType();
+    static TypeNode* CreateRangeType(ExprNode* rangeLow, ExprNode* rangeHigh);
 };
 
 
