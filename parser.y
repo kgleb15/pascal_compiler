@@ -3,6 +3,7 @@
 %code requires {
     #include <string>
     #include "ast/ExprNode.h"
+    #include "ast/StmtNode.h"
 }
 
 %{
@@ -21,9 +22,11 @@
     std::string*    f_liter_str;
     std::string*    f_id;
     ExprNode*       f_expr;
+    StmtNode*       f_stmt;
 }
 
 %type <f_expr> expr expr_list expr_list_e
+%type <f_stmt> stmt for_stmt repeat_stmt while_stmt if_stmt compound_statement stmt_list
 
 %printer {
     fprintf(yyo, "%lld", $$);
