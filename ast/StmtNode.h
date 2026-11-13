@@ -26,21 +26,21 @@ protected:
     int id;
     StmtNodeType nodeType;
 
-    ExprNode* target; // Левая часть присваивания
-    ExprNode* value;  // Правая часть присваивания
-    ExprNode* callExpr;
+    ExprNode* target = nullptr; // Левая часть присваивания
+    ExprNode* value = nullptr;  // Правая часть присваивания
+    ExprNode* callExpr = nullptr;
 
     std::vector<StmtNode*> stmtList;
 
     std::string loopVariable; // переменная цикла
-    ExprNode* startExpr;
-    ExprNode* endExpr;
-    ExprNode* collection; // Для for in
+    ExprNode* startExpr = nullptr;
+    ExprNode* endExpr = nullptr;
+    ExprNode* collection = nullptr; // Для for in
 
-    ExprNode* condition;
-    StmtNode* loopBody;
-    StmtNode* thenBranch;
-    StmtNode* elseBranch;
+    ExprNode* condition = nullptr;
+    StmtNode* loopBody = nullptr;
+    StmtNode* thenBranch = nullptr;
+    StmtNode* elseBranch = nullptr;
 
     StmtNode() {
         id = NextNodeId();

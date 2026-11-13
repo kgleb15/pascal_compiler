@@ -45,17 +45,17 @@ protected:
     int id;
     ExprNodeType nodeType;
 
-    long long intValue;
-    double realValue;
+    long long intValue = 0;
+    double realValue = 0.0;
     std::string stringValue;
     std::string name;
 
-    ExprNode* leftOperand;
-    ExprNode* rightOperand;
-    ExprNode* operand;
+    ExprNode* leftOperand = nullptr;
+    ExprNode* rightOperand = nullptr;
+    ExprNode* operand = nullptr;
     std::vector<ExprNode*> arguments;
-    ExprNode* object; // для полей и методов класса (сам объект)
-    ExprNode* arrayBase;  // для массивов
+    ExprNode* object = nullptr; // для полей и методов класса (сам объект)
+    ExprNode* arrayBase = nullptr;  // для массивов
 
     std::vector<ExprNode*> list_elements; // Для expr_list
 
