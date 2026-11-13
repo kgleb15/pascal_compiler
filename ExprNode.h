@@ -54,6 +54,7 @@ protected:
     ExprNode* object; // для полей и методов класса (сам объект)
     ExprNode* arrayBase;  // для массивов
 
+public:
     static ExprNode* CreateIntNode(long long intValue);
     static ExprNode* CreateRealNode(double realValue);
     static ExprNode* CreateStringNode(const std::string& stringValue);
