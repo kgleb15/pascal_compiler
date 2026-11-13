@@ -2,6 +2,7 @@
 
 %code requires {
     #include <string>
+    #include "ast/ExprNode.h"
 }
 
 %{
@@ -19,7 +20,10 @@
     double          f_liter_float;
     std::string*    f_liter_str;
     std::string*    f_id;
+    ExprNode*       f_expr;
 }
+
+%type <f_expr> expr expr_list expr_list_e
 
 %printer {
     fprintf(yyo, "%lld", $$);
