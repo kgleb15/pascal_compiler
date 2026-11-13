@@ -18,4 +18,38 @@ enum StmtNodeType {
     ENUM_STMT_WHILE,
     ENUM_STMT_IF
 };
+
+class StmtNode {
+protected:
+    int id;
+    ExprNodeType nodeType;
+
+    ExprNode* target; // Левая часть присваивания
+    ExprNode* value;  // Правая часть присваивания
+    ExprNode* callExpr;
+
+    std::vector<StmtNode*> stmtList;
+
+    std::string loopVariable; // переменная цикла
+    ExprNode* startExpr;
+    ExprNode* endExpr;
+    ExprNode* collection; // Для for in
+
+    ExprNode* condition;
+    StmtNode* loopBody;
+    StmtNode* thenBranch;
+    StmtNode* elseBranch;
+
+public:
+    static StmtNode* CreateAssignNode(StmtNodeType nodeType, ExprNode* target, ExprNode* value);
+    static StmtNode* CreateCallNode(ExprNode* callExpr);
+    static StmtNode* CreateStmtList(StmtNode* first);
+    static StmtNode* AddToStmtList(StmtNode* list, StmtNode* stmt);
+    static StmtNode* CreateForNode(StmtNodeType nodeType, const std::string& loopVariable, ExprNode* startExpr, ExprNode* endExpr, ExprNode* loopBody);
+    static StmtNode* CreateForInNode(StmtNodeType nodeType, const std::string& loopVariable, ExprNode* collection, ExprNode* loopBody);
+    static StmtNode* CreateRepeatNode(StmtNode* loopBody, StmtNode* condition);
+    static StmtNode* CreateWhileNode(ExprNode* condition, StmtNode* loopBody);
+    static StmtNode* CreateIfNode(ExprNode* condition, StmtNode* thenBranch, StmtNode* elseBranch);
+};
+
 #endif //PASCAL_COMPILER_STMTNODE_H
