@@ -27,6 +27,10 @@ protected:
     std::vector<TypeNode*> arrayRanges;
     TypeNode* arrayElementType = nullptr;
 
+    TypeNode() {
+        id = NextNodeId();
+    }
+
 public:
     static TypeNode* CreateNameType(const std::string& name);
     static TypeNode* CreateStringType();
