@@ -45,9 +45,9 @@ public:
     static StmtNode* CreateCallNode(ExprNode* callExpr);
     static StmtNode* CreateStmtList(StmtNode* first);
     static StmtNode* AddToStmtList(StmtNode* list, StmtNode* stmt);
-    static StmtNode* CreateForNode(StmtNodeType nodeType, const std::string& loopVariable, ExprNode* startExpr, ExprNode* endExpr, ExprNode* loopBody);
-    static StmtNode* CreateForInNode(StmtNodeType nodeType, const std::string& loopVariable, ExprNode* collection, ExprNode* loopBody);
-    static StmtNode* CreateRepeatNode(StmtNode* loopBody, StmtNode* condition);
+    static StmtNode* CreateForNode(StmtNodeType nodeType, const std::string& loopVariable, ExprNode* startExpr, ExprNode* endExpr, StmtNode* loopBody);
+    static StmtNode* CreateForInNode(const std::string& loopVariable, ExprNode* collection, StmtNode* loopBody);
+    static StmtNode* CreateRepeatNode(StmtNode* loopBody, ExprNode* condition);
     static StmtNode* CreateWhileNode(ExprNode* condition, StmtNode* loopBody);
     static StmtNode* CreateIfNode(ExprNode* condition, StmtNode* thenBranch, StmtNode* elseBranch);
 };
