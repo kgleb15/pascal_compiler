@@ -67,7 +67,7 @@ public:
     static ExprNode* CreateSelfNode();
     static ExprNode* CreateMemberNode(ExprNode* object, const std::string& name);
     static ExprNode* CreateIndexNode(ExprNode* arrayBase, std::vector<ExprNode*> arguments);
-    static ExprNode* CreateMethodCallNode(ExprNode* object, std::string& name, std::vector<ExprNode*> arguments);
+    static ExprNode* CreateMethodCallNode(ExprNode* object, const std::string& name, std::vector<ExprNode*> arguments);
 };
 
 

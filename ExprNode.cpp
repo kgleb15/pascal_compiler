@@ -89,7 +89,7 @@ ExprNode* ExprNode::CreateIndexNode(ExprNode* arrayBase, std::vector<ExprNode*> 
     return result;
 }
 
-ExprNode* ExprNode::CreateMethodCallNode(ExprNode* object, std::string& name, std::vector<ExprNode*> arguments) {
+ExprNode* ExprNode::CreateMethodCallNode(ExprNode* object, const std::string& name, std::vector<ExprNode*> arguments) {
     ExprNode* result = new ExprNode();
     result->object = object;
     result->nodeType = ENUM_EXPR_METHOD_CALL;
