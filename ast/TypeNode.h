@@ -35,6 +35,12 @@ public:
     static TypeNode* CreateEnumType(TypeNode* firstEnumElement);
     static TypeNode* CreateEnumElement(const std::string& name, ExprNode* enumElement);
     static TypeNode* AddToEnumType(TypeNode* enumType, TypeNode* enumElement);
+
+    static TypeNode* CreateStaticArrayType(ExprNode* lowRange, ExprNode* highRange);
+    static TypeNode* AddArrayRange(TypeNode* arrayType, ExprNode* rangeLow, ExprNode* rangeHigh);
+    static TypeNode* CreateDynamicArrayType();
+    static TypeNode* AddArrayBase(TypeNode* outerArray, TypeNode* innerArray);
+    static TypeNode* SetArrayElementType(TypeNode* array, TypeNode* elementType);
 };
 
 
