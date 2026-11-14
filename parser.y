@@ -27,13 +27,22 @@
     StmtNode*       f_stmt;
     TypeNode*       f_type;
     DeclNode*       f_decl;
+    BlockNode*      f_block;
+    ParamNode*      f_param;
+    ProgramNode*    f_program;
+    SubroutineNode* f_subroutine;
 }
 
 %type <f_expr> expr expr_list expr_list_e range_bound init_value
 %type <f_stmt> stmt for_stmt repeat_stmt while_stmt if_stmt compound_statement stmt_list
-%type <f_type> type not_array_type ordinal_type enum_type enum_element enum_element_list array_type array_bases array_base range_list
+%type <f_type> type not_array_type ordinal_type enum_type enum_element enum_element_list array_type array_bases array_base range_list type_id parameter_type class_type
 %type <f_decl> declaration declaration_part declaration_part_e constant_declaration constant_declaration_list
 %type <f_decl> type_declaration_list type_declaration variable_declaration_list variable_declaration id_list
+%type <f_program> program
+%type <f_block> block subroutine_block
+%type <f_param> parameter_declarations parameter_declaration value_parameter var_parameter const_parameter formal_parameter_list_e
+%type <f_subroutine> subroutine_header
+%type <f_decl> subroutine_definition subroutine_name big_id_list modifiers_list modifiers_list_e component_list field_declaration_list member_list member
 
 %printer {
     fprintf(yyo, "%lld", $$);
