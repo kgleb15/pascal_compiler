@@ -18,6 +18,10 @@
     }
 %}
 
+%code {
+    ProgramNode* programRoot = nullptr;
+}
+
 %union {
     long long       LiterIntUnion;
     double          LiterRealUnion;
