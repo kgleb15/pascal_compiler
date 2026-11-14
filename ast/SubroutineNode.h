@@ -1,0 +1,38 @@
+#ifndef PASCAL_COMPILER_SUBROUTINENODE_H
+#define PASCAL_COMPILER_SUBROUTINENODE_H
+#include <string>
+#include <utility>
+#include <vector>
+
+#include "BlockNode.h"
+#include "ParamNode.h"
+
+
+enum SubroutineNodeType {
+    ENUM_SUB_PROCEDURE,
+    ENUM_SUB_FUNCTION,
+    ENUM_SUB_CONSTRUCTOR,
+    ENUM_SUB_DESTRUCTOR,
+};
+
+class SubroutineNode {
+protected:
+    int id;
+    SubroutineNodeType nodeType;
+
+    std::vector<std::string> nameParts; // Элементы квалифицированного имени
+    std::vector<ParamNode*> params;
+    TypeNode* returnType = nullptr;
+    std::vector<std::string> modifiers;
+    BlockNode* body;
+
+    SubroutineNode() {
+        id = NextNodeId();
+    }
+
+public:
+    static SubroutineNode* createSubroutineNode(SubroutineNodeType nodeType, DeclNode* nameList, ParamNode* paramList, TypeNode* returnType);
+
+};
+
+#endif //PASCAL_COMPILER_SUBROUTINENODE_H
