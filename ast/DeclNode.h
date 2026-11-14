@@ -13,7 +13,10 @@ enum DeclNodeType {
     ENUM_DECL_VAR_SECTION,
     ENUM_DECL_TYPE_SECTION,
     ENUM_DECL_LIST,
-    ENUM_DECL_ID_LIST
+    ENUM_DECL_ID_LIST,
+    ENUM_DECL_FIELD,
+    ENUM_DECL_SUBROUTINE,
+    ENUM_DECL_METHOD
 };
 
 class DeclNode {
@@ -43,7 +46,12 @@ public:
     static DeclNode* AddToDeclList(DeclNode* declList, DeclNode* newDecl);
 
     static DeclNode* CreateIdList(const std::string& firstName);
+    static DeclNode* CreateEmptyIdList();
     static DeclNode* AddToIdList(DeclNode* list, const std::string& name);
+
+    static DeclNode* CreateFieldList(DeclNode* idList, TypeNode* type);
+    static DeclNode* AddToFieldList(DeclNode* list, DeclNode* idList, TypeNode* type);
+    static DeclNode* MergeDeclLists(DeclNode* first, DeclNode* second);
 };
 
 #endif //PASCAL_COMPILER_DECLNODE_H
