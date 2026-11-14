@@ -30,6 +30,10 @@ protected:
 
     static ParamNode* CreateParamGroup(ParamNodeType nodeType, DeclNode* idList, TypeNode* type, ExprNode* defaultValue);
     static ParamNode* CreateParam(ParamNodeType nodeType, const std::string& name, TypeNode* type, ExprNode* defaultValue);
+
+    static ParamNode* CreateParamList(ParamNode* first);
+    static ParamNode* CreateEmptyParamList();
+    static ParamNode* AddToParamList(ParamNode* list, ParamNode* param);
 };
 
 #endif //PASCAL_COMPILER_PARAMNODE_H

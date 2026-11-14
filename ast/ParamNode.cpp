@@ -18,3 +18,20 @@ ParamNode* ParamNode::CreateParam(ParamNodeType nodeType, const std::string& nam
     return result;
 }
 
+ParamNode* ParamNode::CreateParamList(ParamNode* first) {
+    ParamNode* result = new ParamNode();
+    result->nodeType = ENUM_PARAM_LIST;
+    result->paramList.push_back(first);
+    return result;
+}
+
+ParamNode* ParamNode::CreateEmptyParamList() {
+    ParamNode* result = new ParamNode();
+    result->nodeType = ENUM_PARAM_LIST;
+    return result;
+}
+
+ParamNode* ParamNode::AddToParamList(ParamNode* list, ParamNode* param) {
+    list->paramList.push_back(param);
+    return list;
+}
