@@ -26,6 +26,7 @@ protected:
 
     std::string name;
     std::vector<std::string> varNames;
+    std::vector<std::string> fieldNames;
     std::vector<std::string> idNames;
     TypeNode* declType = nullptr;
     ExprNode* initValue = nullptr;

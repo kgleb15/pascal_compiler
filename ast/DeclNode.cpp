@@ -72,7 +72,7 @@ DeclNode* DeclNode::CreateEmptyIdList() {
 DeclNode* DeclNode::CreateFieldList(DeclNode* idList, TypeNode* type) {
     DeclNode* result = new DeclNode();
     result->nodeType = ENUM_DECL_FIELD;
-    result->varNames = idList->idNames;
+    result->fieldNames = idList->idNames;
     result->declType = type;
     return CreateDeclList(result);
 }
@@ -80,7 +80,7 @@ DeclNode* DeclNode::CreateFieldList(DeclNode* idList, TypeNode* type) {
 DeclNode* DeclNode::AddToFieldList(DeclNode* list, DeclNode* idList, TypeNode* type) {
     DeclNode* newField = new DeclNode();
     newField->nodeType = ENUM_DECL_FIELD;
-    newField->varNames = idList->idNames;
+    newField->fieldNames = idList->idNames;
     newField->declType = type;
     list->items.push_back(newField);
     return list;
