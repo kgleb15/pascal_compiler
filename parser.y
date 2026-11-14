@@ -29,7 +29,7 @@
     DeclNode*       f_decl;
 }
 
-%type <f_expr> expr expr_list expr_list_e range_bound
+%type <f_expr> expr expr_list expr_list_e range_bound init_value
 %type <f_stmt> stmt for_stmt repeat_stmt while_stmt if_stmt compound_statement stmt_list
 %type <f_type> type not_array_type ordinal_type enum_type enum_element enum_element_list array_type array_bases array_base range_list
 %type <f_decl> declaration declaration_part declaration_part_e constant_declaration constant_declaration_list

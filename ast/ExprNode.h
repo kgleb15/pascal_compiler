@@ -37,7 +37,8 @@ enum ExprNodeType {
     ENUM_EXPR_METHOD_CALL,
     ENUM_EXPR_INHERITED,
     ENUM_EXPR_SELF,
-    ENUM_EXPR_LIST
+    ENUM_EXPR_LIST,
+    ENUM_EXPR_ARRAY_INIT // Инициализация массива
 };
 
 class ExprNode {
@@ -80,6 +81,7 @@ public:
     static ExprNode* CreateExprList(ExprNode* firstElement);
     static ExprNode* CreateEmptyExprList();
     static ExprNode* AddToExprList(ExprNode* list, ExprNode* element);
+    static ExprNode* CreateArrayInitNode(ExprNode* first, ExprNode* restList);
 };
 
 

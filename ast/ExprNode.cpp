@@ -116,3 +116,12 @@ ExprNode* ExprNode::AddToExprList(ExprNode* list, ExprNode* element) {
     return list;
 }
 
+ExprNode* ExprNode::CreateArrayInitNode(ExprNode* first, ExprNode* restList) {
+    ExprNode* result = new ExprNode();
+    result->nodeType = ENUM_EXPR_ARRAY_INIT;
+    result->arguments.push_back(first);
+    for (ExprNode* element : restList->list_elements) {
+        result->arguments.push_back(element);
+    }
+    return result;
+}
