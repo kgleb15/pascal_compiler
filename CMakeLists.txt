@@ -54,6 +54,8 @@ add_executable(pascal_compiler
         ast/BlockNode.cpp
         ast/SubroutineNode.h
         ast/SubroutineNode.cpp
+        ast/ProgramNode.h
+        ast/ProgramNode.cpp
 )
 
 target_include_directories(pascal_compiler PRIVATE
