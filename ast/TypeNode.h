@@ -2,6 +2,7 @@
 #define PASCAL_COMPILER_TYPENODE_H
 #include <string>
 
+#include "DeclNode.h"
 #include "ExprNode.h"
 
 
@@ -11,7 +12,9 @@ enum TypeNodeType {
     ENUM_TYPE_RANGE,
     ENUM_TYPE_ENUM,
     ENUM_TYPE_ENUM_ELEMENT,
-    ENUM_TYPE_ARRAY
+    ENUM_TYPE_ARRAY,
+    ENUM_TYPE_CLASS,
+    ENUM_TYPE_CLASS_FORWARD
 };
 
 class TypeNode {
@@ -26,6 +29,9 @@ protected:
     ExprNode* enumElement = nullptr;
     std::vector<TypeNode*> arrayRanges;
     TypeNode* arrayElementType = nullptr;
+
+    std::string parentName;
+    std::vector<DeclNode*> members;
 
     TypeNode() {
         id = NextNodeId();
@@ -45,6 +51,9 @@ public:
     static TypeNode* CreateDynamicArrayType();
     static TypeNode* AddArrayBase(TypeNode* outerArray, TypeNode* innerArray);
     static TypeNode* SetArrayElementType(TypeNode* array, TypeNode* elementType);
+
+    static TypeNode* CreateClassType(const std::string& parentName, DeclNode* members);
+    static TypeNode* CreateForwardClassType(const std::string& parentName);
 };
 
 

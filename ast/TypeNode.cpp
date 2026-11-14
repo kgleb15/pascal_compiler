@@ -76,3 +76,18 @@ TypeNode* TypeNode::SetArrayElementType(TypeNode* array, TypeNode* elementType) 
     lastArrayBase->arrayElementType = elementType;
     return array;
 }
+
+TypeNode* TypeNode::CreateClassType(const std::string& parentName, DeclNode* members) {
+    TypeNode* result = new TypeNode();
+    result->nodeType = ENUM_TYPE_CLASS;
+    result->parentName = parentName;
+    result->members = members->getItems();
+    return result;
+}
+
+TypeNode* TypeNode::CreateForwardClassType(const std::string& parentName) {
+    TypeNode* result = new TypeNode();
+    result->nodeType = ENUM_TYPE_CLASS_FORWARD;
+    result->parentName = parentName;
+    return result;
+}
