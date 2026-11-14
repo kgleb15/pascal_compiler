@@ -19,30 +19,30 @@
 %}
 
 %union {
-    long long       f_liter_int;
-    double          f_liter_float;
-    std::string*    f_liter_str;
-    std::string*    f_id;
-    ExprNode*       f_expr;
-    StmtNode*       f_stmt;
-    TypeNode*       f_type;
-    DeclNode*       f_decl;
-    BlockNode*      f_block;
-    ParamNode*      f_param;
-    ProgramNode*    f_program;
-    SubroutineNode* f_subroutine;
+    long long       LiterIntUnion;
+    double          LiterRealUnion;
+    std::string*    LiterStrUnion;
+    std::string*    IdUnion;
+    ExprNode*       ExprUnion;
+    StmtNode*       StmtUnion;
+    TypeNode*       TypeUnion;
+    DeclNode*       DeclarationUnion;
+    BlockNode*      BlockUnion;
+    ParamNode*      ParamUnion;
+    ProgramNode*    ProgramUnion;
+    SubroutineNode* SubroutineUnion;
 }
 
-%type <f_expr> expr expr_list expr_list_e range_bound init_value
-%type <f_stmt> stmt for_stmt repeat_stmt while_stmt if_stmt compound_statement stmt_list
-%type <f_type> type not_array_type ordinal_type enum_type enum_element enum_element_list array_type array_bases array_base range_list type_id parameter_type class_type
-%type <f_decl> declaration declaration_part declaration_part_e constant_declaration constant_declaration_list
-%type <f_decl> type_declaration_list type_declaration variable_declaration_list variable_declaration id_list
-%type <f_program> program
-%type <f_block> block subroutine_block
-%type <f_param> parameter_declarations parameter_declaration value_parameter var_parameter const_parameter formal_parameter_list_e
-%type <f_subroutine> subroutine_header
-%type <f_decl> subroutine_definition subroutine_name big_id_list modifiers_list modifiers_list_e component_list field_declaration_list member_list member
+%type <ExprUnion> expr expr_list expr_list_e range_bound init_value
+%type <StmtUnion> stmt for_stmt repeat_stmt while_stmt if_stmt compound_statement stmt_list
+%type <TypeUnion> type not_array_type ordinal_type enum_type enum_element enum_element_list array_type array_bases array_base range_list type_id parameter_type class_type
+%type <DeclarationUnion> declaration declaration_part declaration_part_e constant_declaration constant_declaration_list
+%type <DeclarationUnion> type_declaration_list type_declaration variable_declaration_list variable_declaration id_list
+%type <ProgramUnion> program
+%type <BlockUnion> block subroutine_block
+%type <ParamUnion> parameter_declarations parameter_declaration value_parameter var_parameter const_parameter formal_parameter_list_e
+%type <SubroutineUnion> subroutine_header
+%type <DeclarationUnion> subroutine_definition subroutine_name big_id_list modifiers_list modifiers_list_e component_list field_declaration_list member_list member
 
 %printer {
     fprintf(yyo, "%lld", $$);
@@ -111,10 +111,10 @@
 %token OUT
 
 	/* Литераты и идентификаторы */
-%token<f_id> ID
-%token<f_liter_int> INT_L
-%token<f_liter_float> REAL_L
-%token<f_liter_str> STRING_L
+%token<IdUnion> ID
+%token<LiterIntUnion> INT_L
+%token<LiterRealUnion> REAL_L
+%token<LiterStrUnion> STRING_L
 
 %token ASM ABSOLUTE FILE_KW GOTO LABEL OPERATOR PACKED PROPERTY REINTRODUCE UNIT USES SHL SHR XOR POWER
 
