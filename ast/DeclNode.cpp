@@ -12,7 +12,7 @@ DeclNode* DeclNode::CreateConstDecl(const std::string& name, TypeNode* type, Exp
 DeclNode* DeclNode::CreateVarDecl(DeclNode* idList, TypeNode* type, ExprNode* initValue) {
     DeclNode* result = new DeclNode();
     result->nodeType = ENUM_DECL_VAR;
-    result->names = idList->names;
+    result->varNames = idList->idNames;
     result->declType = type;
     result->initValue = initValue;
     return result;
@@ -54,11 +54,11 @@ DeclNode* DeclNode::AddToDeclList(DeclNode* declList, DeclNode* newDecl) {
 DeclNode* DeclNode::CreateIdList(const std::string& firstName) {
     DeclNode* result = new DeclNode();
     result->nodeType = ENUM_DECL_ID_LIST;
-    result->names.push_back(firstName);
+    result->idNames.push_back(firstName);
     return result;
 }
 
 DeclNode* DeclNode::AddToIdList(DeclNode* list, const std::string& name) {
-    list->names.push_back(name);
+    list->idNames.push_back(name);
     return list;
 }

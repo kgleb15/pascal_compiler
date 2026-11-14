@@ -22,7 +22,8 @@ protected:
     DeclNodeType nodeType;
 
     std::string name;
-    std::vector<std::string> names;
+    std::vector<std::string> varNames;
+    std::vector<std::string> idNames;
     TypeNode* declType = nullptr;
     ExprNode* initValue = nullptr;
     std::vector<DeclNode*> items; // элементы секций и для списка блоков объявлений
