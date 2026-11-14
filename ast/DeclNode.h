@@ -57,6 +57,10 @@ public:
     std::vector<DeclNode*>& getItems() {
         return items;
     }
+
+    std::vector<std::string>& getIdNames() {
+        return idNames;
+    }
 };
 
 #endif //PASCAL_COMPILER_DECLNODE_H
