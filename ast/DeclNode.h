@@ -3,6 +3,7 @@
 #include <string>
 
 #include "TypeNode.h"
+#include "SubroutineNode.h"
 
 
 enum DeclNodeType {
@@ -31,6 +32,7 @@ protected:
     TypeNode* declType = nullptr;
     ExprNode* initValue = nullptr;
     std::vector<DeclNode*> items; // элементы секций и для списка блоков объявлений
+    SubroutineNode* subroutine = nullptr; // подпрограмма или метод
 
     DeclNode() {
         id = NextNodeId();
@@ -52,6 +54,9 @@ public:
 
     static DeclNode* CreateFieldList(DeclNode* idList, TypeNode* type);
     static DeclNode* AddToFieldList(DeclNode* list, DeclNode* idList, TypeNode* type);
+
+    static DeclNode* CreateSubroutineDef(SubroutineNode* header, DeclNode* modifiers, BlockNode* body);
+    static DeclNode* CreateMethodDecl(SubroutineNode* header, DeclNode* modifiers);
     static DeclNode* MergeDeclLists(DeclNode* first, DeclNode* second);
 
     std::vector<DeclNode*>& getItems() {

@@ -33,6 +33,13 @@ protected:
 public:
     static SubroutineNode* createSubroutineNode(SubroutineNodeType nodeType, DeclNode* nameList, ParamNode* paramList, TypeNode* returnType);
 
+    void setModifiers(std::vector<std::string> modifiers) {
+        this->modifiers = std::move(modifiers);
+    }
+
+    void setBody(BlockNode* body) {
+        this->body = body;
+    }
 };
 
 #endif //PASCAL_COMPILER_SUBROUTINENODE_H

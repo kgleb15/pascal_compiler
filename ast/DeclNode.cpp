@@ -86,6 +86,23 @@ DeclNode* DeclNode::AddToFieldList(DeclNode* list, DeclNode* idList, TypeNode* t
     return list;
 }
 
+DeclNode* DeclNode::CreateSubroutineDef(SubroutineNode* header, DeclNode* modifiers, BlockNode* body) {
+    header->setModifiers(modifiers->idNames);
+    header->setBody(body);   // nullptr для forward
+    DeclNode* result = new DeclNode();
+    result->nodeType = ENUM_DECL_SUBROUTINE;
+    result->subroutine = header;
+    return result;
+}
+
+DeclNode* DeclNode::CreateMethodDecl(SubroutineNode* header, DeclNode* modifiers) {
+    header->setModifiers(modifiers->idNames);
+    DeclNode* result = new DeclNode();
+    result->nodeType = ENUM_DECL_METHOD;
+    result->subroutine = header;
+    return result;
+}
+
 DeclNode* DeclNode::MergeDeclLists(DeclNode* first, DeclNode* second) {
     for (DeclNode* item : second->items) {
         first->items.push_back(item);
