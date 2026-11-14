@@ -53,6 +53,10 @@ public:
     static DeclNode* CreateFieldList(DeclNode* idList, TypeNode* type);
     static DeclNode* AddToFieldList(DeclNode* list, DeclNode* idList, TypeNode* type);
     static DeclNode* MergeDeclLists(DeclNode* first, DeclNode* second);
+
+    std::vector<DeclNode*>& getItems() {
+        return items;
+    }
 };
 
 #endif //PASCAL_COMPILER_DECLNODE_H
