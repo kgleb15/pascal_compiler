@@ -24,7 +24,7 @@ protected:
     std::vector<ParamNode*> params;
     TypeNode* returnType = nullptr;
     std::vector<std::string> modifiers;
-    BlockNode* body;
+    BlockNode* body = nullptr;
 
     SubroutineNode() {
         id = NextNodeId();
