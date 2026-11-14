@@ -39,7 +39,7 @@ protected:
     }
 
 public:
-    static DeclNode* CreateConstDecl(const std::string& name, TypeNode* type, ExprNode* initValue);;
+    static DeclNode* CreateConstDecl(const std::string& name, TypeNode* type, ExprNode* initValue);
     static DeclNode* CreateVarDecl(DeclNode* idList, TypeNode* type, ExprNode* initValue);
     static DeclNode* CreateTypeDecl(const std::string& name, TypeNode* type);
 

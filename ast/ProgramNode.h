@@ -15,7 +15,7 @@ protected:
     }
 
 public:
-    static ProgramNode* createProgramNode(const std::string& name, BlockNode* block);
+    static ProgramNode* CreateProgramNode(const std::string& name, BlockNode* block);
 };
 
 

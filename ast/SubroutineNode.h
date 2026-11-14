@@ -31,7 +31,7 @@ protected:
     }
 
 public:
-    static SubroutineNode* createSubroutineHeader(SubroutineNodeType nodeType, DeclNode* nameList, ParamNode* paramList, TypeNode* returnType);
+    static SubroutineNode* CreateSubroutineHeader(SubroutineNodeType nodeType, DeclNode* nameList, ParamNode* paramList, TypeNode* returnType);
 
     void setModifiers(std::vector<std::string> modifiers) {
         this->modifiers = std::move(modifiers);
