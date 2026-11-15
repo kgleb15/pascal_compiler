@@ -1,4 +1,5 @@
 { Приоритеты арифметических операторов }
+
 program ExprPriority;
 var
   a, b, c, d, e, r1, r2: integer;
