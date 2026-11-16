@@ -34,6 +34,11 @@ DeclNode* DeclNode::CreateSection(DeclNodeType sectionType, DeclNode* firstDecl)
     return result;
 }
 
+DeclNode* DeclNode::AddToSection(DeclNode* section, DeclNode* newDecl) {
+    section->items.push_back(newDecl);
+    return section;
+}
+
 DeclNode* DeclNode::CreateDeclList(DeclNode* first) {
     DeclNode* result = new DeclNode();
     result->nodeType = ENUM_DECL_LIST;

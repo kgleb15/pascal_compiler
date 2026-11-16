@@ -46,6 +46,8 @@ public:
     static DeclNode* CreateTypeDecl(const std::string& name, TypeNode* type);
 
     static DeclNode* CreateSection(DeclNodeType sectionType, DeclNode* firstDecl);
+    static DeclNode* AddToSection(DeclNode* section, DeclNode* newDecl);
+
     static DeclNode* CreateDeclList(DeclNode* first);
     static DeclNode* CreateEmptyDeclList();
     static DeclNode* AddToDeclList(DeclNode* declList, DeclNode* newDecl);

@@ -168,7 +168,7 @@ declaration : constant_declaration_list { $$ = $1; }
 
 /* Объявления констант */
 constant_declaration_list : CONST constant_declaration { $$ = DeclNode::CreateSection(ENUM_DECL_CONST_SECTION, $2); }
-                          | constant_declaration_list constant_declaration { $$ = DeclNode::AddToDeclList($1, $2); }
+                          | constant_declaration_list constant_declaration { $$ = DeclNode::AddToSection($1, $2); }
                           ;
 
 constant_declaration : ID '=' expr ';' { $$ = DeclNode::CreateConstDecl(*$1, nullptr, $3); }
@@ -177,7 +177,7 @@ constant_declaration : ID '=' expr ';' { $$ = DeclNode::CreateConstDecl(*$1, nul
 
 /* Объявления типов */
 type_declaration_list : TYPE type_declaration { $$ = DeclNode::CreateSection(ENUM_DECL_TYPE_SECTION, $2); }
-                      | type_declaration_list type_declaration { $$ = DeclNode::AddToDeclList($1, $2); }
+                      | type_declaration_list type_declaration { $$ = DeclNode::AddToSection($1, $2); }
                       ;
 
 type_declaration : ID '=' type ';' { $$ = DeclNode::CreateTypeDecl(*$1, $3); } /* Обычные типы */
@@ -253,7 +253,7 @@ big_id_list : ID ',' ID { $$ = DeclNode::AddToIdList(DeclNode::CreateIdList(*$1)
 
 /* Объявления переменных */
 variable_declaration_list : VAR variable_declaration { $$ = DeclNode::CreateSection(ENUM_DECL_VAR_SECTION, $2); }
-                          | variable_declaration_list variable_declaration { $$ = DeclNode::AddToDeclList($1, $2); }
+                          | variable_declaration_list variable_declaration { $$ = DeclNode::AddToSection($1, $2); }
                           ;
 
 variable_declaration : id_list ':' type ';' { $$ = DeclNode::CreateVarDecl($1, $3, nullptr); }
