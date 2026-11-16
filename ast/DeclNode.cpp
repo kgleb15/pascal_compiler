@@ -69,12 +69,6 @@ DeclNode* DeclNode::AddToIdList(DeclNode* list, const std::string& name) {
     return list;
 }
 
-DeclNode* DeclNode::CreateEmptyIdList() {
-    DeclNode* result = new DeclNode();
-    result->nodeType = ENUM_DECL_ID_LIST;
-    return result;
-}
-
 DeclNode* DeclNode::CreateFieldList(DeclNode* idList, TypeNode* type) {
     DeclNode* result = new DeclNode();
     result->nodeType = ENUM_DECL_FIELD;

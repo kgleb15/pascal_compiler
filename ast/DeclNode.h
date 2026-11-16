@@ -56,7 +56,6 @@ public:
     static DeclNode* AddToDeclList(DeclNode* declList, DeclNode* newDecl);
 
     static DeclNode* CreateIdList(const std::string& firstName);
-    static DeclNode* CreateEmptyIdList();
     static DeclNode* AddToIdList(DeclNode* list, const std::string& name);
 
     static DeclNode* CreateFieldList(DeclNode* idList, TypeNode* type);
