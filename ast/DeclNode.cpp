@@ -128,3 +128,15 @@ DeclNode* DeclNode::AddToMemberList(DeclNode* list, DeclNode* member) {
     return list;
 }
 
+DeclNode* DeclNode::CreateQualifiedName(const std::string& firstPart) {
+    DeclNode* result = new DeclNode();
+    result->nodeType = ENUM_DECL_QUALIFIED_NAME;
+    result->idNames.push_back(firstPart);
+    return result;
+}
+
+DeclNode* DeclNode::AddToQualifiedName(DeclNode* name, const std::string& part) {
+    name->idNames.push_back(part);
+    return name;
+}
+

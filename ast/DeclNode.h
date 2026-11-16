@@ -69,6 +69,9 @@ public:
     static DeclNode* CreateMemberList(DeclNode* first);
     static DeclNode* AddToMemberList(DeclNode* list, DeclNode* member);
 
+    static DeclNode* CreateQualifiedName(const std::string& firstPart);
+    static DeclNode* AddToQualifiedName(DeclNode* name, const std::string& part);
+
     std::vector<DeclNode*>& getItems() {
         return items;
     }

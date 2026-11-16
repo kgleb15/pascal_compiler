@@ -312,8 +312,8 @@ subroutine_header : PROCEDURE subroutine_name formal_parameter_list_e { $$ = Sub
                   | DESTRUCTOR subroutine_name '(' ')' { $$ = SubroutineNode::CreateSubroutineHeader(ENUM_SUB_DESTRUCTOR, $2, nullptr, nullptr); }
                   ;
 
-subroutine_name : ID { $$ = DeclNode::CreateIdList(*$1); }
-                | subroutine_name '.' ID { $$ = DeclNode::AddToIdList($1, *$3); } /* название с указанием класса */
+subroutine_name : ID { $$ = DeclNode::CreateQualifiedName(*$1); }
+                | subroutine_name '.' ID { $$ = DeclNode::AddToQualifiedName($1, *$3); } /* название с указанием класса */
                 ;
 
 formal_parameter_list_e : %empty { $$ = ParamNode::CreateEmptyParamList(); }
