@@ -1,4 +1,6 @@
 #include "DotPrinter.h"
+#include <iomanip>
+#include <sstream>
 
 std::ostream* DotPrinter::out = nullptr;
 
@@ -58,4 +60,30 @@ int DotPrinter::PrintNode(ProgramNode* p) {
     Node(p->id, "program: " + p->name);
     Link(p->id, p->block, "block");
     return p->id;
+}
+
+std::string DotPrinter::OperatorText(ExprNodeType type) {
+    switch (type) {
+        case ENUM_EXPR_EQUALS:            return "=";
+        case ENUM_EXPR_NOT_EQUALS:        return "<>";
+        case ENUM_EXPR_GREATER:           return ">";
+        case ENUM_EXPR_LESS:              return "<";
+        case ENUM_EXPR_LESS_OR_EQUALS:    return "<=";
+        case ENUM_EXPR_GREATER_OR_EQUALS: return ">=";
+        case ENUM_EXPR_IS:                return "is";
+        case ENUM_EXPR_AS:                return "as";
+        case ENUM_EXPR_ADD:               return "+";
+        case ENUM_EXPR_SUB:               return "-";
+        case ENUM_EXPR_MUL:               return "*";
+        case ENUM_EXPR_DIVIDE:            return "/";
+        case ENUM_EXPR_DIV:               return "div";
+        case ENUM_EXPR_MOD:               return "mod";
+        case ENUM_EXPR_OR:                return "or";
+        case ENUM_EXPR_AND:               return "and";
+        case ENUM_EXPR_NOT:               return "not";
+        case ENUM_EXPR_UNARY_MINUS:       return "unary -";
+        case ENUM_EXPR_UNARY_PLUS:        return "unary +";
+        default:                          return "???";
+    }
+}
 }
