@@ -53,6 +53,7 @@ std::string DotPrinter::Join(const std::vector<std::string>& parts, const std::s
 
 int DotPrinter::PrintNode(BlockNode* b) {
     Node(b->id, "block");
+    Link(b->id, b->declarations, "declarations");
     Link(b->id, b->body, "body");
     return b->id;
 }
@@ -254,6 +255,7 @@ int DotPrinter::PrintNode(TypeNode* t) {
             break;
         case ENUM_TYPE_CLASS:
             Node(t->id, "class" + parent);
+            LinkList(t->id, t->members, "member");
             break;
         case ENUM_TYPE_CLASS_FORWARD:
             Node(t->id, "class (forward)" + parent);
@@ -304,4 +306,46 @@ int DotPrinter::PrintNode(SubroutineNode* s) {
     Link(s->id, s->returnType, "returns");
     Link(s->id, s->body, "body");
     return s->id;
+}
+
+int DotPrinter::PrintNode(DeclNode* d) {
+    switch (d->nodeType) {
+        case ENUM_DECL_CONST:
+            Node(d->id, "const: " + d->name);
+            Link(d->id, d->declType, "type");
+            Link(d->id, d->initValue, "value");
+            break;
+        case ENUM_DECL_VAR:
+            Node(d->id, "var: " + Join(d->varNames, ", "));
+            Link(d->id, d->declType, "type");
+            Link(d->id, d->initValue, "init");
+            break;
+        case ENUM_DECL_TYPE:
+            Node(d->id, "type: " + d->name);
+            Link(d->id, d->declType, "definition");
+            break;
+        case ENUM_DECL_FIELD: {
+            const std::vector<std::string>& names = d->fieldNames.empty() ? d->varNames : d->fieldNames;
+            Node(d->id, "field: " + Join(names, ", "));
+            Link(d->id, d->declType, "type");
+            break;
+        }
+        case ENUM_DECL_CONST_SECTION: Node(d->id, "const section"); LinkList(d->id, d->items); break;
+        case ENUM_DECL_VAR_SECTION: Node(d->id, "var section"); LinkList(d->id, d->items); break;
+        case ENUM_DECL_TYPE_SECTION: Node(d->id, "type section"); LinkList(d->id, d->items); break;
+        case ENUM_DECL_LIST: Node(d->id, "declarations"); LinkList(d->id, d->items); break;
+        case ENUM_DECL_SUBROUTINE:
+            Node(d->id, d->subroutine != nullptr && d->subroutine->body == nullptr ? "subroutine (forward)" : "subroutine");
+            Link(d->id, d->subroutine);
+            break;
+        case ENUM_DECL_METHOD:
+            Node(d->id, "method declaration");
+            Link(d->id, d->subroutine);
+            break;
+        default:
+            Node(d->id, "[[decl list]]");
+            LinkList(d->id, d->items);
+            break;
+    }
+    return d->id;
 }

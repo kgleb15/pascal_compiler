@@ -10,6 +10,7 @@
 #include "TypeNode.h"
 #include "ParamNode.h"
 #include "SubroutineNode.h"
+#include "DeclNode.h"
 
 class DotPrinter {
 public:
@@ -45,6 +46,7 @@ private:
     static int PrintNode(TypeNode* type);
     static int PrintNode(ParamNode* param);
     static int PrintNode(SubroutineNode* subroutine);
+    static int PrintNode(DeclNode* decl);
 
     static std::string OperatorText(ExprNodeType type);
 };
