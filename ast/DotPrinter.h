@@ -7,6 +7,7 @@
 #include "BlockNode.h"
 #include "ExprNode.h"
 #include "StmtNode.h"
+#include "TypeNode.h"
 
 class DotPrinter {
 public:
@@ -39,6 +40,7 @@ private:
     static int PrintNode(BlockNode* node);
     static int PrintNode(ExprNode*);
     static int PrintNode(StmtNode*);
+    static int PrintNode(TypeNode*);
 
     static std::string OperatorText(ExprNodeType type);
 };

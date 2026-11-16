@@ -228,3 +228,36 @@ int DotPrinter::PrintNode(StmtNode* s) {
     }
     return s->id;
 }
+
+int DotPrinter::PrintNode(TypeNode* t) {
+    std::string parent = t->parentName.empty() ? "" : "\nparent: " + t->parentName;
+    switch (t->nodeType) {
+        case ENUM_TYPE_NAME: Node(t->id, "type: " + t->name); break;
+        case ENUM_TYPE_STRING: Node(t->id, "string"); break;
+        case ENUM_TYPE_RANGE:
+            Node(t->id, "range");
+            Link(t->id, t->rangeLow, "low");
+            Link(t->id, t->rangeHigh, "high");
+            break;
+        case ENUM_TYPE_ENUM:
+            Node(t->id, "enum");
+            LinkList(t->id, t->enumElements, "element");
+            break;
+        case ENUM_TYPE_ENUM_ELEMENT:
+            Node(t->id, "enum element: " + t->name);
+            Link(t->id, t->enumElement, "value");
+            break;
+        case ENUM_TYPE_ARRAY:
+            Node(t->id, t->arrayRanges.empty() ? "dynamic array" : "array");
+            LinkList(t->id, t->arrayRanges, "range");
+            Link(t->id, t->arrayElementType, "element type");
+            break;
+        case ENUM_TYPE_CLASS:
+            Node(t->id, "class" + parent);
+            break;
+        case ENUM_TYPE_CLASS_FORWARD:
+            Node(t->id, "class (forward)" + parent);
+            break;
+    }
+    return t->id;
+}
