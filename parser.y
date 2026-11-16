@@ -289,7 +289,7 @@ member_list : member { $$ = DeclNode::CreateDeclList($1); }
 member : variable_declaration_list { $$ = $1; }
        | constant_declaration_list { $$ = $1; }
        | type_declaration_list { $$ = $1; }
-       | subroutine_header ';' modifiers_list_e { $$ = DeclNode::CreateMethodDecl($1, $3); } /* Определение метода */
+       | subroutine_header ';' modifiers_list_e { $$ = DeclNode::CreateMethodDecl($1, $3); } /* Объявление метода */
        ;
 
 modifiers_list_e : %empty { $$ = DeclNode::CreateEmptyIdList(); }
@@ -364,11 +364,11 @@ stmt : expr ASSIGN expr { $$ = StmtNode::CreateAssignNode(ENUM_STMT_ASSIGN, $1, 
      | expr MUL_ASSIGN expr { $$ = StmtNode::CreateAssignNode(ENUM_STMT_MUL_ASSIGN, $1, $3); }
      | ID { $$ = StmtNode::CreateCallNode(ExprNode::CreateCallNode(*$1, {})); } /* Вызов функции без скобок */
      | expr '.' ID { $$ = StmtNode::CreateCallNode(ExprNode::CreateMethodCallNode($1, *$3, {})); } /* Вызов метода без скобок */
-     | ID '(' expr_list_e ')' { $$ = StmtNode::CreateCallNode(ExprNode::CreateCallNode(*$1, $3->list_elements)); } /* Вызов функции/процедуры */
-     | expr '.' ID '(' expr_list_e ')' { $$ = StmtNode::CreateCallNode(ExprNode::CreateMethodCallNode($1, *$3, $5->list_elements)); } /* Вызов метода с параметрами */
+     | ID '(' expr_list_e ')' { $$ = StmtNode::CreateCallNode(ExprNode::CreateCallNode(*$1, $3->getListElements())); } /* Вызов функции/процедуры */
+     | expr '.' ID '(' expr_list_e ')' { $$ = StmtNode::CreateCallNode(ExprNode::CreateMethodCallNode($1, *$3, $5->getListElements())); } /* Вызов метода с параметрами */
      | INHERITED { $$ = StmtNode::CreateCallNode(ExprNode::CreateInheritedNode("", {})); } /* Вызов метода родительского класса */
      | INHERITED ID { $$ = StmtNode::CreateCallNode(ExprNode::CreateInheritedNode(*$2, {})); }
-     | INHERITED ID '(' expr_list_e ')' { $$ = StmtNode::CreateCallNode(ExprNode::CreateInheritedNode(*$2, $4->list_elements)); }
+     | INHERITED ID '(' expr_list_e ')' { $$ = StmtNode::CreateCallNode(ExprNode::CreateInheritedNode(*$2, $4->getListElements())); }
      | compound_statement { $$ = $1; }
      | for_stmt { $$ = $1; }
      | repeat_stmt { $$ = $1; }
@@ -429,13 +429,13 @@ expr : INT_L { $$ = ExprNode::CreateIntNode($1); }
      | NOT expr { $$ = ExprNode::CreateUnaryNode(ENUM_EXPR_NOT, $2); }
      | '(' expr ')' { $$ = $2; }
      | expr '.' ID { $$ = ExprNode::CreateMemberNode($1, *$3); } /* Вызов метода без скобок */
-     | expr '[' expr_list ']' { $$ = ExprNode::CreateIndexNode($1, $3->list_elements); } /* Доступ к эл-ту массива */
-     | ID '(' expr_list_e ')' { $$ = ExprNode::CreateCallNode(*$1, $3->list_elements); } /* Вызов функции/процедуры */
-     | expr '.' ID '(' expr_list_e ')' { $$ = ExprNode::CreateMethodCallNode($1, *$3, $5->list_elements); }
+     | expr '[' expr_list ']' { $$ = ExprNode::CreateIndexNode($1, $3->getListElements()); } /* Доступ к эл-ту массива */
+     | ID '(' expr_list_e ')' { $$ = ExprNode::CreateCallNode(*$1, $3->getListElements()); } /* Вызов функции/процедуры */
+     | expr '.' ID '(' expr_list_e ')' { $$ = ExprNode::CreateMethodCallNode($1, *$3, $5->getListElements()); }
      | SELF { $$ = ExprNode::CreateSelfNode(); } /* Ссылка на текущий экземпляр класса */
      | INHERITED { $$ = ExprNode::CreateInheritedNode("", {}); } /* Вызов метода родительского класса */
      | INHERITED ID { $$ = ExprNode::CreateInheritedNode(*$2, {}); }
-     | INHERITED ID '(' expr_list_e ')' { $$ = ExprNode::CreateInheritedNode(*$2, $4->list_elements); }
+     | INHERITED ID '(' expr_list_e ')' { $$ = ExprNode::CreateInheritedNode(*$2, $4->getListElements()); }
      ;
 
 expr_list : expr { $$ = ExprNode::CreateExprList($1); }

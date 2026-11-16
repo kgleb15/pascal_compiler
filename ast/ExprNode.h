@@ -82,6 +82,10 @@ public:
     static ExprNode* CreateEmptyExprList();
     static ExprNode* AddToExprList(ExprNode* list, ExprNode* element);
     static ExprNode* CreateArrayInitNode(ExprNode* first, ExprNode* restList);
+
+    std::vector<ExprNode*>& getListElements() {
+        return list_elements;
+    }
 };
 
 
