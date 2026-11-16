@@ -292,12 +292,12 @@ member : variable_declaration_list { $$ = $1; }
        | subroutine_header ';' modifiers_list_e { $$ = DeclNode::CreateMethodDecl($1, $3); } /* Объявление метода */
        ;
 
-modifiers_list_e : %empty { $$ = DeclNode::CreateEmptyIdList(); }
+modifiers_list_e : %empty { $$ = DeclNode::CreateEmptyModifierList(); }
                  | modifiers_list { $$ = $1; }
                  ;
 
-modifiers_list : ID ';' { $$ = DeclNode::CreateIdList(*$1); } /* abstract, virtual, dynamic ... */
-               | modifiers_list ID ';' { $$ = DeclNode::AddToIdList($1, *$2); }
+modifiers_list : ID ';' { $$ = DeclNode::CreateModifierList(*$1); } /* abstract, virtual, dynamic ... */
+               | modifiers_list ID ';' { $$ = DeclNode::AddToModifierList($1, *$2); }
                ;
 
 

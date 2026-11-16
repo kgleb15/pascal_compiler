@@ -140,3 +140,22 @@ DeclNode* DeclNode::AddToQualifiedName(DeclNode* name, const std::string& part) 
     return name;
 }
 
+DeclNode* DeclNode::CreateModifierList(const std::string& first) {
+    DeclNode* result = new DeclNode();
+    result->nodeType = ENUM_DECL_MODIFIER_LIST;
+    result->idNames.push_back(first);
+    return result;
+}
+
+DeclNode* DeclNode::CreateEmptyModifierList() {
+    DeclNode* result = new DeclNode();
+    result->nodeType = ENUM_DECL_MODIFIER_LIST;
+    return result;
+}
+
+DeclNode* DeclNode::AddToModifierList(DeclNode* list, const std::string& modifier) {
+    list->idNames.push_back(modifier);
+    return list;
+}
+
+

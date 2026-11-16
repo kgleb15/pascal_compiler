@@ -72,6 +72,10 @@ public:
     static DeclNode* CreateQualifiedName(const std::string& firstPart);
     static DeclNode* AddToQualifiedName(DeclNode* name, const std::string& part);
 
+    static DeclNode* CreateModifierList(const std::string& first);
+    static DeclNode* CreateEmptyModifierList();
+    static DeclNode* AddToModifierList(DeclNode* list, const std::string& modifier);
+
     std::vector<DeclNode*>& getItems() {
         return items;
     }
