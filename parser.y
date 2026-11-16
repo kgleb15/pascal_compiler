@@ -282,8 +282,8 @@ field_declaration_list : id_list ':' type ';' { $$ = DeclNode::CreateFieldList($
                        | field_declaration_list id_list ':' type ';' { $$ = DeclNode::AddToFieldList($1, $2, $4); }
                        ;
 
-member_list : member { $$ = DeclNode::CreateDeclList($1); }
-            | member_list member { $$ = DeclNode::AddToDeclList($1, $2); }
+member_list : member { $$ = DeclNode::CreateMemberList($1); }
+            | member_list member { $$ = DeclNode::AddToMemberList($1, $2); }
             ;
 
 member : variable_declaration_list { $$ = $1; }

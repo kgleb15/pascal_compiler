@@ -116,3 +116,15 @@ DeclNode* DeclNode::MergeDeclLists(DeclNode* first, DeclNode* second) {
     return first;
 }
 
+DeclNode* DeclNode::CreateMemberList(DeclNode* first) {
+    DeclNode* result = new DeclNode();
+    result->nodeType = ENUM_DECL_MEMBER_LIST;
+    result->items.push_back(first);
+    return result;
+}
+
+DeclNode* DeclNode::AddToMemberList(DeclNode* list, DeclNode* member) {
+    list->items.push_back(member);
+    return list;
+}
+

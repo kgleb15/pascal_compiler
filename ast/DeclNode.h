@@ -16,7 +16,10 @@ enum DeclNodeType {
     ENUM_DECL_ID_LIST,
     ENUM_DECL_FIELD,
     ENUM_DECL_SUBROUTINE,
-    ENUM_DECL_METHOD
+    ENUM_DECL_METHOD,
+    ENUM_DECL_MEMBER_LIST,
+    ENUM_DECL_QUALIFIED_NAME,
+    ENUM_DECL_MODIFIER_LIST,
 };
 
 class SubroutineNode;
@@ -62,6 +65,9 @@ public:
     static DeclNode* CreateSubroutineDef(SubroutineNode* header, DeclNode* modifiers, BlockNode* body);
     static DeclNode* CreateMethodDecl(SubroutineNode* header, DeclNode* modifiers);
     static DeclNode* MergeDeclLists(DeclNode* first, DeclNode* second);
+    
+    static DeclNode* CreateMemberList(DeclNode* first);
+    static DeclNode* AddToMemberList(DeclNode* list, DeclNode* member);
 
     std::vector<DeclNode*>& getItems() {
         return items;
