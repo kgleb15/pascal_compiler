@@ -6,6 +6,10 @@
     #include "ast/StmtNode.h"
     #include "ast/TypeNode.h"
     #include "ast/DeclNode.h"
+    #include "ast/ParamNode.h"
+    #include "ast/SubroutineNode.h"
+    #include "ast/BlockNode.h"
+    #include "ast/ProgramNode.h"
 }
 
 %{
