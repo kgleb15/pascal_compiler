@@ -4,6 +4,8 @@
 #include <string>
 #include <vector>
 #include "ProgramNode.h"
+#include "BlockNode.h"
+#include "ExprNode.h"
 
 class DotPrinter {
 public:
@@ -35,6 +37,8 @@ private:
     static int PrintNode(ProgramNode* node);
     static int PrintNode(BlockNode* node);
     static int PrintNode(ExprNode*);
+
+    static std::string OperatorText(ExprNodeType type);
 };
 
 

@@ -86,4 +86,20 @@ std::string DotPrinter::OperatorText(ExprNodeType type) {
         default:                          return "???";
     }
 }
+
+int DotPrinter::PrintNode(ExprNode* e) {
+    switch (e->nodeType) {
+        case ENUM_EXPR_INT: Node(e->id, "int: " + std::to_string(e->intValue)); break;
+        case ENUM_EXPR_REAL: Node(e->id, "real: " + std::to_string(e->realValue)); break;
+        case ENUM_EXPR_STRING: Node(e->id, "string: '" + e->stringValue + "'"); break;
+        case ENUM_EXPR_NIL: Node(e->id, "nil"); break;
+        case ENUM_EXPR_ID: Node(e->id, "id: " + e->name); break;
+        case ENUM_EXPR_SELF: Node(e->id, "self"); break;
+        default:  // бинарные операции
+            Node(e->id, OperatorText(e->nodeType));
+            Link(e->id, e->leftOperand, "left");
+            Link(e->id, e->rightOperand, "right");
+            break;
+    }
+    return e->id;
 }
