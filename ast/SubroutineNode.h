@@ -18,6 +18,7 @@ enum SubroutineNodeType {
 class DeclNode;
 
 class SubroutineNode {
+    friend class DotPrinter;
 protected:
     int id;
     SubroutineNodeType nodeType;

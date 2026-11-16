@@ -17,6 +17,7 @@ enum ParamNodeType {
 class DeclNode;
 
 class ParamNode {
+    friend class DotPrinter;
 protected:
     int id;
     ParamNodeType nodeType;

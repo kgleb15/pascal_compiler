@@ -5,6 +5,7 @@
 #include "BlockNode.h"
 
 class ProgramNode {
+    friend class DotPrinter;
 protected:
     int id;
     std::string name;

@@ -26,6 +26,7 @@ class SubroutineNode;
 class BlockNode;
 
 class DeclNode {
+    friend class DotPrinter;
 protected:
     int id;
     DeclNodeType nodeType;

@@ -19,6 +19,7 @@ enum TypeNodeType {
 class DeclNode;
 
 class TypeNode {
+    friend class DotPrinter;
 protected:
     int id;
     TypeNodeType nodeType;

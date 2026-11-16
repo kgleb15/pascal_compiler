@@ -22,6 +22,7 @@ enum StmtNodeType {
 };
 
 class StmtNode {
+    friend class DotPrinter;
 protected:
     int id;
     StmtNodeType nodeType;

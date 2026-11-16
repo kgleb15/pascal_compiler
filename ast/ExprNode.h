@@ -42,6 +42,7 @@ enum ExprNodeType {
 };
 
 class ExprNode {
+    friend class DotPrinter;
 protected:
     int id;
     ExprNodeType nodeType;

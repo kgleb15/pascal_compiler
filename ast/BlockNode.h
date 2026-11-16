@@ -5,6 +5,7 @@
 class DeclNode;
 
 class BlockNode {
+    friend class DotPrinter;
 protected:
     int id;
     DeclNode* declarations = nullptr;

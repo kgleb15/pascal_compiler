@@ -1,0 +1,9 @@
+#ifndef PASCAL_COMPILER_DOTPRINTER_H
+#define PASCAL_COMPILER_DOTPRINTER_H
+
+
+class DotPrinter {
+};
+
+
+#endif //PASCAL_COMPILER_DOTPRINTER_H

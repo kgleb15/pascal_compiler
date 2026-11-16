@@ -56,6 +56,8 @@ add_executable(pascal_compiler
         ast/SubroutineNode.cpp
         ast/ProgramNode.h
         ast/ProgramNode.cpp
+        ast/DotPrinter.cpp
+        ast/DotPrinter.h
 )
 
 target_include_directories(pascal_compiler PRIVATE
