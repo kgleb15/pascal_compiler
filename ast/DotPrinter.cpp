@@ -6,6 +6,7 @@ void DotPrinter::Print(ProgramNode* root, std::ostream& stream) {
     out = &stream;
     *out << "digraph AST {\n";
     *out << "    node [shape=box, fontname=\"Helvetica\"];\n";
+    if (root != nullptr) PrintNode(root);
     *out << "}\n";
 }
 
@@ -46,4 +47,15 @@ std::string DotPrinter::Join(const std::vector<std::string>& parts, const std::s
         result += parts[i];
     }
     return result;
+}
+
+int DotPrinter::PrintNode(BlockNode* b) {
+    Node(b->id, "block");
+    return b->id;
+}
+
+int DotPrinter::PrintNode(ProgramNode* p) {
+    Node(p->id, "program: " + p->name);
+    Link(p->id, p->block, "block");
+    return p->id;
 }

@@ -31,6 +31,9 @@ private:
             Link(parent, children[i], label);
         }
     }
+
+    static int PrintNode(ProgramNode* node);
+    static int PrintNode(BlockNode* node);
 };
 
 
