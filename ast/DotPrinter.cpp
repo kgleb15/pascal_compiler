@@ -53,6 +53,7 @@ std::string DotPrinter::Join(const std::vector<std::string>& parts, const std::s
 
 int DotPrinter::PrintNode(BlockNode* b) {
     Node(b->id, "block");
+    Link(b->id, b->body, "body");
     return b->id;
 }
 
@@ -95,6 +96,42 @@ int DotPrinter::PrintNode(ExprNode* e) {
         case ENUM_EXPR_NIL: Node(e->id, "nil"); break;
         case ENUM_EXPR_ID: Node(e->id, "id: " + e->name); break;
         case ENUM_EXPR_SELF: Node(e->id, "self"); break;
+        case ENUM_EXPR_NOT:
+        case ENUM_EXPR_UNARY_MINUS:
+        case ENUM_EXPR_UNARY_PLUS:
+            Node(e->id, OperatorText(e->nodeType));
+            Link(e->id, e->operand, "operand");
+            break;
+        case ENUM_EXPR_MEMBER:
+            Node(e->id, "member: " + e->name);
+            Link(e->id, e->object, "object");
+            break;
+        case ENUM_EXPR_INDEX:
+            Node(e->id, "index");
+            Link(e->id, e->arrayBase, "array");
+            LinkList(e->id, e->arguments, "index");
+            break;
+        case ENUM_EXPR_CALL:
+            Node(e->id, "call: " + e->name);
+            LinkList(e->id, e->arguments, "arg");
+            break;
+        case ENUM_EXPR_METHOD_CALL:
+            Node(e->id, "method call: " + e->name);
+            Link(e->id, e->object, "object");
+            LinkList(e->id, e->arguments, "arg");
+            break;
+        case ENUM_EXPR_INHERITED:
+            Node(e->id, e->name.empty() ? "inherited" : "inherited: " + e->name);
+            LinkList(e->id, e->arguments, "arg");
+            break;
+        case ENUM_EXPR_ARRAY_INIT:
+            Node(e->id, "array init");
+            LinkList(e->id, e->arguments, "element");
+            break;
+        case ENUM_EXPR_LIST:  // служебный узел
+            Node(e->id, "[[expr list]]");
+            LinkList(e->id, e->list_elements, "item");
+            break;
         default:  // бинарные операции
             Node(e->id, OperatorText(e->nodeType));
             Link(e->id, e->leftOperand, "left");
@@ -102,4 +139,92 @@ int DotPrinter::PrintNode(ExprNode* e) {
             break;
     }
     return e->id;
+}
+
+int DotPrinter::PrintNode(StmtNode* s) {
+    switch (s->nodeType) {
+        case ENUM_STMT_ASSIGN:
+            Node(s->id, ":=");
+            Link(s->id, s->target, "target");
+            Link(s->id, s->value, "value");
+            return s->id;
+
+        case ENUM_STMT_ADD_ASSIGN:
+            Node(s->id, "+=");
+            Link(s->id, s->target, "target");
+            Link(s->id, s->value, "value");
+            return s->id;
+
+        case ENUM_STMT_SUB_ASSIGN:
+            Node(s->id, "-=");
+            Link(s->id, s->target, "target");
+            Link(s->id, s->value, "value");
+            return s->id;
+
+        case ENUM_STMT_MUL_ASSIGN:
+            Node(s->id, "*=");
+            Link(s->id, s->target, "target");
+            Link(s->id, s->value, "value");
+            return s->id;
+
+        case ENUM_STMT_DIV_ASSIGN:
+            Node(s->id, "/=");
+            Link(s->id, s->target, "target");
+            Link(s->id, s->value, "value");
+            return s->id;
+
+        case ENUM_STMT_CALL:
+            Node(s->id, "call statement");
+            Link(s->id, s->callExpr, "call");
+            return s->id;
+
+        case ENUM_STMT_LIST:
+            Node(s->id, "statement list");
+            LinkList(s->id, s->stmtList, "stmt");
+            return s->id;
+
+        case ENUM_STMT_FOR_TO:
+            Node(s->id, "for " + s->loopVariable + " to");
+            Link(s->id, s->startExpr, "from");
+            Link(s->id, s->endExpr, "to");
+            Link(s->id, s->loopBody, "body");
+            return s->id;
+
+        case ENUM_STMT_FOR_DOWNTO:
+            Node(s->id, "for " + s->loopVariable + " downto");
+            Link(s->id, s->startExpr, "from");
+            Link(s->id, s->endExpr, "to");
+            Link(s->id, s->loopBody, "body");
+            return s->id;
+
+        case ENUM_STMT_FOR_IN:
+            Node(s->id, "for " + s->loopVariable + " in");
+            Link(s->id, s->collection, "collection");
+            Link(s->id, s->loopBody, "body");
+            return s->id;
+
+        case ENUM_STMT_REPEAT:
+            Node(s->id, "repeat");
+            Link(s->id, s->loopBody, "body");
+            Link(s->id, s->condition, "until");
+            return s->id;
+
+        case ENUM_STMT_WHILE:
+            Node(s->id, "while");
+            Link(s->id, s->condition, "condition");
+            Link(s->id, s->loopBody, "body");
+            return s->id;
+
+        case ENUM_STMT_IF:
+            Node(s->id, "if");
+            Link(s->id, s->condition, "condition");
+            Link(s->id, s->thenBranch, "then");
+            Link(s->id, s->elseBranch, "else");
+            return s->id;
+
+        case ENUM_STMT_EMPTY:
+            Node(s->id, "empty statement");
+            return s->id;
+    }
+    return s->id;
 }
