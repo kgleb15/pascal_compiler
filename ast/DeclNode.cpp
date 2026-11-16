@@ -1,4 +1,5 @@
 #include "DeclNode.h"
+#include "SubroutineNode.h"
 
 DeclNode* DeclNode::CreateConstDecl(const std::string& name, TypeNode* type, ExprNode* initValue) {
     DeclNode* result = new DeclNode();

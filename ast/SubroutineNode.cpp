@@ -1,4 +1,5 @@
 #include "SubroutineNode.h"
+#include "DeclNode.h"
 
 SubroutineNode* SubroutineNode::CreateSubroutineHeader(SubroutineNodeType nodeType, DeclNode* nameList, ParamNode* paramList, TypeNode* returnType) {
     SubroutineNode* result = new SubroutineNode();

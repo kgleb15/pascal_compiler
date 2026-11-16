@@ -2,7 +2,6 @@
 #define PASCAL_COMPILER_TYPENODE_H
 #include <string>
 
-#include "DeclNode.h"
 #include "ExprNode.h"
 
 
@@ -16,6 +15,8 @@ enum TypeNodeType {
     ENUM_TYPE_CLASS,
     ENUM_TYPE_CLASS_FORWARD
 };
+
+class DeclNode;
 
 class TypeNode {
 protected:

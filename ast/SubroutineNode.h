@@ -15,6 +15,8 @@ enum SubroutineNodeType {
     ENUM_SUB_DESTRUCTOR,
 };
 
+class DeclNode;
+
 class SubroutineNode {
 protected:
     int id;

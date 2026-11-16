@@ -14,6 +14,8 @@ enum ParamNodeType {
     ENUM_PARAM_LIST, // список параметров функции/процедуры
 };
 
+class DeclNode;
+
 class ParamNode {
 protected:
     int id;

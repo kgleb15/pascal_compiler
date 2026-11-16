@@ -1,4 +1,5 @@
 #include "TypeNode.h"
+#include "DeclNode.h"
 
 TypeNode* TypeNode::CreateNameType(const std::string& name) {
     TypeNode* result = new TypeNode();

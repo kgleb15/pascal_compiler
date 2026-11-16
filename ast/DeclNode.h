@@ -3,7 +3,6 @@
 #include <string>
 
 #include "TypeNode.h"
-#include "SubroutineNode.h"
 
 
 enum DeclNodeType {
@@ -19,6 +18,9 @@ enum DeclNodeType {
     ENUM_DECL_SUBROUTINE,
     ENUM_DECL_METHOD
 };
+
+class SubroutineNode;
+class BlockNode;
 
 class DeclNode {
 protected:

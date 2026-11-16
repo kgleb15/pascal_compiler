@@ -1,4 +1,5 @@
 #include "ParamNode.h"
+#include "DeclNode.h"
 
 ParamNode* ParamNode::CreateParamGroup(ParamNodeType nodeType, DeclNode* idList, TypeNode* type, ExprNode* defaultValue) {
     ParamNode* result = new ParamNode();
