@@ -54,19 +54,19 @@
 
 %printer {
     fprintf(yyo, "%lld", $$);
-} <f_liter_int>
+} <LiterIntUnion>
 
 %printer {
     fprintf(yyo, "%g", $$);
-} <f_liter_float>
+} <LiterRealUnion>
 
 %printer {
     fprintf(yyo, "\"%s\"", $$->c_str());
-} <f_liter_str>
+} <LiterStrUnion>
 
 %printer {
     fprintf(yyo, "\"%s\"", $$->c_str());
-} <f_id>
+} <IdUnion>
 
 	/* Подробные сообщения об ошибках: bison перечисляет ожидаемые токены */
 %define parse.error verbose

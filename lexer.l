@@ -337,12 +337,12 @@ xor             { return XOR; }
 }
 <STRING_CONT>(.|\n) {
     unput(yytext[0]); // возвращаем символ обратно во входной поток
-    yylval.f_liter_str = new string(stringBuf.current());
+    yylval.LiterStrUnion = new string(stringBuf.current());
     BEGIN(INITIAL);
     return STRING_L;
 }
 <STRING_CONT><<EOF>> {
-    yylval.f_liter_str = new string(stringBuf.current());
+    yylval.LiterStrUnion = new string(stringBuf.current());
     BEGIN(INITIAL);
     return STRING_L;
 }
@@ -350,12 +350,12 @@ xor             { return XOR; }
 
     /* ---------- Идентификаторы ---------- */
 {ID} {
-    yylval.f_id = new string(toLower(yytext));   // id всегда выводим в нижнем регистре
+    yylval.IdUnion = new string(toLower(yytext));   // id всегда выводим в нижнем регистре
     return ID;
 }
 
 \&{ID} { // id, совпадающий с ключевым словом
-    yylval.f_id = new string(toLower(yytext + 1));
+    yylval.IdUnion = new string(toLower(yytext + 1));
     return ID;
 }
 
@@ -395,7 +395,7 @@ void logIntToken(int line, const char* kind, const char* lexeme, const char* dig
     long long value = strtoll(digits, nullptr, base);
     if (errno == ERANGE)    // Если число вне диапазона
         Console::Error(line, string("integer literal is out of range: ") + lexeme);
-    yylval.f_liter_int = value;
+    yylval.LiterIntUnion = value;
 }
 
 void logRealToken(int line, const char* lexeme) {
@@ -403,5 +403,5 @@ void logRealToken(int line, const char* lexeme) {
     double value = strtod(lexeme, nullptr);
     if (errno == ERANGE)    // Если число вне диапазона
         Console::Error(line, string("real literal is out of range: ") + lexeme);
-    yylval.f_liter_float = value;
+    yylval.LiterRealUnion = value;
 }
