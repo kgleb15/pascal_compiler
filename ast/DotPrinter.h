@@ -38,13 +38,13 @@ private:
         }
     }
 
-    static int PrintNode(ProgramNode* node);
-    static int PrintNode(BlockNode* node);
-    static int PrintNode(ExprNode*);
-    static int PrintNode(StmtNode*);
-    static int PrintNode(TypeNode*);
-    static int PrintNode(ParamNode* p);
-    static int PrintNode(SubroutineNode* s);
+    static int PrintNode(ProgramNode* program);
+    static int PrintNode(BlockNode* block);
+    static int PrintNode(ExprNode* expr);
+    static int PrintNode(StmtNode* stmt);
+    static int PrintNode(TypeNode* type);
+    static int PrintNode(ParamNode* param);
+    static int PrintNode(SubroutineNode* subroutine);
 
     static std::string OperatorText(ExprNodeType type);
 };
