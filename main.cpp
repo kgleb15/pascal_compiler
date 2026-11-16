@@ -4,8 +4,10 @@
 
 #include "core/Console.h"
 #include "parser.hpp"
+#include "ast/DotPrinter.h"
 
 static yyFlexLexer *g_lexer = nullptr;
+extern ProgramNode* programRoot;
 
 int yylex() { return g_lexer->yylex(); } // bison вызывает yylex() сам
 
@@ -27,6 +29,8 @@ int main(int argc, char **argv) {
 
     yydebug = 1; // включение трассы отладки
     yyparse();   // вызов парсера
+    std::ofstream dot("tree.dot");
+    DotPrinter::Print(programRoot, dot);
     Console::PrintErrors();
 
     return 0;
