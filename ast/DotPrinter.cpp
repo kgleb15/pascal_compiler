@@ -261,3 +261,47 @@ int DotPrinter::PrintNode(TypeNode* t) {
     }
     return t->id;
 }
+
+int DotPrinter::PrintNode(ParamNode* p) {
+    switch (p->nodeType) {
+        case ENUM_PARAM_VALUE:
+            Node(p->id, "value param: " + Join(p->names, ", "));
+            Link(p->id, p->paramType, "type");
+            Link(p->id, p->defaultValue, "default");
+            return p->id;
+        case ENUM_PARAM_VAR:
+            Node(p->id, "var param: " + Join(p->names, ", "));
+            Link(p->id, p->paramType, "type");
+            Link(p->id, p->defaultValue, "default");
+            return p->id;
+        case ENUM_PARAM_CONST:
+            Node(p->id, "const param: " + Join(p->names, ", "));
+            Link(p->id, p->paramType, "type");
+            Link(p->id, p->defaultValue, "default");
+            return p->id;
+        case ENUM_PARAM_LIST:
+            Node(p->id, "[[param list]]");
+            LinkList(p->id, p->paramList, "param");
+            return p->id;
+    }
+    return p->id;
+}
+
+int DotPrinter::PrintNode(SubroutineNode* s) {
+    std::string kind;
+    switch (s->nodeType) {
+        case ENUM_SUB_PROCEDURE: kind = "procedure"; break;
+        case ENUM_SUB_FUNCTION: kind = "function"; break;
+        case ENUM_SUB_CONSTRUCTOR: kind = "constructor"; break;
+        case ENUM_SUB_DESTRUCTOR: kind = "destructor"; break;
+    }
+    std::string label = kind + ": " + Join(s->nameParts, ".");
+    if (!s->modifiers.empty()) {
+        label += "\nmodifiers: " + Join(s->modifiers, ", ");
+    }
+    Node(s->id, label);
+    LinkList(s->id, s->params, "param");
+    Link(s->id, s->returnType, "returns");
+    Link(s->id, s->body, "body");
+    return s->id;
+}

@@ -8,6 +8,8 @@
 #include "ExprNode.h"
 #include "StmtNode.h"
 #include "TypeNode.h"
+#include "ParamNode.h"
+#include "SubroutineNode.h"
 
 class DotPrinter {
 public:
@@ -41,6 +43,8 @@ private:
     static int PrintNode(ExprNode*);
     static int PrintNode(StmtNode*);
     static int PrintNode(TypeNode*);
+    static int PrintNode(ParamNode* p);
+    static int PrintNode(SubroutineNode* s);
 
     static std::string OperatorText(ExprNodeType type);
 };
