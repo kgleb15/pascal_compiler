@@ -273,7 +273,7 @@ class_type : CLASS { $$ = TypeNode::CreateForwardClassType(""); } /* forward Ð¾Ð
            | CLASS component_list END { $$ = TypeNode::CreateClassType("", $2); }
            ;
 
-component_list : field_declaration_list member_list { $$ = DeclNode::MergeDeclLists($1, $2); }
+component_list : field_declaration_list member_list { $$ = DeclNode::MergeFieldsAndMembers($1, $2); }
                | field_declaration_list { $$ = $1; }
                | member_list { $$ = $1; }
                ;

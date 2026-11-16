@@ -103,11 +103,11 @@ DeclNode* DeclNode::CreateMethodDecl(SubroutineNode* header, DeclNode* modifiers
     return result;
 }
 
-DeclNode* DeclNode::MergeDeclLists(DeclNode* first, DeclNode* second) {
-    for (DeclNode* item : second->items) {
-        first->items.push_back(item);
+DeclNode* DeclNode::MergeFieldsAndMembers(DeclNode* fields, DeclNode* members) {
+    for (DeclNode* item : members->items) {
+        fields->items.push_back(item);
     }
-    return first;
+    return fields;
 }
 
 DeclNode* DeclNode::CreateMemberList(DeclNode* first) {

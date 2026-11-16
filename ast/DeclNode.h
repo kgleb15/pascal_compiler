@@ -63,8 +63,9 @@ public:
 
     static DeclNode* CreateSubroutineDef(SubroutineNode* header, DeclNode* modifiers, BlockNode* body);
     static DeclNode* CreateMethodDecl(SubroutineNode* header, DeclNode* modifiers);
-    static DeclNode* MergeDeclLists(DeclNode* first, DeclNode* second);
-    
+
+    static DeclNode* MergeFieldsAndMembers(DeclNode* fields, DeclNode* members);
+
     static DeclNode* CreateMemberList(DeclNode* first);
     static DeclNode* AddToMemberList(DeclNode* list, DeclNode* member);
 
