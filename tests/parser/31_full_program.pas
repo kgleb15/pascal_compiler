@@ -273,30 +273,6 @@ begin
   for digit in table do
     a := a + digit;
 
-  case a of
-    0: b := 0;
-    1, 2, 3: b := 1;
-    4..6: b := 2;
-    -5..-1: b := 3;
-    red: b := 4;
-    'x': b := 5;
-    else b := 6
-  end;
-
-  case b of
-    1: begin
-         a := 1;
-         c := 2
-       end;
-    2: b := 2
-    otherwise b := 0
-  end;
-
-  case c of
-    1: b := 1;
-    2: b := 2
-  end;
-
   begin end;
   ;;
   begin
