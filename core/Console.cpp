@@ -38,3 +38,7 @@ void Console::LogInt(int line, const string& kind, long long value) {
 void Console::LogReal(int line, const string& kind, double value) {
     printf("[%d] %s: %g\n", line, kind.c_str(), value);
 }
+
+void Console::Error(int line, int column, const string& message) {
+    _errors.push_back("ERROR [" + std::to_string(line) + ":" + std::to_string(column) + "]: " + message);
+}

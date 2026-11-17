@@ -13,6 +13,7 @@ class Console {
 public:
     static void Log(int line, const std::string& message);
     static void Error(int line, const std::string& message);
+    static void Error(int line, int column, const std::string& message);
     static void PrintErrors();
     static bool HasErrors();
     static void LogInt(int line, const std::string& kind, long long value);

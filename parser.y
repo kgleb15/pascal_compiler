@@ -14,6 +14,9 @@
     #include "ast/SubroutineNode.h"
     #include "ast/BlockNode.h"
     #include "ast/ProgramNode.h"
+    #include "core/Console.h"
+
+    void yyerror(const char *msg);
 }
 
 %{
@@ -22,7 +25,7 @@
     extern int yylex(void);
 
     void yyerror(const char *msg) {
-        fprintf(stderr, "%s\n", msg);
+        Console::Error(yylloc.first_line, yylloc.first_column, msg);
     }
 %}
 
