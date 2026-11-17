@@ -6,4 +6,5 @@ type
   TLetter = 'a'..'z';
   TSigned = -5..5;
   TColor = (red, green, blue);
+  TColor2 = (red, green, blue := 42);
 begin end.

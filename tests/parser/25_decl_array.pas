@@ -6,6 +6,7 @@ type
   TGrid = array[1..3, 1..4] of integer;
   TDyn = array of integer;
   TMatrix = array[1..3] of array of string;
+  TMatrix2 = array[1..3] of array[1..3] of array of array of string;
 var
   s: string;
 begin end.
