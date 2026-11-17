@@ -17,9 +17,20 @@ public:
     static void Print(ProgramNode* root, std::ostream& stream);
 
 private:
+
+    // цвета заливки и формы
+    static const char* const COLOR_WHITE;
+    static const char* const COLOR_EXPR;
+    static const char* const COLOR_STMT;
+    static const char* const COLOR_TYPE;
+    static const char* const COLOR_DECL;
+    static const char* const COLOR_SUB;
+    static const char* const SHAPE_BOX;
+    static const char* const SHAPE_ELLIPSE;
+
     static std::ostream* out;
 
-    static void Node(int id, const std::string& label);
+    static void Node(int id, const std::string& label, const char* shape = SHAPE_BOX, const char* fillColor = COLOR_WHITE);
     static void Edge(int from, int to, const std::string& label = "");
     static std::string Escape(const std::string& text);
     static std::string Join(const std::vector<std::string>& parts, const std::string& separator);
