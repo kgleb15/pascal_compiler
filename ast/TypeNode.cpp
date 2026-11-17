@@ -82,7 +82,9 @@ TypeNode* TypeNode::CreateClassType(const std::string& parentName, DeclNode* mem
     TypeNode* result = new TypeNode();
     result->nodeType = ENUM_TYPE_CLASS;
     result->parentName = parentName;
-    result->members = members->getItems();
+    if (members != nullptr) {
+        result->members = members->getItems();
+    }
     return result;
 }
 
