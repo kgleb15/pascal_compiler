@@ -5,7 +5,9 @@ SubroutineNode* SubroutineNode::CreateSubroutineHeader(SubroutineNodeType nodeTy
     SubroutineNode* result = new SubroutineNode();
     result->nodeType = nodeType;
     result->nameParts = nameList->getIdNames();
-    result->params = paramList->getParamList();
+    if (paramList != nullptr) {
+        result->params = paramList->getParamList();
+    }
     result->returnType = returnType;
     return result;
 }

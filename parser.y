@@ -308,8 +308,8 @@ subroutine_definition : subroutine_header ';' modifiers_list_e subroutine_block 
 subroutine_header : PROCEDURE subroutine_name formal_parameter_list_e { $$ = SubroutineNode::CreateSubroutineHeader(ENUM_SUB_PROCEDURE, $2, $3, nullptr); }
                   | FUNCTION subroutine_name formal_parameter_list_e ':' type_id { $$ = SubroutineNode::CreateSubroutineHeader(ENUM_SUB_FUNCTION, $2, $3, $5); }
                   | CONSTRUCTOR subroutine_name formal_parameter_list_e { $$ = SubroutineNode::CreateSubroutineHeader(ENUM_SUB_CONSTRUCTOR, $2, $3, nullptr); }
-                  | DESTRUCTOR subroutine_name { $$ = SubroutineNode::CreateSubroutineHeader(ENUM_SUB_DESTRUCTOR, $2, nullptr, nullptr); }
-                  | DESTRUCTOR subroutine_name '(' ')' { $$ = SubroutineNode::CreateSubroutineHeader(ENUM_SUB_DESTRUCTOR, $2, nullptr, nullptr); }
+                  | DESTRUCTOR subroutine_name { $$ = SubroutineNode::CreateSubroutineHeader(ENUM_SUB_DESTRUCTOR, $2, ParamNode::CreateEmptyParamList(), nullptr); }
+                  | DESTRUCTOR subroutine_name '(' ')' { $$ = SubroutineNode::CreateSubroutineHeader(ENUM_SUB_DESTRUCTOR, $2, ParamNode::CreateEmptyParamList(), nullptr); }
                   ;
 
 subroutine_name : ID { $$ = DeclNode::CreateQualifiedName(*$1); }
