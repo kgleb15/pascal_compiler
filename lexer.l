@@ -21,6 +21,9 @@
     string toLower(const string& s);
     void logIntToken(int line, const char* kind, const char* lexeme, const char* digits, int base);
     void logRealToken(int line, const char* lexeme);
+
+    void UpdateLocation(const char* text, int length);
+    #define YY_USER_ACTION UpdateLocation(yytext, yyleng);
 %}
 
 
@@ -404,4 +407,21 @@ void logRealToken(int line, const char* lexeme) {
     if (errno == ERANGE)    // Если число вне диапазона
         Console::Error(line, string("real literal is out of range: ") + lexeme);
     yylval.LiterRealUnion = value;
+}
+
+static int g_line = 1;    // текущая строка
+static int g_column = 1;  // текущий столбец
+
+void UpdateLocation(const char* text, int length) {
+    yylloc.first_line = g_line;
+    yylloc.first_column = g_column;
+    for (int i = 0; i < length; ++i) {
+        if (text[i] == '\n') {
+            ++g_line; g_column = 1;
+        } else {
+            ++g_column;
+        }
+    }
+    yylloc.last_line = g_line;
+    yylloc.last_column = g_column;
 }
