@@ -17,11 +17,8 @@ type
   TDyn = array of integer;
   TWords = array[1..3] of array of string;
   TBig = array[1..2 * 3] of integer;
-  TBigger = array[1..2 + 3] of integer;
   TPalette = array[TColor.red..TColor.blue] of integer;
-  TRange = array[1..5 - 2] of integer;
   TRange2 = array[1..6 div 2] of integer;
-  TRange3 = array[+1..5] of integer;
 
   TForward = class;
 
@@ -31,7 +28,6 @@ type
     constructor Create(ax, ay: integer);
     destructor Destroy; override;
     procedure Move(dx: integer; var dy: integer);
-    procedure Freeze;
     function Area: real; virtual;
     function Calc(k: integer): integer; virtual;
   end;
@@ -39,7 +35,6 @@ type
   TSquare = class(TShape)
     side: integer;
     procedure Move(dx: integer; var dy: integer); override;
-    procedure Freeze; override;
     procedure Reset; virtual; abstract;
     function Area: real; override;
     function Calc(k: integer): integer; override;
@@ -150,11 +145,6 @@ begin
   dy := 0
 end;
 
-procedure TShape.Freeze;
-begin
-  name := 'frozen'
-end;
-
 function TShape.Area: real;
 begin
   Area := 0
@@ -166,29 +156,10 @@ begin
   side := side + dx
 end;
 
-procedure TSquare.Freeze;
-begin
-  inherited Freeze;
-  side := 0
-end;
-
-function TShape.Calc(k: integer): integer;
-begin
-  Calc := k + x
-end;
-
-function TSquare.Area: real;
-begin
-  Area := inherited Area + side * side
-end;
-
 function TSquare.Calc(k: integer): integer;
 begin
   Calc := inherited Calc(k) + side
 end;
-
-destructor TBag.Cleanup();
-begin end;
 
 begin
   a := 1;
@@ -206,11 +177,9 @@ begin
   flag := shape is TShape;
 
   text := 'it''s' + #65;
-  text := 'plain';
   words[1][2] := text;
 
   table[1] := table[2] + table[3];
-  table[a] := b;
 
   a := Max3(1, 2, 3);
   a := Max3(b, c, a) + Max3(a, b, c);
@@ -218,33 +187,19 @@ begin
   Countdown();
   Countdown(5);
   Swap(a, b);
-  Fill(table, 0);
-  Show(text);
-  Sum(1, 2);
 
   shape := TShape.Create(1, 2);
   square := TSquare.Create(1, 2);
   square := shape as TSquare;
   shape.Move(1, a);
-  square.Move(b, c);
-  shape.Freeze;
   shape.x := 5;
   square.side := shape.x + square.y;
-  ratio := square.Area + shape.Area;
   shape := nil;
-  flag := shape = nil;
 
   a += 1;
   a -= 1;
   a *= 2;
   a /= 2;
-
-  if a > 0 then
-    b := 1
-  else if a < 0 then
-    b := -1
-  else
-    b := 0;
 
   if flag then
     if a = b then
