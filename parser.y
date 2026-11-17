@@ -1,4 +1,6 @@
 %define parse.trace
+	/* Подробные сообщения об ошибках: bison перечисляет ожидаемые токены */
+%define parse.error verbose
 
 %code requires {
     #include <string>
@@ -51,25 +53,6 @@
 %type <ParamUnion> parameter_declarations parameter_declaration value_parameter var_parameter const_parameter formal_parameter_list_e
 %type <SubroutineUnion> subroutine_header
 %type <DeclarationUnion> subroutine_definition subroutine_name big_id_list modifiers_list modifiers_list_e component_list field_declaration_list member_list member
-
-%printer {
-    fprintf(yyo, "%lld", $$);
-} <LiterIntUnion>
-
-%printer {
-    fprintf(yyo, "%g", $$);
-} <LiterRealUnion>
-
-%printer {
-    fprintf(yyo, "\"%s\"", $$->c_str());
-} <LiterStrUnion>
-
-%printer {
-    fprintf(yyo, "\"%s\"", $$->c_str());
-} <IdUnion>
-
-	/* Подробные сообщения об ошибках: bison перечисляет ожидаемые токены */
-%define parse.error verbose
 
     /* Стартовый символ */
 %start program

@@ -27,7 +27,7 @@ int main(int argc, char **argv) {
     yyFlexLexer lexer(input, &std::cout);
     g_lexer = &lexer;
 
-    yydebug = 1; // включение трассы отладки
+    // yydebug = 1; // включение трассы отладки
     yyparse();   // вызов парсера
     std::ofstream dot("tree.dot");
     DotPrinter::Print(programRoot, dot);
