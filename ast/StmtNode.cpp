@@ -23,7 +23,9 @@ StmtNode* StmtNode::CreateStmtList(StmtNode* first) {
 }
 
 StmtNode* StmtNode::AddToStmtList(StmtNode* list, StmtNode* stmt) {
-    list->stmtList.push_back(stmt);
+    if (stmt->nodeType != ENUM_STMT_EMPTY) { // !!!
+        list->stmtList.push_back(stmt);
+    }
     return list;
 }
 
