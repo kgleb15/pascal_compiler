@@ -29,9 +29,14 @@ int main(int argc, char **argv) {
 
     // yydebug = 1; // включение трассы отладки
     yyparse();   // вызов парсера
+    Console::PrintErrors();
+    if (Console::HasErrors()) {
+        return 1;
+    }
+
     std::ofstream dot("tree.dot");
     DotPrinter::Print(programRoot, dot);
-    Console::PrintErrors();
+
 
     return 0;
 }

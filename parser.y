@@ -23,14 +23,14 @@
     #include <cstdio>
 
     extern int yylex(void);
-
-    void yyerror(const char *msg) {
-        Console::Error(yylloc.first_line, yylloc.first_column, msg);
-    }
 %}
 
 %code {
     ProgramNode* programRoot = nullptr;
+
+    void yyerror(const char *msg) {
+        Console::Error(yylloc.first_line, yylloc.first_column, msg);
+    }
 }
 
 %union {
