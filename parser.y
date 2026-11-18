@@ -363,6 +363,7 @@ stmt : expr ASSIGN expr { $$ = StmtNode::CreateAssignNode(ENUM_STMT_ASSIGN, $1, 
      | while_stmt { $$ = $1; }
      | if_stmt { $$ = $1; }
      | %empty { $$ = StmtNode::CreateEmptyNode(); }
+     | error { $$ = StmtNode::CreateEmptyNode(); }
      ;
 
 /* Циклы */
