@@ -24,16 +24,16 @@ protected:
     int id;
     TypeNodeType nodeType;
 
-    std::string name;
-    ExprNode* rangeLow = nullptr;
-    ExprNode* rangeHigh = nullptr;
-    std::vector<TypeNode*> enumElements;
-    std::vector<TypeNode*> arrayRanges;
-    TypeNode* arrayElementType = nullptr;
+    std::string name; // Название типа (integer, real...) или имя элемента перечисления
+    ExprNode* rangeLow = nullptr;          // Нижняя граница диапазона
+    ExprNode* rangeHigh = nullptr;         // Верхняя граница диапазона
+    std::vector<TypeNode*> enumElements;   // Элементы перечисления
     ExprNode* enumElementNumber = nullptr; // Явно заданный порядковый номер элемента перечисления
+    std::vector<TypeNode*> arrayRanges;    // Диапазоны индексов массива (пусто для динамического)
+    TypeNode* arrayElementType = nullptr;  // Тип элемента массива
 
-    std::string parentName;
-    std::vector<DeclNode*> members;
+    std::string parentName;          // Имя родительского класса
+    std::vector<DeclNode*> members;  // Члены класса (поля, методы и вложенные секции)
 
     TypeNode() {
         id = NextNodeId();

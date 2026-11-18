@@ -24,10 +24,10 @@ protected:
     SubroutineNodeType nodeType;
 
     std::vector<std::string> nameParts; // Элементы квалифицированного имени
-    std::vector<ParamNode*> params;
-    TypeNode* returnType = nullptr;
-    std::vector<std::string> modifiers;
-    BlockNode* body = nullptr;
+    std::vector<ParamNode*> params;     // Группы параметров
+    TypeNode* returnType = nullptr;     // Возвращаемое значение
+    std::vector<std::string> modifiers; // Модификаторы
+    BlockNode* body = nullptr;          // Тело (null для forward и объявления в классе)
 
     SubroutineNode() {
         id = NextNodeId();

@@ -8,7 +8,7 @@ TypeNode* TypeNode::CreateNameType(const std::string& name) {
     return result;
 }
 
-TypeNode *TypeNode::CreateStringType() {
+TypeNode* TypeNode::CreateStringType() {
     TypeNode* result = new TypeNode();
     result->nodeType = ENUM_TYPE_STRING;
     return result;

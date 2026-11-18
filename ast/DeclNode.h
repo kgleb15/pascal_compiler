@@ -12,7 +12,7 @@ enum DeclNodeType {
     ENUM_DECL_CONST_SECTION,
     ENUM_DECL_VAR_SECTION,
     ENUM_DECL_TYPE_SECTION,
-    ENUM_DECL_LIST,
+    ENUM_DECL_LIST,         // Общий список объявлений
     ENUM_DECL_ID_LIST,
     ENUM_DECL_FIELD,
     ENUM_DECL_SUBROUTINE,
@@ -31,14 +31,14 @@ protected:
     int id;
     DeclNodeType nodeType;
 
-    std::string name;
-    std::vector<std::string> varNames;
-    std::vector<std::string> fieldNames;
-    std::vector<std::string> idNames;
-    TypeNode* declType = nullptr;
-    ExprNode* initValue = nullptr;
-    std::vector<DeclNode*> items; // элементы секций и для списка блоков объявлений
-    SubroutineNode* subroutine = nullptr; // подпрограмма или метод
+    std::string name;                       // Имя объявляемой константы или типа
+    std::vector<std::string> varNames;      // Имена var
+    std::vector<std::string> fieldNames;    // Имена полей класса
+    std::vector<std::string> idNames; // Имена служебных узлов-списков (список id, части имени, список модификаторов)
+    TypeNode* declType = nullptr;           // Тип константы, переменной, поля
+    ExprNode* initValue = nullptr;          // Начальное значение
+    std::vector<DeclNode*> items;           // элементы секций (const, var, type) и для общего списка объявлений
+    SubroutineNode* subroutine = nullptr;   // подпрограмма или метод
 
     DeclNode() {
         id = NextNodeId();

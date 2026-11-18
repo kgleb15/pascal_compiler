@@ -11,7 +11,7 @@ enum ParamNodeType {
     ENUM_PARAM_VALUE,
     ENUM_PARAM_VAR,
     ENUM_PARAM_CONST,
-    ENUM_PARAM_LIST, // список параметров функции/процедуры
+    ENUM_PARAM_LIST, // общий список параметров функции/процедуры
 };
 
 class DeclNode;
@@ -22,10 +22,10 @@ protected:
     int id;
     ParamNodeType nodeType;
 
-    std::vector<std::string> names;   // имена параметров одной группы
+    std::vector<std::string> names;   // имена параметров одной группы (у одиночного один элемент)
     TypeNode* paramType = nullptr;
-    ExprNode* defaultValue = nullptr; // Значение по умолчанию
-    std::vector<ParamNode*> paramList;
+    ExprNode* defaultValue = nullptr;  // Значение по умолчанию
+    std::vector<ParamNode*> paramList; // Список групп параметров
 
     ParamNode() {
         id = NextNodeId();

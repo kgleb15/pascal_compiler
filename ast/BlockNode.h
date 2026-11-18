@@ -8,7 +8,7 @@ class BlockNode {
     friend class DotPrinter;
 protected:
     int id;
-    DeclNode* declarations = nullptr;
+    DeclNode* declarations = nullptr; // Список разделов объявлений
     StmtNode* body = nullptr;
 
     BlockNode() {

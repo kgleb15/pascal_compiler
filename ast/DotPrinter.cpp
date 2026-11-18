@@ -256,7 +256,7 @@ int DotPrinter::PrintNode(TypeNode* t) {
             break;
         case ENUM_TYPE_ENUM_ELEMENT:
             Node(t->id, "enum element: " + t->name, SHAPE_BOX, COLOR_TYPE);
-            Link(t->id, t->enumElement, "value");
+            Link(t->id, t->enumElementNumber, "value");
             break;
         case ENUM_TYPE_ARRAY:
             Node(t->id, t->arrayRanges.empty() ? "dynamic array" : "array", SHAPE_BOX, COLOR_TYPE);

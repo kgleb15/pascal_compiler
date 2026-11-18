@@ -23,7 +23,7 @@ StmtNode* StmtNode::CreateStmtList(StmtNode* first) {
 }
 
 StmtNode* StmtNode::AddToStmtList(StmtNode* list, StmtNode* stmt) {
-    if (stmt->nodeType != ENUM_STMT_EMPTY) { // !!!
+    if (stmt->nodeType != ENUM_STMT_EMPTY) { // не добавляем пустые stmt в дерево
         list->stmtList.push_back(stmt);
     }
     return list;

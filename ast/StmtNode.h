@@ -10,7 +10,7 @@ enum StmtNodeType {
     ENUM_STMT_SUB_ASSIGN,
     ENUM_STMT_MUL_ASSIGN,
     ENUM_STMT_DIV_ASSIGN,
-    ENUM_STMT_CALL,         // вызовы процедуры, метода, inherited
+    ENUM_STMT_CALL,     // вызовы процедуры, функции, метода, inherited
     ENUM_STMT_LIST,
     ENUM_STMT_FOR_TO,
     ENUM_STMT_FOR_DOWNTO,
@@ -27,19 +27,19 @@ protected:
     int id;
     StmtNodeType nodeType;
 
-    ExprNode* target = nullptr; // Левая часть присваивания
-    ExprNode* value = nullptr;  // Правая часть присваивания
-    ExprNode* callExpr = nullptr;
+    ExprNode* target = nullptr;   // Левая часть присваивания
+    ExprNode* value = nullptr;    // Правая часть присваивания
+    ExprNode* callExpr = nullptr; // Выражение вызова для ENUM_STMT_CALL
 
-    std::vector<StmtNode*> stmtList;
+    std::vector<StmtNode*> stmtList; // Операторы составного оператора / списка
 
-    std::string loopVariable; // переменная цикла
-    ExprNode* startExpr = nullptr;
-    ExprNode* endExpr = nullptr;
-    ExprNode* collection = nullptr; // Для for in
+    std::string loopVariable;       // переменная цикла for / for in
+    ExprNode* startExpr = nullptr;  // начальное значение счетчика в for
+    ExprNode* endExpr = nullptr;    // конечное значение счетчика в for
+    ExprNode* collection = nullptr; // Выражение после in в for...in
 
-    ExprNode* condition = nullptr;
-    StmtNode* loopBody = nullptr;
+    ExprNode* condition = nullptr;  // Условие для if, while, until
+    StmtNode* loopBody = nullptr;   // Тело циклов for, while, repeat
     StmtNode* thenBranch = nullptr;
     StmtNode* elseBranch = nullptr;
 

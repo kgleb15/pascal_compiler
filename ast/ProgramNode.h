@@ -8,8 +8,8 @@ class ProgramNode {
     friend class DotPrinter;
 protected:
     int id;
-    std::string name;
-    BlockNode* block;
+    std::string name;   // Имя программы
+    BlockNode* block;   // Главный блок программы
 
     ProgramNode() {
         id = NextNodeId();

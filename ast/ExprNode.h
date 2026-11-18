@@ -50,16 +50,17 @@ protected:
     long long intValue = 0;
     double realValue = 0.0;
     std::string stringValue;
-    std::string name;
+    std::string name; // имя идентификатора
 
     ExprNode* leftOperand = nullptr;
     ExprNode* rightOperand = nullptr;
-    ExprNode* operand = nullptr;
-    std::vector<ExprNode*> arguments;
-    ExprNode* object = nullptr; // для полей и методов класса (сам объект)
+    ExprNode* operand = nullptr; // операнд унарной операции
+    std::vector<ExprNode*> arguments; // CALL, METHOD_CALL, INHERITED, индексы (INDEX), а также ARRAY_INIT
+
+    ExprNode* object = nullptr; // объект к чьему методу/полю обращаемся
     ExprNode* arrayBase = nullptr;  // для массивов
 
-    std::vector<ExprNode*> list_elements; // Для expr_list
+    std::vector<ExprNode*> list_elements; // Для expr_list (служебное)
 
     ExprNode() {
         id = NextNodeId();
