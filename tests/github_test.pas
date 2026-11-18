@@ -1,237 +1,645 @@
-{
-  Тест на реальном коде с GitHub: за основу взят CastleScriptParser.pas
-  из Castle Game Engine (https://github.com/castle-engine/castle-engine).
-
-  Из исходного unit-а убрано всё, что не поддерживается нашим компилятором:
-  unit/interface/implementation/uses, классы и объекты, множества,
-  оператор case, try..except/finally, raise, директивы overload/forward,
-  записи, указатели и приведение типов.
-
-  Оставлен и переписан под наше подмножество сам алгоритм: рекурсивный
-  спуск по уровням приоритета Factor -> Term -> Sum -> Comparison.
-}
-
-program CastleScriptParserTest;
-
 const
-  TokEnd = 0;
-  TokNumber = 1;
-  TokPlus = 2;
-  TokMinus = 3;
-  TokMultiply = 4;
-  TokFloatDivide = 5;
-  TokIntDivide = 6;
-  TokModulo = 7;
-  TokGreater = 8;
-  TokLesser = 9;
-  TokGreaterEqual = 10;
-  TokLesserEqual = 11;
-  TokEqual = 12;
-  TokNotEqual = 13;
-  TokLParen = 14;
-  TokRParen = 15;
-  MaxTokens = 64;
+  FactorOperator = [tokMultiply, tokFloatDivide, tokIntDivide, tokPower, tokModulo];
+  TermOperator = [tokPlus, tokMinus];
+  ComparisonOperator = [tokGreater, tokLesser, tokGreaterEqual,
+    tokLesserEqual, tokEqual, tokNotEqual];
 
-type
-  TTokenKinds = array[1..MaxTokens] of integer;
-  TTokenValues = array[1..MaxTokens] of real;
+function Expression(const Lexer: TCasScriptLexer;
+  const Variables: array of TCasScriptValue): TCasScriptExpression; forward;
 
+function NonAssignmentExpression(const Lexer: TCasScriptLexer;
+  const AllowFullExpressionInFactor: Boolean;
+  const Variables: array of TCasScriptValue): TCasScriptExpression; forward;
+
+function PossiblyAssignmentExpression(const Lexer: TCasScriptLexer;
+  const Variables: array of TCasScriptValue): TCasScriptExpression; forward;
+
+function BinaryOper(tok: TToken): TCasScriptFunctionClass;
+begin
+  Result := nil;
+  if tok = tokPlus then Result := TCasScriptAdd
+  else if tok = tokMinus then Result := TCasScriptSubtract
+  else if tok = tokMultiply then Result := TCasScriptMultiply
+  else if tok = tokFloatDivide then Result := TCasScriptFloatDivide
+  else if tok = tokIntDivide then Result := TCasScriptIntDivide
+  else if tok = tokPower then Result := TCasScriptPower
+  else if tok = tokModulo then Result := TCasScriptModulo
+  else if tok = tokGreater then Result := TCasScriptGreater
+  else if tok = tokLesser then Result := TCasScriptLesser
+  else if tok = tokGreaterEqual then Result := TCasScriptGreaterEq
+  else if tok = tokLesserEqual then Result := TCasScriptLesserEq
+  else if tok = tokEqual then Result := TCasScriptEqual
+  else if tok = tokNotEqual then Result := TCasScriptNotEqual;
+end;
+
+function Operand(const Lexer: TCasScriptLexer;
+  const Variables: array of TCasScriptValue): TCasScriptValue;
 var
-  Token: integer;
-  TokenValue: real;
-  Position: integer;
-  Count: integer;
-  Errors: integer;
-  Kinds: TTokenKinds;
-  Values: TTokenValues;
-  Last: real;
-
-procedure Fail(const Message: string);
+  I: Integer;
 begin
-  Errors := Errors + 1
+  Result := nil;
+  if Lexer.Token <> tokIdentifier then Exit;
+
+  for I := 0 to Length(Variables) - 1 do
+    if SameText(Variables[I].Name, Lexer.TokenString) then
+    begin
+      Result := Variables[I];
+      Break;
+    end;
+
+  if Result = nil then Exit;
+
+  Lexer.NextToken;
 end;
 
-procedure Push(kind: integer; value: real);
+function ExpressionInsideFactor(const Lexer: TCasScriptLexer;
+  const AllowFullExpressionInFactor: Boolean;
+  const Variables: array of TCasScriptValue): TCasScriptExpression;
 begin
-  if Count < MaxTokens then
-  begin
-    Count := Count + 1;
-    Kinds[Count] := kind;
-    Values[Count] := value
-  end
+  if AllowFullExpressionInFactor then
+    Result := Expression(Lexer, Variables)
   else
-    Fail('too many tokens')
+    Result := NonAssignmentExpression(Lexer, AllowFullExpressionInFactor, Variables);
 end;
 
-procedure NextToken;
-begin
-  if Position <= Count then
-  begin
-    Token := Kinds[Position];
-    TokenValue := Values[Position];
-    Position := Position + 1
-  end
-  else
-  begin
-    Token := TokEnd;
-    TokenValue := 0
-  end
-end;
-
-procedure Expect(kind: integer);
-begin
-  if Token = kind then
-    NextToken
-  else
-    Fail('unexpected token')
-end;
-
-function ApplyBinary(kind: integer; a, b: real): real;
+function Factor(const Lexer: TCasScriptLexer;
+  const AllowFullExpressionInFactor: Boolean;
+  const Variables: array of TCasScriptValue): TCasScriptExpression;
 var
-  r: real;
+  FC: TCasScriptFunctionClass;
+  FParams: TCasScriptExpressionList;
+  ParamExpr: TCasScriptExpression;
+  ParseOk: Boolean;
 begin
-  if kind = TokPlus then
-    r := a + b
-  else if kind = TokMinus then
-    r := a - b
-  else if kind = TokMultiply then
-    r := a * b
-  else if kind = TokFloatDivide then
-    r := a / b
-  else if kind = TokIntDivide then
-    r := (a - a mod b) / b
-  else if kind = TokModulo then
-    r := a mod b
-  else
+  Result := nil;
+
+  if Lexer.Token = tokIdentifier then
   begin
-    Fail('not a binary operator');
-    r := 0
+    Result := Operand(Lexer, Variables);
+    Exit;
   end;
-  ApplyBinary := r
-end;
 
-function Factor: real;
-var
-  r: real;
-begin
-  if Token = TokNumber then
+  if Lexer.Token = tokInteger then
   begin
-    r := TokenValue;
-    NextToken
-  end
-  else if Token = TokMinus then
-  begin
-    NextToken;
-    r := -Factor
-  end
-  else if Token = TokLParen then
-  begin
-    NextToken;
-    r := Comparison;
-    Expect(TokRParen)
-  end
-  else
-  begin
-    Fail('expected number, minus or left bracket');
-    r := 0
+    Result := TCasScriptInteger.Create(false, Lexer.TokenInteger);
+    Lexer.NextToken;
+    Exit;
   end;
-  Factor := r
-end;
 
-function Term: real;
-var
-  r, right: real;
-  op: integer;
-begin
-  r := Factor;
-  while (Token = TokMultiply) or (Token = TokFloatDivide) or
-        (Token = TokIntDivide) or (Token = TokModulo) do
+  if Lexer.Token = tokFloat then
   begin
-    op := Token;
-    NextToken;
-    right := Factor;
-    r := ApplyBinary(op, r, right)
+    Result := TCasScriptFloat.Create(false, Lexer.TokenFloat);
+    Lexer.NextToken;
+    Exit;
   end;
-  Term := r
-end;
 
-function Sum: real;
-var
-  r, right: real;
-  op: integer;
-begin
-  r := Term;
-  while (Token = TokPlus) or (Token = TokMinus) do
+  if Lexer.Token = tokBoolean then
   begin
-    op := Token;
-    NextToken;
-    right := Term;
-    r := ApplyBinary(op, r, right)
+    Result := TCasScriptBoolean.Create(false, Lexer.TokenBoolean);
+    Lexer.NextToken;
+    Exit;
   end;
-  Sum := r
+
+  if Lexer.Token = tokString then
+  begin
+    Result := TCasScriptString.Create(false, Lexer.TokenString);
+    Lexer.NextToken;
+    Exit;
+  end;
+
+  if Lexer.Token = tokMinus then
+  begin
+    Lexer.NextToken;
+    ParamExpr := Factor(Lexer, AllowFullExpressionInFactor, Variables);
+    if ParamExpr <> nil then
+      Result := TCasScriptNegate.Create([ParamExpr]);
+    Exit;
+  end;
+
+  if Lexer.Token = tokLParen then
+  begin
+    Lexer.NextToken;
+    Result := ExpressionInsideFactor(Lexer, AllowFullExpressionInFactor, Variables);
+    if Result <> nil then
+    begin
+      if Lexer.Token = tokRParen then
+        Lexer.NextToken
+      else
+      begin
+        Result.FreeByParentExpression;
+        Result := nil;
+      end;
+    end;
+    Exit;
+  end;
+
+  if Lexer.Token = tokFuncName then
+  begin
+    FC := Lexer.TokenFunctionClass;
+    Lexer.NextToken;
+
+    FParams := TCasScriptExpressionList.Create(false);
+    ParseOk := Lexer.Token = tokLParen;
+
+    if ParseOk then
+    begin
+      Lexer.NextToken;
+
+      if Lexer.Token <> tokRParen then
+      begin
+        while True do
+        begin
+          ParamExpr := ExpressionInsideFactor(Lexer, AllowFullExpressionInFactor, Variables);
+          if ParamExpr = nil then
+          begin
+            ParseOk := False;
+            Break;
+          end;
+
+          FParams.Add(ParamExpr);
+
+          if Lexer.Token = tokRParen then Break;
+
+          if Lexer.Token <> tokComma then
+          begin
+            ParseOk := False;
+            Break;
+          end;
+
+          Lexer.NextToken;
+        end;
+      end;
+
+      if ParseOk then
+      begin
+        if Lexer.Token = tokRParen then
+        begin
+          Lexer.NextToken;
+          Result := FC.Create(FParams);
+        end
+        else
+          ParseOk := False;
+      end;
+    end;
+
+    if not ParseOk then
+      FParams.FreeContentsByParentExpression;
+
+    FParams.Free;
+    Exit;
+  end;
 end;
 
-function Comparison: real;
+function Term(const Lexer: TCasScriptLexer;
+  const AllowFullExpressionInFactor: Boolean;
+  const Variables: array of TCasScriptValue): TCasScriptExpression;
 var
-  left, right: real;
-  op: integer;
+  FC: TCasScriptFunctionClass;
+  Right: TCasScriptExpression;
 begin
-  left := Sum;
-  while (Token = TokGreater) or (Token = TokLesser) or
-        (Token = TokGreaterEqual) or (Token = TokLesserEqual) or
-        (Token = TokEqual) or (Token = TokNotEqual) do
+  Result := Factor(Lexer, AllowFullExpressionInFactor, Variables);
+
+  while (Result <> nil) and (Lexer.Token in FactorOperator) do
   begin
-    op := Token;
-    NextToken;
-    right := Sum;
-    if op = TokGreater then
-      if left > right then left := 1 else left := 0
-    else if op = TokLesser then
-      if left < right then left := 1 else left := 0
-    else if op = TokGreaterEqual then
-      if left >= right then left := 1 else left := 0
-    else if op = TokLesserEqual then
-      if left <= right then left := 1 else left := 0
-    else if op = TokEqual then
-      if left = right then left := 1 else left := 0
+    FC := BinaryOper(Lexer.Token);
+    if FC = nil then Break;
+
+    Lexer.NextToken;
+    Right := Factor(Lexer, AllowFullExpressionInFactor, Variables);
+
+    if Right = nil then
+    begin
+      Result.FreeByParentExpression;
+      Result := nil;
+      Break;
+    end;
+
+    Result := FC.Create([Result, Right]);
+  end;
+end;
+
+function ComparisonArgument(const Lexer: TCasScriptLexer;
+  const AllowFullExpressionInFactor: Boolean;
+  const Variables: array of TCasScriptValue): TCasScriptExpression;
+var
+  FC: TCasScriptFunctionClass;
+  Right: TCasScriptExpression;
+begin
+  Result := Term(Lexer, AllowFullExpressionInFactor, Variables);
+
+  while (Result <> nil) and (Lexer.Token in TermOperator) do
+  begin
+    FC := BinaryOper(Lexer.Token);
+    if FC = nil then Break;
+
+    Lexer.NextToken;
+    Right := Term(Lexer, AllowFullExpressionInFactor, Variables);
+
+    if Right = nil then
+    begin
+      Result.FreeByParentExpression;
+      Result := nil;
+      Break;
+    end;
+
+    Result := FC.Create([Result, Right]);
+  end;
+end;
+
+function NonAssignmentExpression(const Lexer: TCasScriptLexer;
+  const AllowFullExpressionInFactor: Boolean;
+  const Variables: array of TCasScriptValue): TCasScriptExpression;
+var
+  FC: TCasScriptFunctionClass;
+  Right: TCasScriptExpression;
+begin
+  Result := ComparisonArgument(Lexer, AllowFullExpressionInFactor, Variables);
+
+  while (Result <> nil) and (Lexer.Token in ComparisonOperator) do
+  begin
+    FC := BinaryOper(Lexer.Token);
+    if FC = nil then Break;
+
+    Lexer.NextToken;
+    Right := ComparisonArgument(Lexer, AllowFullExpressionInFactor, Variables);
+
+    if Right = nil then
+    begin
+      Result.FreeByParentExpression;
+      Result := nil;
+      Break;
+    end;
+
+    Result := FC.Create([Result, Right]);
+  end;
+end;
+
+function PossiblyAssignmentExpression(const Lexer: TCasScriptLexer;
+  const Variables: array of TCasScriptValue): TCasScriptExpression;
+var
+  OperandExpr, AssignedValue: TCasScriptExpression;
+begin
+  Result := NonAssignmentExpression(Lexer, True, Variables);
+  if Result = nil then Exit;
+
+  if Lexer.Token = tokAssignment then
+  begin
+    Lexer.NextToken;
+
+    AssignedValue := PossiblyAssignmentExpression(Lexer, Variables);
+    if AssignedValue = nil then
+    begin
+      Result.FreeByParentExpression;
+      Result := nil;
+      Exit;
+    end;
+
+    OperandExpr := Result;
+    Result := TCasScriptAssignment.Create([OperandExpr, AssignedValue]);
+  end;
+end;
+
+function Expression(const Lexer: TCasScriptLexer;
+  const Variables: array of TCasScriptValue): TCasScriptExpression;
+var
+  SequenceArgs: TCasScriptExpressionList;
+  NextExpr: TCasScriptExpression;
+  ParseOk: Boolean;
+begin
+  Result := PossiblyAssignmentExpression(Lexer, Variables);
+  if Result = nil then Exit;
+
+  if Lexer.Token = tokSemicolon then
+  begin
+    SequenceArgs := TCasScriptExpressionList.Create(false);
+    SequenceArgs.Add(Result);
+    Result := nil;
+
+    ParseOk := True;
+
+    while Lexer.Token = tokSemicolon do
+    begin
+      Lexer.NextToken;
+
+      NextExpr := PossiblyAssignmentExpression(Lexer, Variables);
+      if NextExpr = nil then
+      begin
+        ParseOk := False;
+        Break;
+      end;
+
+      SequenceArgs.Add(NextExpr);
+    end;
+
+    if ParseOk then
+      Result := TCasScriptSequence.Create(SequenceArgs);
+
+    if Result = nil then
+      SequenceArgs.FreeContentsByParentExpression;
+
+    SequenceArgs.Free;
+  end;
+end;
+
+function Expression(const Lexer: TCasScriptLexer;
+  const Variables: TCasScriptValueList): TCasScriptExpression;
+begin
+  Result := Expression(Lexer, Variables.ToArray);
+end;
+
+function AFunction(const Lexer: TCasScriptLexer;
+  const GlobalVariables: array of TCasScriptValue): TCasScriptUserFunction;
+var
+  BodyVariables: TCasScriptValueList;
+  Parameter: TCasScriptValue;
+  BodyExpr: TCasScriptExpression;
+  ParseOk: Boolean;
+begin
+  Result := TCasScriptUserFunction.Create;
+  if Result = nil then Exit;
+
+  ParseOk := Lexer.Token = tokIdentifier;
+
+  if ParseOk then
+  begin
+    Result.Name := Lexer.TokenString;
+    Lexer.NextToken;
+  end;
+
+  BodyVariables := TCasScriptValueList.Create(false);
+
+  if ParseOk then
+  begin
+    ParseOk := Lexer.Token = tokLParen;
+
+    if ParseOk then
+    begin
+      Lexer.NextToken;
+
+      if Lexer.Token <> tokRParen then
+      begin
+        while True do
+        begin
+          if Lexer.Token <> tokIdentifier then
+          begin
+            ParseOk := False;
+            Break;
+          end;
+
+          Parameter := TCasScriptParameterValue.Create(true);
+          if Parameter = nil then
+          begin
+            ParseOk := False;
+            Break;
+          end;
+
+          Parameter.Name := Lexer.TokenString;
+          Parameter.OwnedByParentExpression := false;
+
+          Result.Parameters.Add(Parameter);
+          BodyVariables.Add(Parameter);
+
+          Lexer.NextToken;
+
+          if Lexer.Token = tokRParen then Break;
+
+          if Lexer.Token <> tokComma then
+          begin
+            ParseOk := False;
+            Break;
+          end;
+
+          Lexer.NextToken;
+        end;
+      end;
+
+      if ParseOk then
+      begin
+        if Lexer.Token = tokRParen then
+          Lexer.NextToken
+        else
+          ParseOk := False;
+      end;
+    end;
+  end;
+
+  if ParseOk then
+  begin
+    BodyVariables.AddRange(GlobalVariables);
+
+    BodyExpr := Expression(Lexer, BodyVariables.ToArray);
+    if BodyExpr = nil then
+      ParseOk := False
     else
-      if left <> right then left := 1 else left := 0
+      Result.Body := BodyExpr;
   end;
-  Comparison := left
+
+  BodyVariables.Free;
+
+  if not ParseOk then
+  begin
+    Result.Free;
+    Result := nil;
+  end;
 end;
 
-function Evaluate: real;
+function AProgram(const Lexer: TCasScriptLexer;
+  const GlobalVariables: array of TCasScriptValue): TCasScriptProgram;
+var
+  F: TCasScriptUserFunction;
 begin
-  Position := 1;
-  Errors := 0;
-  NextToken;
-  Evaluate := Comparison
+  Result := TCasScriptProgram.Create;
+
+  while Lexer.Token = tokFunctionKeyword do
+  begin
+    Lexer.NextToken;
+
+    F := AFunction(Lexer, GlobalVariables);
+    if F = nil then
+    begin
+      Result.Free;
+      Result := nil;
+      Exit;
+    end;
+
+    Result.Functions.Add(F);
+  end;
 end;
 
+function ParseSimpleExpression(const S: string;
+  const Variables: array of TCasScriptValue): TCasScriptExpression;
+var
+  Lexer: TCasScriptLexer;
+  I: Integer;
 begin
-  Last := 0;
-  Errors := 0;
-  Count := 0;
-  Push(TokLParen, 0);
-  Push(TokNumber, 1);
-  Push(TokPlus, 0);
-  Push(TokNumber, 2);
-  Push(TokRParen, 0);
-  Push(TokMultiply, 0);
-  Push(TokNumber, 3);
-  Last := Evaluate;
+  for I := 0 to Length(Variables) - 1 do
+    Variables[I].OwnedByParentExpression := false;
 
-  Count := 0;
-  Push(TokNumber, 5);
-  Push(TokMinus, 0);
-  Push(TokNumber, 2);
-  Push(TokMultiply, 0);
-  Push(TokNumber, 3);
-  Last := Evaluate;
+  Lexer := TCasScriptLexer.Create(S);
+  Result := NonAssignmentExpression(Lexer, False, Variables);
 
-  Count := 0;
-  Push(TokNumber, 4);
-  Push(TokLesser, 0);
-  Push(TokNumber, 7);
-  Last := Evaluate
-end.
+  if Result <> nil then
+  begin
+    if Lexer.Token <> tokEnd then
+    begin
+      Result.FreeByParentExpression;
+      Result := nil;
+    end;
+  end;
+
+  Lexer.Free;
+end;
+
+function ParseFloatExpression(const S: string;
+  const Variables: array of TCasScriptValue): TCasScriptExpression;
+var
+  Inner: TCasScriptExpression;
+begin
+  Inner := ParseSimpleExpression(S, Variables);
+  if Inner = nil then
+    Result := nil
+  else
+  begin
+    Result := TCasScriptFloatFun.Create([Inner]);
+    if Result = nil then
+      Inner.FreeByParentExpression;
+  end;
+end;
+
+function ParseIntExpression(const S: string;
+  const Variables: array of TCasScriptValue): TCasScriptExpression;
+var
+  Inner: TCasScriptExpression;
+begin
+  Inner := ParseSimpleExpression(S, Variables);
+  if Inner = nil then
+    Result := nil
+  else
+  begin
+    Result := TCasScriptInt.Create([Inner]);
+    if Result = nil then
+      Inner.FreeByParentExpression;
+  end;
+end;
+
+function ParseStringExpression(const S: string;
+  const Variables: array of TCasScriptValue): TCasScriptExpression;
+var
+  Inner: TCasScriptExpression;
+begin
+  Inner := ParseSimpleExpression(S, Variables);
+  if Inner = nil then
+    Result := nil
+  else
+  begin
+    Result := TCasScriptStringFun.Create([Inner]);
+    if Result = nil then
+      Inner.FreeByParentExpression;
+  end;
+end;
+
+function ParseBoolExpression(const S: string;
+  const Variables: array of TCasScriptValue): TCasScriptExpression;
+var
+  Inner: TCasScriptExpression;
+begin
+  Inner := ParseSimpleExpression(S, Variables);
+  if Inner = nil then
+    Result := nil
+  else
+  begin
+    Result := TCasScriptBool.Create([Inner]);
+    if Result = nil then
+      Inner.FreeByParentExpression;
+  end;
+end;
+
+function ParseExpression(const S: string;
+  const Variables: array of TCasScriptValue): TCasScriptExpression;
+var
+  Lexer: TCasScriptLexer;
+  I: Integer;
+begin
+  for I := 0 to Length(Variables) - 1 do
+    Variables[I].OwnedByParentExpression := false;
+
+  Lexer := TCasScriptLexer.Create(S);
+
+  Result := Expression(Lexer, Variables);
+
+  if Result <> nil then
+  begin
+    if Lexer.Token <> tokEnd then
+    begin
+      Result.FreeByParentExpression;
+      Result := nil;
+    end;
+  end;
+
+  Lexer.Free;
+end;
+
+function ParseConstantFloatExpression(const S: string): Float;
+var
+  Expr: TCasScriptExpression;
+  V: TCasScriptFloat;
+begin
+  Result := 0;
+
+  Expr := ParseFloatExpression(S, []);
+  if Expr = nil then Exit;
+
+  V := Expr.Execute as TCasScriptFloat;
+  if V <> nil then
+    Result := V.Value;
+
+  Expr.Free;
+end;
+
+function ParseConstantIntExpression(const S: string): Int64;
+var
+  Expr: TCasScriptExpression;
+  V: TCasScriptInteger;
+begin
+  Result := 0;
+
+  Expr := ParseIntExpression(S, []);
+  if Expr = nil then Exit;
+
+  V := Expr.Execute as TCasScriptInteger;
+  if V <> nil then
+    Result := V.Value;
+
+  Expr.Free;
+end;
+
+function ParseProgram(const S: string;
+  const Variables: TCasScriptValueList): TCasScriptProgram;
+begin
+  Result := ParseProgram(S, Variables.ToArray);
+end;
+
+function ParseProgram(const S: string;
+  const Variables: array of TCasScriptValue): TCasScriptProgram;
+var
+  Lexer: TCasScriptLexer;
+  I: Integer;
+begin
+  for I := 0 to Length(Variables) - 1 do
+    Variables[I].OwnedByParentExpression := false;
+
+  Lexer := TCasScriptLexer.Create(S);
+
+  Result := AProgram(Lexer, Variables);
+
+  if Result <> nil then
+  begin
+    if Lexer.Token <> tokEnd then
+    begin
+      Result.Free;
+      Result := nil;
+    end;
+  end;
+
+  Lexer.Free;
+end;
