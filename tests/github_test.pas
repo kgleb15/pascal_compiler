@@ -1,8 +1,5 @@
-const
-  FactorOperator = [tokMultiply, tokFloatDivide, tokIntDivide, tokPower, tokModulo];
-  TermOperator = [tokPlus, tokMinus];
-  ComparisonOperator = [tokGreater, tokLesser, tokGreaterEqual,
-    tokLesserEqual, tokEqual, tokNotEqual];
+program p1;
+
 
 function Expression(const Lexer: TCasScriptLexer;
   const Variables: array of TCasScriptValue): TCasScriptExpression; forward;
@@ -112,7 +109,7 @@ begin
     Lexer.NextToken;
     ParamExpr := Factor(Lexer, AllowFullExpressionInFactor, Variables);
     if ParamExpr <> nil then
-      Result := TCasScriptNegate.Create([ParamExpr]);
+      Result := TCasScriptNegate.Create(ParamExpr);
     Exit;
   end;
 
@@ -199,7 +196,7 @@ var
 begin
   Result := Factor(Lexer, AllowFullExpressionInFactor, Variables);
 
-  while (Result <> nil) and (Lexer.Token in FactorOperator) do
+  while (Result <> nil) do
   begin
     FC := BinaryOper(Lexer.Token);
     if FC = nil then Break;
@@ -214,7 +211,7 @@ begin
       Break;
     end;
 
-    Result := FC.Create([Result, Right]);
+    Result := FC.Create(Result, Right);
   end;
 end;
 
@@ -227,7 +224,7 @@ var
 begin
   Result := Term(Lexer, AllowFullExpressionInFactor, Variables);
 
-  while (Result <> nil) and (Lexer.Token in TermOperator) do
+  while (Result <> nil) do
   begin
     FC := BinaryOper(Lexer.Token);
     if FC = nil then Break;
@@ -242,7 +239,7 @@ begin
       Break;
     end;
 
-    Result := FC.Create([Result, Right]);
+    Result := FC.Create(Result, Right);
   end;
 end;
 
@@ -255,7 +252,7 @@ var
 begin
   Result := ComparisonArgument(Lexer, AllowFullExpressionInFactor, Variables);
 
-  while (Result <> nil) and (Lexer.Token in ComparisonOperator) do
+  while (Result <> nil) do
   begin
     FC := BinaryOper(Lexer.Token);
     if FC = nil then Break;
@@ -270,7 +267,7 @@ begin
       Break;
     end;
 
-    Result := FC.Create([Result, Right]);
+    Result := FC.Create(Result, Right);
   end;
 end;
 
@@ -295,7 +292,7 @@ begin
     end;
 
     OperandExpr := Result;
-    Result := TCasScriptAssignment.Create([OperandExpr, AssignedValue]);
+    Result := TCasScriptAssignment.Create(OperandExpr, AssignedValue);
   end;
 end;
 
@@ -500,7 +497,7 @@ begin
     Result := nil
   else
   begin
-    Result := TCasScriptFloatFun.Create([Inner]);
+    Result := TCasScriptFloatFun.Create(Inner);
     if Result = nil then
       Inner.FreeByParentExpression;
   end;
@@ -516,7 +513,7 @@ begin
     Result := nil
   else
   begin
-    Result := TCasScriptInt.Create([Inner]);
+    Result := TCasScriptInt.Create(Inner);
     if Result = nil then
       Inner.FreeByParentExpression;
   end;
@@ -532,7 +529,7 @@ begin
     Result := nil
   else
   begin
-    Result := TCasScriptStringFun.Create([Inner]);
+    Result := TCasScriptStringFun.Create(Inner);
     if Result = nil then
       Inner.FreeByParentExpression;
   end;
@@ -548,7 +545,7 @@ begin
     Result := nil
   else
   begin
-    Result := TCasScriptBool.Create([Inner]);
+    Result := TCasScriptBool.Create(Inner);
     if Result = nil then
       Inner.FreeByParentExpression;
   end;
@@ -586,7 +583,7 @@ var
 begin
   Result := 0;
 
-  Expr := ParseFloatExpression(S, []);
+  Expr := ParseFloatExpression(S);
   if Expr = nil then Exit;
 
   V := Expr.Execute as TCasScriptFloat;
@@ -603,7 +600,7 @@ var
 begin
   Result := 0;
 
-  Expr := ParseIntExpression(S, []);
+  Expr := ParseIntExpression(S);
   if Expr = nil then Exit;
 
   V := Expr.Execute as TCasScriptInteger;
@@ -643,3 +640,4 @@ begin
 
   Lexer.Free;
 end;
+begin end.
