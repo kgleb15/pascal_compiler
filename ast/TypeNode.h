@@ -28,9 +28,9 @@ protected:
     ExprNode* rangeLow = nullptr;
     ExprNode* rangeHigh = nullptr;
     std::vector<TypeNode*> enumElements;
-    ExprNode* enumElement = nullptr;
     std::vector<TypeNode*> arrayRanges;
     TypeNode* arrayElementType = nullptr;
+    ExprNode* enumElementNumber = nullptr; // Явно заданный порядковый номер элемента перечисления
 
     std::string parentName;
     std::vector<DeclNode*> members;
@@ -46,7 +46,7 @@ public:
 
     static TypeNode* CreateEnumType(TypeNode* firstEnumElement);
     static TypeNode* CreateEnumElement(const std::string& name, ExprNode* enumElement);
-    static TypeNode* AddToEnumType(TypeNode* enumType, TypeNode* enumElement);
+    static TypeNode* AddToEnumType(TypeNode* enumType, TypeNode* enumElementNumber);
 
     static TypeNode* CreateStaticArrayType(ExprNode* lowRange, ExprNode* highRange);
     static TypeNode* AddArrayRange(TypeNode* arrayType, ExprNode* rangeLow, ExprNode* rangeHigh);

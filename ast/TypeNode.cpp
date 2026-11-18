@@ -33,12 +33,12 @@ TypeNode* TypeNode::CreateEnumElement(const std::string& name, ExprNode* enumEle
     TypeNode* result = new TypeNode();
     result->nodeType = ENUM_TYPE_ENUM_ELEMENT;
     result->name = name;
-    result->enumElement = enumElement;
+    result->enumElementNumber = enumElement;
     return result;
 }
 
-TypeNode* TypeNode::AddToEnumType(TypeNode* enumType, TypeNode* enumElement) {
-    enumType->enumElements.push_back(enumElement);
+TypeNode* TypeNode::AddToEnumType(TypeNode* enumType, TypeNode* enumElementNumber) {
+    enumType->enumElements.push_back(enumElementNumber);
     return enumType;
 }
 
