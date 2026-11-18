@@ -187,7 +187,7 @@ xor             { return XOR; }
 
     /* ---------- Однострочный комментарий ---------- */
 \/\/[^\n]* {
-    Console::Log(lineno(), "COMMENT: " + string(yytext));
+    // Console::Log(lineno(), "COMMENT: " + string(yytext));
 }
 
     /* ---------- Многострочный комментарий ---------- */
@@ -216,7 +216,7 @@ xor             { return XOR; }
 <COMMENT_ONE_CHAR>\} {
     commentDepth--;
     if (commentDepth == 0) { // комментарий завершен
-        Console::Log(commentBuf.getStartLine(), string(isDirective ? "DIRECTIVE" : "COMMENT") + ": {" + commentBuf.current() + "}");
+        // Console::Log(commentBuf.getStartLine(), string(isDirective ? "DIRECTIVE" : "COMMENT") + ": {" + commentBuf.current() + "}");
         BEGIN(INITIAL);
     } else {
         commentBuf.append(yytext);
@@ -247,7 +247,7 @@ xor             { return XOR; }
 <COMMENT_TWO_CHAR>\*\) {
     commentDepth--;
     if (commentDepth == 0) { // комментарий завершен
-        Console::Log(commentBuf.getStartLine(), "COMMENT: (*" + commentBuf.current() + "*)");
+        // Console::Log(commentBuf.getStartLine(), "COMMENT: (*" + commentBuf.current() + "*)");
         BEGIN(INITIAL);
     } else {
         commentBuf.append(yytext);
